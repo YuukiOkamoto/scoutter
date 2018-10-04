@@ -43,6 +43,7 @@ group :development, :test do
   # Code analyze
   gem 'rubocop-rails_config'
   gem 'rails_best_practices'
+  gem 'scss_lint', require: false
 end
 
 group :development do
