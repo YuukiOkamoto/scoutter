@@ -49,6 +49,7 @@ group :development, :test do
   gem 'rubocop-rails_config'
   gem 'rails_best_practices'
   gem 'scss_lint', require: false
+  gem 'slim_lint'
 end
 
 group :development do
