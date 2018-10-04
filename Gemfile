@@ -42,6 +42,7 @@ group :development, :test do
 
   # Code analyze
   gem 'rubocop-rails_config'
+  gem 'rails_best_practices'
 end
 
 group :development do
