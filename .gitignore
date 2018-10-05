@@ -29,4 +29,8 @@
 # RubyMine
 .idea/
 
+# bundle
 /vendor/bundle
+
+# database.yml
+config/database.yml
