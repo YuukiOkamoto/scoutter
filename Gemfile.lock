@@ -82,6 +82,7 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mimemagic (0.3.2)
+    mini_magick (4.9.2)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -92,6 +93,8 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     parallel (1.12.1)
+    paranoia (2.4.1)
+      activerecord (>= 4.0, < 5.3)
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.2)
@@ -217,7 +220,9 @@ DEPENDENCIES
   html2slim
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  mini_magick (~> 4.8)
   mysql2 (>= 0.4.4, < 0.6.0)
+  paranoia
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails_best_practices
