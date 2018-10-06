@@ -34,6 +34,9 @@ gem 'mini_magick', '~> 4.8'
 # Soft delete
 gem 'paranoia'
 
+# Decorator
+gem 'draper'
+
 group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
