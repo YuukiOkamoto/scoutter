@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_080154) do
+ActiveRecord::Schema.define(version: 2018_10_07_083441) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -72,17 +72,8 @@ ActiveRecord::Schema.define(version: 2018_10_07_080154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_characters_on_deleted_at"
-  end
-
-  create_table "growth_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "minimum"
-    t.bigint "maximum"
     t.float "growth_rate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_growth_rates_on_deleted_at"
+    t.index ["deleted_at"], name: "index_characters_on_deleted_at"
   end
 
   create_table "power_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
