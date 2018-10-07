@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_05_070915) do
+ActiveRecord::Schema.define(version: 2018_10_07_080154) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_10_05_070915) do
   end
 
   create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "action"
+    t.string "name"
     t.integer "limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
