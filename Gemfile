@@ -22,6 +22,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'sorcery'
 
+# Configuration
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 # Slim
 gem 'slim-rails'
 gem 'html2slim'
