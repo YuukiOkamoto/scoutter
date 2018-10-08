@@ -212,6 +212,9 @@ GEM
     scss_lint (0.57.1)
       rake (>= 0.9, < 13)
       sass (~> 3.5, >= 3.5.5)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     sexp_processor (4.11.0)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
@@ -284,6 +287,7 @@ DEPENDENCIES
   rubocop-rails_config
   sass-rails (~> 5.0)
   scss_lint
+  seed-fu
   slim-rails
   slim_lint
   sorcery
