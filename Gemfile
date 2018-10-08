@@ -37,6 +37,9 @@ gem 'paranoia'
 # Decorator
 gem 'draper'
 
+# Seeds
+gem 'seed-fu'
+
 group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
