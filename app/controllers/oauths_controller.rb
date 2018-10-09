@@ -4,7 +4,7 @@ class OauthsController < ApplicationController
     login_at(params[:provider])
   end
 
-  # TODO: 下記アクションのリダイレクト先はログイン動作確認のための仮のパスなので要変更
+  # TODO: 下記アクションのリダイレクト先はログイン動作確認のための仮のパスなので本来の遷移先は戦闘力を表示するページになる予定
   def callback
     provider = params[:provider]
     if @user = login_from(provider)
