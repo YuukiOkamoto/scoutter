@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_05_070915) do
+ActiveRecord::Schema.define(version: 2018_10_08_164958) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_10_05_070915) do
   end
 
   create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "action"
+    t.string "name"
     t.integer "limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2018_10_05_070915) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
+
   create_table "characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "introduction"
@@ -72,17 +81,8 @@ ActiveRecord::Schema.define(version: 2018_10_05_070915) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_characters_on_deleted_at"
-  end
-
-  create_table "growth_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "minimum"
-    t.bigint "maximum"
     t.float "growth_rate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_growth_rates_on_deleted_at"
+    t.index ["deleted_at"], name: "index_characters_on_deleted_at"
   end
 
   create_table "power_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
