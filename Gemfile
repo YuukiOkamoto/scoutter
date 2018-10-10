@@ -46,6 +46,11 @@ gem 'draper'
 # Seeds
 gem 'seed-fu'
 
+# Pagination
+gem 'kaminari'
+gem 'kaminari-i18n'
+gem 'bootstrap4-kaminari-views'
+
 group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
