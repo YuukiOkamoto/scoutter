@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :power_levels
   has_many :authentications, dependent: :destroy
 
+  belongs_to :character
+
   validates :name, presence: true
   validates :twitter_id, presence: true
 end
