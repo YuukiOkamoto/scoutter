@@ -1,0 +1,18 @@
+tr
+  th scope="row" = rank_counter + (@rankings.current_page - 1) * 25 + 1
+  td
+    |
+    = link_to "https://twitter.com/#{rank.twitter_id}" do
+      = image_tag rank.decorate.icon_url(:icon), class: 'rounded-circle', width: '100x100'
+      |
+      '
+
+      = rank.name
+    | 戦闘力
+    = rank.total_power
+    | キャラクター
+    = rank.character.name
+    | 紹介
+    = rank.character.introduction
+
+
