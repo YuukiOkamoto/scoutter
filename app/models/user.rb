@@ -12,5 +12,13 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :twitter_id, presence: true
 
-  scope :power_total_rank, -> { includes(:character).with_attached_icon.order('total_power desc') }
+  scope :power_rank, -> do
+    joins(:sum_power)
+      .includes(:character, :sum_power)
+      .with_attached_icon
+      .order('sum_powers.power desc')
+  end
+  scope :total_period, -> { merge(SumPower.total) }
+  scope :week_period, -> { merge(SumPower.week) }
+  scope :day_period, -> { merge(SumPower.day) }
 end
