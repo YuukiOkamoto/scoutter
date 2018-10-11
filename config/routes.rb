@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/ranking', to: 'power_levels#rank'
+  get '/ranking', to: 'users#rank'
   root to: 'home#index'
   post 'oauth/callback' => 'oauths#callback'
   get 'oauth/callback' => 'oauths#callback'
