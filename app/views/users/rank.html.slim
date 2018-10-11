@@ -1,11 +1,12 @@
 .pg-container
   .container
     .checkbox
-      = collection_radio_buttons :period,
-        :period_id,
-        Period.all,
-        :id,
-        :name
+      = collection_radio_buttons :sum_power,
+        :periods,
+        SumPower.periods,
+        :first,
+        :first,
+        checked: @period
     table.table.table-hover
       caption Ranking
       tbody
