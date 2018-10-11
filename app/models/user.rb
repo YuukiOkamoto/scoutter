@@ -10,5 +10,5 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :twitter_id, presence: true
 
-  scope :power_total_rank, -> { includes(:character).order('total_power desc') }
+  scope :power_total_rank, -> { includes(:character).with_attached_icon.order('total_power desc') }
 end
