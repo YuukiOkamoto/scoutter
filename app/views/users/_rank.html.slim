@@ -1,5 +1,5 @@
 tr
-  th scope="row" = rank_counter + (@rankings.current_page - 1) * 25 + 1
+  th scope="row" = rank_counter + (@ranks.current_page - 1) * 25 + 1
   td
     |
     = link_to "https://twitter.com/#{rank.twitter_id}" do
@@ -9,7 +9,7 @@ tr
 
       = rank.name
     | 戦闘力
-    = rank.total_power
+    = sum_power(rank, period)
     | キャラクター
     = rank.character.name
     | 紹介

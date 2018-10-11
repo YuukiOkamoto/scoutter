@@ -10,6 +10,6 @@
     table.table.table-hover
       caption Ranking
       tbody
-        = render partial: 'users/rank', collection: @rankings
-    = paginate @rankings, theme: 'twitter-bootstrap-4',
+        = render partial: 'users/rank', collection: @ranks, locals: { period: @period }
+    = paginate @ranks, theme: 'twitter-bootstrap-4',
       pagination_class: 'pagination-sm'
