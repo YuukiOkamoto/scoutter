@@ -40,6 +40,9 @@ gem 'mini_magick', '~> 4.8'
 # Soft delete
 gem 'paranoia'
 
+# Model
+gem 'active_hash'
+
 # Decorator
 gem 'draper'
 
