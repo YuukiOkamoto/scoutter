@@ -10,16 +10,8 @@ class Character < ApplicationRecord
   scope :power_range, -> { select(:id, :minimum, :maximum) }
 
   class << self
-    def character_decision(total_power)
-      get_ranges.each do |r|
-        if total_power.between?(r.minimum, r.maximum)
-          return r.id
-        end
-      end
-    end
-
-    def get_ranges
-      Character.select(:id, :minimum, :maximum).to_a
+    def decide_character_id(total_power)
+      all.find_by('minimum <= ? && ? <=  maximum', total_power, total_power)&.id
     end
   end
 end
