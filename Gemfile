@@ -40,11 +40,19 @@ gem 'mini_magick', '~> 4.8'
 # Soft delete
 gem 'paranoia'
 
+# Model
+gem 'active_hash'
+
 # Decorator
 gem 'draper'
 
 # Seeds
 gem 'seed-fu'
+
+# Pagination
+gem 'kaminari'
+gem 'kaminari-i18n'
+gem 'bootstrap4-kaminari-views'
 
 group :development, :test do
   # Debugger

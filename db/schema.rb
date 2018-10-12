@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_164958) do
+ActiveRecord::Schema.define(version: 2018_10_11_163438) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -95,12 +95,24 @@ ActiveRecord::Schema.define(version: 2018_10_08_164958) do
     t.index ["user_id"], name: "index_power_levels_on_user_id"
   end
 
+  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "power"
+    t.integer "period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_sum_powers_on_deleted_at"
+    t.index ["user_id"], name: "index_sum_powers_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "twitter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "character_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["name"], name: "index_users_on_name"
   end
