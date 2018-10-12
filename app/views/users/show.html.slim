@@ -1,0 +1,48 @@
+/ 戦闘力表示画面
+    表示：
+    戦闘力
+    キャラ名
+    テキスト
+    twitterへのシェアボタン
+      シェアボタン押下で戦闘力、キャラ名、テキスト部分のスクリーンショットを取り、
+      twitterへ投稿
+
+.power
+  h2 戦闘力：15000
+.name
+  h3 キャラ名：悟空
+.text
+  p テキスト：一番強い
+
+
+.sample
+  = image_tag 'power_image', class: 'img'
+  p これはテスト
+
+sass:
+  .sample
+    position: relative
+    .img
+      width: 100%
+    p
+      font-size: px
+      position: absolute
+      color: black
+      top: 0
+      left: 50%
+
+/ twitterシェアボタン：
+  ・ボタン押下時にキャプチャ取得する
+    →user#take_screenshotに移る
+  ・「リンクをあなたのフォロワーに共有する」画面に遷移する
+  ・取得したキャプチャをtwittercardで作成する際に、twitter:imageに指定します
+= link_to 'アクション', share_twitter_path(url: @url)
+/a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+/ twitter-card
+meta content="summary_large_image" name="twitter:card"
+meta content="@lavie77152878" name="twitter:site"
+meta content="http://localhost:3000/users/show" property="og:url"
+meta content="これはテスト" property="og:title"
+meta content="これはテストです" property="og:description"
+meta content="#{asset_url('test.jpg')}" property="twitter:image"

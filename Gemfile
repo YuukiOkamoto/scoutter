@@ -14,6 +14,7 @@ gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'phantomjs', '1.9.8'
 
 # Application server
 gem 'puma', '~> 3.11'
@@ -60,8 +61,13 @@ gem 'seed-fu'
 gem 'paranoia'
 
 group :development, :test do
+  gem 'capybara'
+  gem 'poltergeist'
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
 
   # Code analyze
   gem 'rubocop-rails_config'

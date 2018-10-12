@@ -46,6 +46,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.1.4)
@@ -60,8 +62,17 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
+    capybara (3.9.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.1)
+    cliver (0.3.2)
     code_analyzer (0.4.8)
       sexp_processor
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     dotenv (2.5.0)
@@ -136,8 +147,25 @@ GEM
       activerecord (>= 4.0, < 5.3)
     parser (2.5.1.2)
       ast (~> 2.4.0)
+    phantomjs (1.9.8.0)
+    poltergeist (1.18.1)
+      capybara (>= 2.1, < 4)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     popper_js (1.14.3)
     powerpack (0.1.2)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
+    pry-doc (0.13.4)
+      pry (~> 0.11)
+      yard (~> 0.9.11)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
+    public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
     rack-test (1.1.0)
@@ -262,6 +290,9 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    xpath (3.1.0)
+      nokogiri (~> 1.8)
+    yard (0.9.16)
 
 PLATFORMS
   ruby
@@ -270,6 +301,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.3)
   byebug
+  capybara
   dotenv-rails
   draper
   font-awesome-rails
@@ -280,6 +312,11 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   mysql2 (>= 0.4.4, < 0.6.0)
   paranoia
+  phantomjs (= 1.9.8)
+  poltergeist
+  pry-byebug
+  pry-doc
+  pry-rails
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails-i18n (~> 5.0.0)
