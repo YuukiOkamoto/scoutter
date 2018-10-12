@@ -1,5 +1,5 @@
 module PowerLevelHelper
-  def sum_power(user, period)
+  def get_sum_power(user, period)
     case period
     when 'total'
       user.sum_power.total.pluck(:power).first

@@ -1,3 +1,4 @@
+/ TODO レイアウトは仮です。今後デザインを考えて適用する必要があります。
 tr
   th scope="row" = rank_counter + (@ranks.current_page - 1) * 25 + 1
   td
@@ -6,13 +7,12 @@ tr
       = image_tag rank.decorate.icon_url(:icon), class: 'rounded-circle', width: '100x100'
       |
       '
-
       = rank.name
     | 戦闘力
-    = sum_power(rank, period)
+    = get_sum_power(rank, period)
     | キャラクター
-    = rank.character.name
+    = rank.character&.name
     | 紹介
-    = rank.character.introduction
+    = rank.character&.introduction
 
 
