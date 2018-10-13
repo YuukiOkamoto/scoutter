@@ -22,6 +22,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'sorcery'
 
+# Background Job
+gem 'whenever', require: false
+
 # Configuration
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 
