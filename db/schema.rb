@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_163438) do
+ActiveRecord::Schema.define(version: 2018_10_13_100016) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 2018_10_11_163438) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "action_id"
+    t.integer "yesterday_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "latest_value"
+    t.index ["action_id"], name: "index_activities_on_action_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
@@ -95,7 +106,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_163438) do
     t.index ["user_id"], name: "index_power_levels_on_user_id"
   end
 
-  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "power"
     t.integer "period"
@@ -106,7 +117,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_163438) do
     t.index ["user_id"], name: "index_sum_powers_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "twitter_id"
     t.datetime "created_at", null: false
