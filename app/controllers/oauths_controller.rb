@@ -38,6 +38,11 @@ class OauthsController < ApplicationController
         @daily_power_record.save
       end
 
+      # 戦闘力の合計値によって、ユーザーのキャラクターを変更
+      @power_levels = PowerLevel.get_total_power(current_user.id)
+      current_user.character_id = Character.decide_character_id(@power_levels)
+      current_user.save
+
       redirect_to power_levels_path
     else
       begin
