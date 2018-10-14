@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def show
+    @data_30days = PowerLevel.get_target_period_array(30, current_user.id)
+  end
+
   def rank
     case @period = params[:period] || 'total'
     when 'total'
