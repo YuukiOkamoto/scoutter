@@ -1,6 +1,6 @@
 / TODO レイアウトは仮です。今後デザインを考えて適用する必要があります。
 tr
-  th scope="row" = rank_counter + (@ranks.current_page - 1) * 25 + 1
+  th scope="row" = rank_counter + (ranks.current_page - 1) * 25 + 1
   td
     |
     = link_to "https://twitter.com/#{rank.twitter_id}" do
