@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'power_levels', to: 'users#show'
   get '/ranking', to: 'users#rank'
   root to: 'home#index'
   post 'oauth/callback' => 'oauths#callback'

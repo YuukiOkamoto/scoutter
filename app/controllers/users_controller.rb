@@ -9,4 +9,9 @@ class UsersController < ApplicationController
       @ranks = User.power_rank.day_period.page(params[:page]).per(25)
     end
   end
+
+  def show
+    @power_levels = PowerLevel.get_total_power(current_user.id)
+    @character = Character.find_by(id: current_user.character_id).name
+  end
 end
