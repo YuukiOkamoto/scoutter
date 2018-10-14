@@ -14,5 +14,11 @@ class PowerLevel < ApplicationRecord
     def get_total_power(user_id:)
       all.where(user_id: user_id).sum(:power)
     end
+
+    # 特定ユーザーのcount日前からの日々の戦闘力の合計値を配列で返す
+    def get_target_period_array(count, user_id)
+      from_power = PowerLevel.until_ago(count).get_total_power(user_id: user_id)
+      count.step(1, -1).map { |i| from_power += PowerLevel.ago(i - 1).get_total_power(user_id: user_id) }
+    end
   end
 end
