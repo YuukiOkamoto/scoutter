@@ -16,18 +16,18 @@ class TwitterAPI
   end
 
   class << self
-    def fav(uid, user_id)
+    def fav(uid, user)
       fav_point = ActionPoint.fav.point
       total_fav = TwitterAPI.instance.client.user(uid).favorites_count
-      activity = Activity.find_by(user_id: user_id, action_id: 1)
+      activity = Activity.find_by(user_id: user.id, action_id: 1)
 
       if activity == nil
-        Activity.create(user_id: user_id, action_id: 1, yesterday_value: total_fav)
+        Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav)
         yesterday_fav = total_fav
 
         @fav = fav_point * (total_fav - yesterday_fav)
       else
-        yesterday_fav = Activity.find_by(user_id: user_id, action_id: 1).yesterday_value
+        yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
         @fav = fav_point * (total_fav - yesterday_fav)
         activity.latest_value = total_fav
         activity.save
@@ -88,6 +88,27 @@ class TwitterAPI
       @xl_tweet = xl_tweet_count * xl_tweet_point
 
       @tweet = @xs_tweet + @s_tweet + @l_tweet + @xl_tweet
+    end
+
+    def powering(uid, user)
+      @daily_score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
+      @daily_power = @daily_score * Character.find(user.character_id).growth_rate
+      @daily_power = @daily_power.to_i
+
+      # デイリー戦闘力をpower_levelsテーブルに保存
+      # 今日一度も戦闘力を図っていなければデイリー戦闘力のレコードを作成し、一度でも測っていればデイリー戦闘力を更新する
+      @daily_power_record = PowerLevel.where('created_at > ?', Time.now.beginning_of_day).find_by(user_id: user.id)
+      if @daily_power_record.nil?
+        PowerLevel.create(user_id: user.id, power: @daily_power)
+      else
+        @daily_power_record.power = @daily_power
+        @daily_power_record.save
+      end
+
+      # 戦闘力の合計値によって、ユーザーのキャラクターを変更
+      @power_levels = PowerLevel.get_total_power(user.id)
+      user.character_id = Character.decide_character_id(@power_levels)
+      user.save
     end
   end
 end
