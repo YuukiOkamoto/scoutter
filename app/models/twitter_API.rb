@@ -40,7 +40,7 @@ class TwitterAPI
     end
 
     def retweet(uid)
-      retweet_count = TwitterAPI.instance.client.retweeted_by_user(user_id: uid, count: 10).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      retweet_count = TwitterAPI.instance.client.retweeted_by_user(user_id: uid, count: Action.retweet.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
       retweet_point = ActionPoint.retweet.point
       @retweet = retweet_point * retweet_count
     end
@@ -48,7 +48,7 @@ class TwitterAPI
     def quote(uid)
       quote = []
 
-      TwitterAPI.instance.client.user_timeline(user_id: uid, count: 10).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
+      TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.quote.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
         if tweet.quote?
           quote << tweet
         end
@@ -59,7 +59,7 @@ class TwitterAPI
     end
 
     def reply(uid)
-      reply_count = TwitterAPI.instance.client.user_timeline(user_id: uid, count: 50).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 1000, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      reply_count = TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.reply.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 1000, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
       reply_point = ActionPoint.reply.point
       @reply = reply_count * reply_point
     end
