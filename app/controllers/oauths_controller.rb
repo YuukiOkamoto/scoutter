@@ -18,7 +18,6 @@ class OauthsController < ApplicationController
         auto_login(@user)
         @uid = Authentication.find_by(user_id: current_user.id).uid.to_i
         if TwitterAPI.instance.client.user(@uid).protected?
-          Authentication.find_by(user_id: @user.id).destroy
           @user.destroy
           redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
           return
