@@ -7,7 +7,7 @@ class PowerLevel < ApplicationRecord
   scope :daily, -> { where(updated_at: (Date.today)..(Time.current)) }
 
   class << self
-    def get_total_power(user_id)
+    def get_total_power(user_id:)
       all.where(user_id: user_id).sum(:power)
     end
   end
