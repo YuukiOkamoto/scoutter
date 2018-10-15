@@ -10,7 +10,7 @@ class OauthsController < ApplicationController
       @uid = Authentication.find_by(user_id: current_user.id).uid.to_i
       TwitterAPI.update_user_info(@user, @uid)
       TwitterAPI.powering(@uid, @user)
-      redirect_to power_levels_path
+      redirect_to user_path(@user.id)
     else
       begin
         @user = create_from(provider)
@@ -24,8 +24,9 @@ class OauthsController < ApplicationController
           return
         end
         TwitterAPI.powering(@uid, @user)
-        redirect_to power_levels_path
+        redirect_to user_path(@user.id)
       rescue
+        logger.debug
         redirect_to root_path
       end
     end
