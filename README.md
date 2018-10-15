@@ -61,3 +61,11 @@ $ bundle exec scss-lint
 ```
 $ bundle exec slim-lint
 ```
+
+### Force login
+
+- See `app/controllers/development/sessions_controller.rb`
+
+```
+/login_as/[user_id]
+```
