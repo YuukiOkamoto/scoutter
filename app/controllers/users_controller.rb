@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :not_self_page, only: :show
 
   def show
-    @data_30days = PowerLevel.get_target_period_array(30, current_user.id)
+    @data_30days = PowerLevel.get_target_period_array(30, params[:id])
   end
 
   def rank
