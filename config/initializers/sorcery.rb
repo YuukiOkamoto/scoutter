@@ -112,7 +112,7 @@ Rails.application.config.sorcery.configure do |config|
   when "development"
     config.twitter.callback_url = ENV["TWITTER_CALLBACK_DEVELOPMENT"]
   end
-  config.twitter.user_info_mapping = {:name => "name" , :twitter_id => "screen_name"}
+  config.twitter.user_info_mapping = { name: "name" , twitter_id: "screen_name", image: "profile_image_url_https" }
   #
   # config.facebook.key = ""
   # config.facebook.secret = ""
