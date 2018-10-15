@@ -3,7 +3,7 @@ tr
   th scope="row" = rank_counter + prev_page_last_rank(ranks)
   td
     |
-    = link_to "https://twitter.com/#{rank.twitter_id}" do
+    = link_to "https://twitter.com/#{rank.twitter_id}", target: '_blank' do
       = image_tag rank.image, class: 'rounded-circle', width: '100x100'
       |
       '
