@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 2018_10_15_042359) do
     t.datetime "deleted_at"
     t.integer "character_id", default: 1
     t.string "image"
-    t.integer "character_id"
     t.index ["character_id"], name: "index_users_on_character_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["name"], name: "index_users_on_name"
