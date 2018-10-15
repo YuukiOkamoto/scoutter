@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   belongs_to :character
 
+  delegate :name, :introduction, to: :character, prefix: true
+
   validates :name, presence: true
   validates :twitter_id, presence: true
 

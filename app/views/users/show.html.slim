@@ -5,11 +5,11 @@
   | です
 .name
   | あなたは
-  = @user.character&.name
+  = @user.character_name
   | です
 .text
   p
-    = @user.character&.introduction
+    = @user.character_introduction
 p
 script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
 canvas#lineChartCanvas
