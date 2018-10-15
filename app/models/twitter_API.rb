@@ -119,6 +119,13 @@ class TwitterAPI
         @daily_power_record.save
       end
 
+      # sum_powerテーブルに日時、週間、合計戦闘力を格納
+      if user.sum_power.empty?
+        SumPower.bundle_create(user)
+      else
+        SumPower.bundle_update(user)
+      end
+
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更
       @power_levels = PowerLevel.get_total_power(user_id: user.id)
       user.character_id = Character.decide_character_id(@power_levels)
