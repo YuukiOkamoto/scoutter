@@ -127,7 +127,7 @@ class TwitterAPI
       end
 
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更
-      @power_levels = PowerLevel.get_total_power(user_id: user.id)
+      @power_levels = user.sum_power.find_by(period: 'total').power
       user.character_id = Character.decide_character_id(@power_levels)
       user.save
     end
