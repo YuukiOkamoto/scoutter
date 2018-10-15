@@ -10,7 +10,7 @@ module PowerLevelHelper
     end
   end
 
-  def prev_last_rank(ranks)
+  def prev_page_last_rank(ranks)
     (ranks.current_page - 1) * 25 + 1
   end
 end
