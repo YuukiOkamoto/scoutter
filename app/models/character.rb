@@ -7,8 +7,6 @@ class Character < ApplicationRecord
   validates :maximum, presence: true
   validates :growth_rate, presence: true
 
-  scope :power_range, -> { select(:id, :minimum, :maximum) }
-
   class << self
     def decide_character_id(total_power)
       all.find_by('minimum <= ? && ? <=  maximum', total_power, total_power)&.id

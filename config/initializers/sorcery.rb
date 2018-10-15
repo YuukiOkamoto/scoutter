@@ -104,15 +104,15 @@ Rails.application.config.sorcery.configure do |config|
   # Twitter will not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
-  config.twitter.key = ENV["TWITTER_KEY"]
-  config.twitter.secret = ENV["TWITTER_SECRET"]
+  config.twitter.key = ENV["CONSUMER_KEY"]
+  config.twitter.secret = ENV["CONSUMER_SECRET"]
   case Rails.env
   when "production"
     config.twitter.callback_url = ENV["TWITTER_CALLBACK"]
   when "development"
     config.twitter.callback_url = ENV["TWITTER_CALLBACK_DEVELOPMENT"]
   end
-  config.twitter.user_info_mapping = {:name => "name" , :twitter_id => "screen_name"}
+  config.twitter.user_info_mapping = { name: "name", twitter_id: "screen_name" }
   #
   # config.facebook.key = ""
   # config.facebook.secret = ""
@@ -371,7 +371,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `5 * 60`
     #
     # user.reset_password_time_between_emails =
-    
+
     # access counter to a reset password page attribute name
     # Default: `:access_count_to_reset_password_page`
     #
