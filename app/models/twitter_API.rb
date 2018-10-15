@@ -73,15 +73,25 @@ class TwitterAPI
       l_tweet_point = ActionPoint.l_tweet.point
       xl_tweet_count = 0
       xl_tweet_point = ActionPoint.xl_tweet.point
-      TwitterAPI.instance.client.user_timeline(user_id: uid, count: 50, exclude_replies: true, include_rts: false).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
+
+      xs_tweet_minimum = ActionQuality.xs_tweet.minimum
+      s_tweet_minimum = ActionQuality.s_tweet.minimum
+      l_tweet_minimum = ActionQuality.l_tweet.minimum
+      xl_tweet_minimum = ActionQuality.xl_tweet.minimum
+      xs_tweet_maximum = ActionQuality.xs_tweet.maximum
+      s_tweet_maximum = ActionQuality.s_tweet.maximum
+      l_tweet_maximum = ActionQuality.l_tweet.maximum
+      xl_tweet_maximum = ActionQuality.xl_tweet.maximum
+
+      TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.tweet.limit, exclude_replies: true, include_rts: false).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
         unless tweet.quote?
-          if tweet.text.length.between?(1, 14)
+          if tweet.text.length.between?(xs_tweet_minimum, xs_tweet_maximum)
             xs_tweet_count += 1
-          elsif tweet.text.length.between?(15, 49)
+          elsif tweet.text.length.between?(s_tweet_minimum, s_tweet_maximum)
             s_tweet_count += 1
-          elsif tweet.text.length.between?(50, 99)
+          elsif tweet.text.length.between?(l_tweet_minimum, l_tweet_maximum)
             l_tweet_count += 1
-          elsif tweet.text.length.between?(100, 140)
+          elsif tweet.text.length.between?(xl_tweet_minimum, xl_tweet_maximum)
             xl_tweet_count += 1
           end
         end
