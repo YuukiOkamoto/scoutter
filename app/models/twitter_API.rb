@@ -28,7 +28,11 @@ class TwitterAPI
         @fav = fav_point * (total_fav - yesterday_fav)
       else
         yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
-        @fav = fav_point * (total_fav - yesterday_fav)
+        fav_count = total_fav - yesterday_fav
+        if fav_count > Action.fav.limit
+          fav_count = Action.fav.limit
+        end
+        @fav = fav_point * fav_count
         activity.latest_value = total_fav
         activity.save
       end
