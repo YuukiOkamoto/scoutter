@@ -3,8 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @data_30days = PowerLevel.get_target_period_array(30, params[:id])
-    @power_levels = PowerLevel.get_total_power(user_id: current_user.id)
-    @character = Character.find_by(id: current_user.character_id).name
+    @user = User.find(params[:id])
   end
 
   def rank
