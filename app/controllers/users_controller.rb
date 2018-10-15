@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @power_levels = PowerLevel.get_total_power(current_user.id)
+    @power_levels = PowerLevel.get_total_power(user_id: current_user.id)
     @character = Character.find_by(id: current_user.character_id).name
   end
 end
