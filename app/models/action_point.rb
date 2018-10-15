@@ -11,5 +11,4 @@ class ActionPoint < ApplicationRecord
   scope :s_tweet, -> { find(6) }
   scope :l_tweet, -> { find(7) }
   scope :xl_tweet, -> { find(8) }
-
 end

@@ -112,7 +112,7 @@ Rails.application.config.sorcery.configure do |config|
   when "development"
     config.twitter.callback_url = ENV["TWITTER_CALLBACK_DEVELOPMENT"]
   end
-  config.twitter.user_info_mapping = { name: "name" , twitter_id: "screen_name", image: "profile_image_url_https" }
+  config.twitter.user_info_mapping = { name: "name", twitter_id: "screen_name", image: "profile_image_url_https" }
   #
   # config.facebook.key = ""
   # config.facebook.secret = ""
@@ -371,7 +371,6 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `5 * 60`
     #
     # user.reset_password_time_between_emails =
-    
     # access counter to a reset password page attribute name
     # Default: `:access_count_to_reset_password_page`
     #
