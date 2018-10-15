@@ -1,4 +1,30 @@
-.container
-  = @power_levels
-  br
-  = @character
+/ TODO デザインは未反映
+.power
+  | あなたの戦闘力は
+  = get_sum_power(current_user, 'total')
+  | です
+.name
+  | あなたは
+  = current_user.character&.name
+  | です
+.text
+  p
+    = current_user.character&.introduction
+p
+script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
+canvas#lineChartCanvas
+/ jsファイルに分けるほうが、変数の受け渡しや可視性の面が劣るため、htmlに記述
+javascript:
+  new Chart(document.getElementById("lineChartCanvas"), {
+    "type": "line",
+    "data": {
+      "labels": #{get_days_from_today(30)},
+      "datasets": [{
+        "label": "戦闘力遷移",
+        "data": #{@data_30days},
+        "borderColor": "rgb(75, 192, 192)",
+        "lineTension": 0.1
+      }]
+    },
+    "options": {}
+  });

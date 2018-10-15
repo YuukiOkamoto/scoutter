@@ -9,4 +9,8 @@ module PowerLevelHelper
       user.sum_power.day.pluck(:power).first
     end
   end
+
+  def prev_page_last_rank(ranks)
+    (ranks.current_page - 1) * 25 + 1
+  end
 end

@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_042359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+    t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
   create_table "characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -125,6 +126,8 @@ ActiveRecord::Schema.define(version: 2018_10_15_042359) do
     t.datetime "deleted_at"
     t.integer "character_id", default: 1
     t.string "image"
+    t.integer "character_id"
+    t.index ["character_id"], name: "index_users_on_character_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["name"], name: "index_users_on_name"
   end
