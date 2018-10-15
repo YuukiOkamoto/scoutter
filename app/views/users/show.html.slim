@@ -18,7 +18,7 @@ javascript:
   new Chart(document.getElementById("lineChartCanvas"), {
     "type": "line",
     "data": {
-      "labels": #{get_days(30)},
+      "labels": #{get_days_from_today(30)},
       "datasets": [{
         "label": "戦闘力遷移",
         "data": #{@data_30days},
