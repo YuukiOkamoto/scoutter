@@ -114,5 +114,18 @@ class TwitterAPI
       user.character_id = Character.decide_character_id(@power_levels)
       user.save
     end
+
+    def update_user_info(user, uid)
+      if user.name != TwitterAPI.instance.client.user(uid).name
+        user.name = TwitterAPI.instance.client.user(uid).name
+        user.save
+      elsif user.twitter_id != TwitterAPI.instance.client.user(uid).screen_name
+        user.twitter_id = TwitterAPI.instance.client.user(uid).screen_name
+        user.save
+      elsif user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
+        user.image = TwitterAPI.instance.client.user(uid).profile_image_url_https
+        user.save
+      end
+    end
   end
 end

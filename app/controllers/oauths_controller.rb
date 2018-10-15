@@ -8,6 +8,7 @@ class OauthsController < ApplicationController
     provider = params[:provider]
     if @user = login_from(provider)
       @uid = Authentication.find_by(user_id: current_user.id).uid.to_i
+      TwitterAPI.update_user_info(@user, @uid)
       TwitterAPI.powering(@uid, @user)
       redirect_to power_levels_path
     else
