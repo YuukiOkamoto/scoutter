@@ -10,7 +10,7 @@ class SumPower < ApplicationRecord
   validates :period, presence: true
 
   class << self
-    def bundle_update(user)
+    def personal_bulk_update(user)
       daily = PowerLevel.daily.get_total_power(user_id: user.id)
       weekly = PowerLevel.weekly.get_total_power(user_id: user.id)
       total = PowerLevel.get_total_power(user_id: user.id)

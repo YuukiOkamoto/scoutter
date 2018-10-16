@@ -4,7 +4,7 @@ namespace :sum_power_ranking do
     users = User.all
     users.each do |user|
       begin
-        SumPower.bundle_update(user)
+        SumPower.personal_bulk_update(user)
       rescue => e
         logger.debug(e)
         next
