@@ -3,7 +3,12 @@ namespace :sum_power_ranking do
   task update: :environment do
     users = User.all
     users.each do |user|
-      SumPower.bundle_update(user)
+      begin
+        SumPower.bundle_update(user)
+      rescue => e
+        logger.debug(e)
+        next
+      end
     end
   end
 end
