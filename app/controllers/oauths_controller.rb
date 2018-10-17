@@ -24,8 +24,8 @@ class OauthsController < ApplicationController
         end
         TwitterAPI.powering(@uid, @user)
         redirect_to user_path(@user.id)
-      rescue
-        logger.debug
+      rescue => e
+        logger.debug(e)
         redirect_to root_path
       end
     end
