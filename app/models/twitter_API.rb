@@ -6,6 +6,28 @@ class TwitterAPI
 
   attr_reader :client
 
+  @@fav_point = ActionPoint.fav.point
+
+  @@retweet_point = ActionPoint.retweet.point
+
+  @@quote_point = ActionPoint.quote.point
+
+  @@reply_point = ActionPoint.reply.point
+
+  @@xs_tweet_point = ActionPoint.xs_tweet.point
+  @@s_tweet_point = ActionPoint.s_tweet.point
+  @@l_tweet_point = ActionPoint.l_tweet.point
+  @@xl_tweet_point = ActionPoint.xl_tweet.point
+
+  @@xs_tweet_minimum = ActionQuality.xs_tweet.minimum
+  @@s_tweet_minimum = ActionQuality.s_tweet.minimum
+  @@l_tweet_minimum = ActionQuality.l_tweet.minimum
+  @@xl_tweet_minimum = ActionQuality.xl_tweet.minimum
+  @@xs_tweet_maximum = ActionQuality.xs_tweet.maximum
+  @@s_tweet_maximum = ActionQuality.s_tweet.maximum
+  @@l_tweet_maximum = ActionQuality.l_tweet.maximum
+  @@xl_tweet_maximum = ActionQuality.xl_tweet.maximum
+
   def initialize
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['CONSUMER_KEY']
@@ -17,22 +39,20 @@ class TwitterAPI
 
   class << self
     def fav(uid, user)
-      fav_point = ActionPoint.fav.point
       total_fav = TwitterAPI.instance.client.user(uid).favorites_count
       activity = Activity.find_by(user_id: user.id, action_id: 1)
 
       if activity == nil
         Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav)
         yesterday_fav = total_fav
-
-        @fav = fav_point * (total_fav - yesterday_fav)
+        @fav = @@fav_point * (total_fav - yesterday_fav)
       else
         yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
         fav_count = total_fav - yesterday_fav
         if fav_count > Action.fav.limit
           fav_count = Action.fav.limit
         end
-        @fav = fav_point * fav_count
+        @fav = @@fav_point * fav_count
         activity.latest_value = total_fav
         activity.save
       end
@@ -41,8 +61,7 @@ class TwitterAPI
 
     def retweet(uid)
       retweet_count = TwitterAPI.instance.client.retweeted_by_user(user_id: uid, count: Action.retweet.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
-      retweet_point = ActionPoint.retweet.point
-      @retweet = retweet_point * retweet_count
+      @retweet = @@retweet_point * retweet_count
     end
 
     def quote(uid)
@@ -54,54 +73,34 @@ class TwitterAPI
         end
       end
       quote_count = quote.count
-      quote_point = ActionPoint.quote.point
-      @quote = quote_point * quote_count
+      @quote = @@quote_point * quote_count
     end
 
     def reply(uid)
       reply_count = TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.reply.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 1000, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
-      reply_point = ActionPoint.reply.point
-      @reply = reply_count * reply_point
+      @reply = @@reply_point * reply_count
     end
 
-    def tweet(uid)
-      xs_tweet_count = 0
-      xs_tweet_point = ActionPoint.xs_tweet.point
-      s_tweet_count = 0
-      s_tweet_point = ActionPoint.s_tweet.point
-      l_tweet_count = 0
-      l_tweet_point = ActionPoint.l_tweet.point
-      xl_tweet_count = 0
-      xl_tweet_point = ActionPoint.xl_tweet.point
-
-      xs_tweet_minimum = ActionQuality.xs_tweet.minimum
-      s_tweet_minimum = ActionQuality.s_tweet.minimum
-      l_tweet_minimum = ActionQuality.l_tweet.minimum
-      xl_tweet_minimum = ActionQuality.xl_tweet.minimum
-      xs_tweet_maximum = ActionQuality.xs_tweet.maximum
-      s_tweet_maximum = ActionQuality.s_tweet.maximum
-      l_tweet_maximum = ActionQuality.l_tweet.maximum
-      xl_tweet_maximum = ActionQuality.xl_tweet.maximum
-
+    def tweet(uid, xs_tweet_count = 0, s_tweet_count = 0, l_tweet_count = 0, xl_tweet_count = 0)
       TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.tweet.limit, exclude_replies: true, include_rts: false).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
         unless tweet.quote?
-          if tweet.text.length.between?(xs_tweet_minimum, xs_tweet_maximum)
+          if tweet.text.length.between?(@@xs_tweet_minimum, @@xs_tweet_maximum)
             xs_tweet_count += 1
-          elsif tweet.text.length.between?(s_tweet_minimum, s_tweet_maximum)
+          elsif tweet.text.length.between?(@@s_tweet_minimum, @@s_tweet_maximum)
             s_tweet_count += 1
-          elsif tweet.text.length.between?(l_tweet_minimum, l_tweet_maximum)
+          elsif tweet.text.length.between?(@@l_tweet_minimum, @@l_tweet_maximum)
             l_tweet_count += 1
-          elsif tweet.text.length.between?(xl_tweet_minimum, xl_tweet_maximum)
+          elsif tweet.text.length.between?(@@xl_tweet_minimum, @@xl_tweet_maximum)
             xl_tweet_count += 1
           end
         end
       end
-      @xs_tweet = xs_tweet_count * xs_tweet_point
-      @s_tweet = s_tweet_count * s_tweet_point
-      @l_tweet = l_tweet_count * l_tweet_point
-      @xl_tweet = xl_tweet_count * xl_tweet_point
+      xs_tweet = @@xs_tweet_point * xs_tweet_count
+      s_tweet = @@s_tweet_point * s_tweet_count
+      l_tweet = @@l_tweet_point * l_tweet_count
+      xl_tweet = @@xl_tweet_point * xl_tweet_count
 
-      @tweet = @xs_tweet + @s_tweet + @l_tweet + @xl_tweet
+      @tweet = xs_tweet + s_tweet + l_tweet + xl_tweet
     end
 
     def powering(uid, user)
