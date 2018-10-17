@@ -7,7 +7,7 @@ class OauthsController < ApplicationController
   def callback
     provider = params[:provider]
     if @user = login_from(provider)
-      @uid = Authentication.find_by(user_id: current_user.id).uid.to_i
+      @uid = @user.authentications.set_uid(provider)
       TwitterAPI.update_user_info(@user, @uid)
       TwitterAPI.powering(@uid, @user)
       redirect_to user_path(@user.id)
@@ -16,7 +16,7 @@ class OauthsController < ApplicationController
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        @uid = Authentication.find_by(user_id: current_user.id).uid.to_i
+        @uid = @user.authentications.set_uid(provider)
         if TwitterAPI.instance.client.user(@uid).protected?
           @user.destroy
           redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
