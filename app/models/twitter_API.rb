@@ -28,6 +28,12 @@ class TwitterAPI
   @@l_tweet_maximum = ActionQuality.l_tweet.maximum
   @@xl_tweet_maximum = ActionQuality.xl_tweet.maximum
 
+  @@fav_limit = Action.fav.limit
+  @@retweet_limit = Action.retweet.limit
+  @@quote_limit = Action.quote.limit
+  @@reply_limit = Action.reply.limit
+  @@tweet_limit = Action.tweet.limit
+
   def initialize
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['CONSUMER_KEY']
@@ -39,7 +45,7 @@ class TwitterAPI
 
   class << self
     def fav(uid, user)
-      total_fav = TwitterAPI.instance.client.user(uid).favorites_count
+      total_fav = TwitterAPI.get_total_favorites_count(uid)
       activity = Activity.find_by(user_id: user.id, action_id: 1)
 
       if activity == nil
@@ -49,8 +55,8 @@ class TwitterAPI
       else
         yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
         fav_count = total_fav - yesterday_fav
-        if fav_count > Action.fav.limit
-          fav_count = Action.fav.limit
+        if fav_count > @@fav_limit
+          fav_count = @@fav_limit
         end
         @fav = @@fav_point * fav_count
         activity.latest_value = total_fav
@@ -60,29 +66,35 @@ class TwitterAPI
     end
 
     def retweet(uid)
-      retweet_count = TwitterAPI.instance.client.retweeted_by_user(user_id: uid, count: Action.retweet.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      retweet_count = TwitterAPI.get_retweets_from_today(uid)
       @retweet = @@retweet_point * retweet_count
     end
 
     def quote(uid)
       quote = []
 
-      TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.quote.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
+      TwitterAPI.get_tweets_from_today(uid).each do |tweet|
         if tweet.quote?
           quote << tweet
         end
       end
       quote_count = quote.count
+      if quote_count > @@quote_limit
+        quote_count = @@quote_limit
+      end
       @quote = @@quote_point * quote_count
     end
 
     def reply(uid)
-      reply_count = TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.reply.limit).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 1000, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      reply_count = TwitterAPI.get_replies_from_today(uid)
+      if reply_count > @@reply_limit
+        reply_count = @@reply_limit
+      end
       @reply = @@reply_point * reply_count
     end
 
     def tweet(uid, xs_tweet_count = 0, s_tweet_count = 0, l_tweet_count = 0, xl_tweet_count = 0)
-      TwitterAPI.instance.client.user_timeline(user_id: uid, count: Action.tweet.limit, exclude_replies: true, include_rts: false).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.each do |tweet|
+      TwitterAPI.get_tweets_from_today(uid).each do |tweet|
         unless tweet.quote?
           if tweet.text.length.between?(@@xs_tweet_minimum, @@xs_tweet_maximum)
             xs_tweet_count += 1
@@ -142,6 +154,22 @@ class TwitterAPI
         user.image = TwitterAPI.instance.client.user(uid).profile_image_url_https
         user.save
       end
+    end
+
+    def get_total_favorites_count(uid)
+      instance.client.user(uid).favorites_count
+    end
+
+    def get_retweets_from_today(uid)
+      instance.client.retweeted_by_user(uid, options = { count: @@retweet_limit }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+    end
+
+    def get_replies_from_today(uid)
+      instance.client.user_timeline(uid, options = { count: 200 }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 200, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+    end
+
+    def get_tweets_from_today(uid)
+      instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
     end
   end
 end
