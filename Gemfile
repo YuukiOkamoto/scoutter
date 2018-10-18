@@ -9,9 +9,8 @@ gem 'rails', '~> 5.2.1'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
 # Assets
-gem 'bootstrap', '~> 4.1.3'
-gem 'font-awesome-rails'
-gem 'jquery-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootswatch', github: 'thomaspark/bootswatch'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'phantomjs', '1.9.8'
@@ -22,6 +21,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
 gem 'sorcery'
+
+# Background Job
+gem 'whenever', require: false
 
 # Configuration
 gem 'dotenv-rails', require: 'dotenv/rails-now'
@@ -44,6 +46,7 @@ gem 'font-awesome-rails'
 # UI/UX
 gem 'rails-i18n', '~> 5.0.0'
 gem 'jbuilder', '~> 2.5'
+gem 'chart-js-rails'
 
 # Storage
 gem 'mini_magick', '~> 4.8'

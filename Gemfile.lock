@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/thomaspark/bootswatch.git
+  revision: cfc74ca5aae81d2944e6bd0f10c341088b818d7a
+  specs:
+    bootswatch (4.1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -62,6 +68,9 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     bootstrap4-kaminari-views (1.0.0)
       kaminari (>= 0.13)
       rails (>= 3.1)
@@ -74,6 +83,9 @@ GEM
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       xpath (~> 3.1)
+    chart-js-rails (0.1.6)
+      railties (> 3.1)
+    chronic (0.10.2)
     cliver (0.3.2)
     code_analyzer (0.4.8)
       sexp_processor
@@ -310,6 +322,8 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
     xpath (3.1.0)
       nokogiri (~> 1.8)
     yard (0.9.16)
@@ -321,9 +335,12 @@ DEPENDENCIES
   active_hash
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.3)
+  bootstrap-sass (~> 3.3.7)
   bootstrap4-kaminari-views
+  bootswatch!
   byebug
   capybara
+  chart-js-rails
   dotenv-rails
   draper
   font-awesome-rails
@@ -356,6 +373,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  whenever
 
 RUBY VERSION
    ruby 2.5.1p57

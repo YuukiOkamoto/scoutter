@@ -16,5 +16,16 @@
  *= require_tree .
  *= require_self
  */
+@import "superhero/variables";
 @import "bootstrap";
+@import "superhero/bootswatch";
 @import "font-awesome";
+@import "custom_bootstrap";
+
+.link-like {
+  color: #DF691A;
+  &:hover {
+    text-decoration: underline;
+    color: #824433;
+  }
+}
