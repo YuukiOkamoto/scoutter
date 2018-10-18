@@ -36,7 +36,6 @@ gem 'html2slim'
 # Twitter
 gem 'twitter'
 
-
 # UI/UX
 gem 'rails-i18n', '~> 5.0.0'
 gem 'jbuilder', '~> 2.5'
