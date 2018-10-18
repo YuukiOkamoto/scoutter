@@ -19,48 +19,6 @@
 @import "font-awesome";
 @import "custom_bootstrap";
 
-body {
-  background-image: url("/images/back.png");
-  background-attachment: fixed;
-  background-size: cover;
-  width: 100%;
-}
-
-.nav-link-extend {
-  padding: 1rem;
-  font-size: 3vmin;
-}
-
-.nav-tabs-extend {
-  border-bottom: 3px solid #4E5D6C;
-}
-
-.active {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-  padding-bottom: 50px;
-  box-sizing: border-box;
-}
-
-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-}
-
-.sticky-top {
-  background-image: url("/images/back.png");
-  background-attachment: fixed;
-  background-size: cover;
-  width: 100%;
-}
-
 .link-like {
   color: #DF691A;
   &:hover {

@@ -6,10 +6,10 @@
         = image_tag '/images/dragonball1.png', size: '40x40', class: 'rounded-circle text-center'
         = image_tag '/images/logo.png', size: '180x60', class: 'text-center'
       end
-  ul.nav.nav-tabs.nav-tabs-extend.sticky-top
-    li.nav-item.col-4.col-lg-2.offset-lg-3.p-0.text-center class = ('active' if displaying?(controller_name: 'home'))
+  ul.nav.nav-tabs.nav-tabs-extend.sticky-top.tab-image
+    li.nav-item.col-4.col-lg-2.offset-lg-3.p-0.text-center class = ('tab-active' if displaying?(controller_name: 'home'))
       = link_to t('home'), root_path, class: 'nav-link nav-link-extend'
-    li.nav-item.col-4.col-lg-2.p-0.text-center class = ('active' if displaying?(controller_name: 'users', action_name: 'show'))
+    li.nav-item.col-4.col-lg-2.p-0.text-center class = ('tab-active' if displaying?(controller_name: 'users', action_name: 'show'))
       = link_to t('result'), user_path(current_user.id), class: 'nav-link nav-link-extend'
-    li.nav-item.col-4.col-lg-2.p-0.text-center class = ('active' if displaying?(controller_name: 'users', action_name: 'rank'))
+    li.nav-item.col-4.col-lg-2.p-0.text-center class = ('tab-active' if displaying?(controller_name: 'users', action_name: 'rank'))
       = link_to t('ranking'), ranking_path, class: 'nav-link nav-link-extend'
