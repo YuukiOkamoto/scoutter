@@ -127,9 +127,9 @@ class TwitterAPI
       end
       # sum_powerテーブルに日時、週間、合計戦闘力を格納
       if user.sum_power.empty?
-        SumPower.bundle_create(user)
+        SumPower.personal_bulk_create(user)
       else
-        SumPower.bundle_update(user)
+        SumPower.personal_bulk_update(user)
       end
 
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更

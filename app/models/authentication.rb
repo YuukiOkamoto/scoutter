@@ -3,7 +3,7 @@ class Authentication < ApplicationRecord
 
   class << self
     def set_uid(provider)
-      find_by(provider: provider).uid.to_i
+      find_by(provider: provider).uid
     end
   end
 end
