@@ -121,9 +121,9 @@ class TwitterAPI
       # 今日一度も戦闘力を図っていなければデイリー戦闘力のレコードを作成し、一度でも測っていればデイリー戦闘力を更新する
       @daily_power_record = PowerLevel.find_by('created_at > ? && user_id = ?', Time.now.beginning_of_day, user.id)
       if @daily_power_record
-        PowerLevel.create(user_id: user.id, power: @daily_power)
-      else
         @daily_power_record.update(power: @daily_power)
+      else
+        PowerLevel.create(user_id: user.id, power: @daily_power)
       end
       # sum_powerテーブルに日時、週間、合計戦闘力を格納
       if user.sum_power.empty?
