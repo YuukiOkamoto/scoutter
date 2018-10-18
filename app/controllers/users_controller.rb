@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   PATH_TO_PHANTOM_SCRIPT = Rails.root.join('app', 'assets', 'javascripts', 'screenshot.js')
 
   def show
-    @url = request.url
     @data_30days = PowerLevel.get_target_period_array(30, params[:id])
+    @user = User.find(params[:id])
+    @url = request.url
     @screenshot_name  = @url.gsub(/\//, '¥').concat(".jpg")
     @screenshot_path = Rails.root.join("app", "assets", "images", "#{@screenshot_name}")
     #事前に、キャプチャの保存先をmetaタグに設定する
