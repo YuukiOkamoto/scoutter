@@ -75,9 +75,7 @@ class TwitterAPI
 
     def reply(uid)
       reply_count = TwitterAPI.get_replies_from_today(uid)
-      if reply_count > @@reply_limit
-        reply_count = @@reply_limit
-      end
+      reply_count = @@reply_limit if reply_count > @@reply_limit
       @reply = @@reply_point * reply_count
     end
 
