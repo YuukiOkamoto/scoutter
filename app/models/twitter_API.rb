@@ -116,10 +116,7 @@ class TwitterAPI
     end
 
     def powering(uid, user)
-      @daily_score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
-      @daily_power = @daily_score * Character.find(user.character_id).growth_rate
-      @daily_power = @daily_power.to_i
-
+      convert_score_into_power(uid, user)
       # デイリー戦闘力をpower_levelsテーブルに保存
       # 今日一度も戦闘力を図っていなければデイリー戦闘力のレコードを作成し、一度でも測っていればデイリー戦闘力を更新する
       @daily_power_record = PowerLevel.where('created_at > ?', Time.now.beginning_of_day).find_by(user_id: user.id)
@@ -170,6 +167,12 @@ class TwitterAPI
 
     def get_tweets_from_today(uid)
       instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
+    end
+
+    def convert_score_into_power(uid, user)
+      @daily_score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
+      @daily_power = @daily_score * Character.find(user.character_id).growth_rate
+      @daily_power = @daily_power.to_i
     end
   end
 end
