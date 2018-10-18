@@ -4,20 +4,28 @@ class OauthsController < ApplicationController
     login_at(params[:provider])
   end
 
-  # TODO: 下記アクションのリダイレクト先はログイン動作確認のための仮のパスなので本来の遷移先は戦闘力を表示するページになる予定
   def callback
     provider = params[:provider]
     if @user = login_from(provider)
-      redirect_to root_path
+      @uid = @user.authentications.set_uid(provider)
+      TwitterAPI.update_user_info(@user, @uid)
+      TwitterAPI.powering(@uid, @user)
+      redirect_to user_path(@user.id)
     else
       begin
         @user = create_from(provider)
-        # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
-
-        reset_session # protect from session fixation attack
+        reset_session
         auto_login(@user)
-        redirect_to root_path
-      rescue
+        @uid = @user.authentications.set_uid(provider)
+        if TwitterAPI.instance.client.user(@uid).protected?
+          @user.destroy
+          redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
+          return
+        end
+        TwitterAPI.powering(@uid, @user)
+        redirect_to user_path(@user.id)
+      rescue => e
+        logger.debug(e)
         redirect_to root_path
       end
     end

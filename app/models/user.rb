@@ -6,8 +6,11 @@ class User < ApplicationRecord
 
   has_many :power_levels
   has_many :authentications, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   belongs_to :character
+
+  delegate :name, :introduction, to: :character, prefix: true
 
   validates :name, presence: true
   validates :twitter_id, presence: true

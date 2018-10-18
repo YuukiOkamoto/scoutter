@@ -1,15 +1,15 @@
 / TODO デザインは未反映
 .power
   | あなたの戦闘力は
-  = get_sum_power(current_user, 'total')
+  = get_sum_power(@user, 'total')
   | です
 .name
   | あなたは
-  = current_user.character&.name
+  = @user.character_name
   | です
 .text
   p
-    = current_user.character&.introduction
+    = @user.character_introduction
 p
 script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
 canvas#lineChartCanvas
