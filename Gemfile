@@ -14,6 +14,8 @@ gem 'bootswatch', github: 'thomaspark/bootswatch'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'phantomjs', '1.9.8'
+gem 'meta-tags'
+gem 'settingslogic'
 
 # Application server
 gem 'puma', '~> 3.11'

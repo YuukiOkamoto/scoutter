@@ -1,11 +1,7 @@
 // 概要：users/:idページのtwitterシェアボタン押下時に画面のキャプチャを取る
 
-// キャプチャを取るページのURL
-var url = location.href;
-
 // headlessブラウザを作る(webページ用のインスタンス作成)
 // コマンドライン引数をsystemとして受け取る（from user#take_screenshot）
-debugger;
 var page = require('webpage').create();
 var system = require('system');
 
@@ -24,6 +20,8 @@ var system = require('system');
 // コマンドライン引数2個目：キャプチャ取得サイトURL
 page.open(system.args[1], function (status) {
   console.log('Status: ' + status);
-  page.render(system.args[2]);
+  if (status == "success") {
+    page.render(system.args[2]);
+  }
   phantom.exit();
 });
