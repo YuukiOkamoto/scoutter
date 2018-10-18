@@ -23,6 +23,7 @@ body {
   background-image: url("/images/back.png");
   background-attachment: fixed;
   background-size: cover;
+  width: 100%;
 }
 
 .nav-link-extend {
@@ -31,7 +32,7 @@ body {
 }
 
 .nav-tabs-extend {
-  border-bottom: 3px solid #4E5D6C
+  border-bottom: 3px solid #4E5D6C;
 }
 
 .active {
@@ -44,12 +45,20 @@ html {
   padding-bottom: 50px;
   box-sizing: border-box;
 }
+
 footer {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 50px;
+}
+
+.sticky-top {
+  background-image: url("/images/back.png");
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
 }
 
 .link-like {
