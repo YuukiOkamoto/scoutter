@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_023900) do
+ActiveRecord::Schema.define(version: 2018_10_18_082025) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "point"
@@ -64,10 +64,21 @@ ActiveRecord::Schema.define(version: 2018_10_14_023900) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "action_id"
+    t.integer "yesterday_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "latest_value"
+    t.index ["action_id"], name: "index_activities_on_action_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
-    t.string "uid", null: false
+    t.bigint "uid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
@@ -96,7 +107,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_023900) do
     t.index ["user_id"], name: "index_power_levels_on_user_id"
   end
 
-  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "power"
     t.integer "period"
@@ -113,7 +124,8 @@ ActiveRecord::Schema.define(version: 2018_10_14_023900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.integer "character_id"
+    t.integer "character_id", default: 1
+    t.string "image"
     t.index ["character_id"], name: "index_users_on_character_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["name"], name: "index_users_on_name"

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @data_30days = PowerLevel.get_target_period_array(30, params[:id])
+    @user = User.find(params[:id])
   end
 
   def rank

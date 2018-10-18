@@ -31,6 +31,7 @@ module Scoutter
       g.assets false
       g.helper false
       g.test_framework false
+      g.decorator false
     end
 
     # Settings in config/environments/* take precedence over those specified here.
