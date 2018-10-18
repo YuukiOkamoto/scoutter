@@ -19,6 +19,25 @@
 @import "font-awesome";
 @import "custom_bootstrap";
 
+body {
+  background-image: url("/images/back.png");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.nav-link-extend {
+  padding: 1rem;
+  font-size: 3vmin;
+}
+
+.nav-tabs-extend {
+  border-bottom: 3px solid #4E5D6C
+}
+
+.active {
+  background: rgba(255,255,255,0.1);
+}
+
 .link-like {
   color: #DF691A;
   &:hover {
