@@ -1,5 +1,6 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand[href="#"]
-    = t('contact')
-  a.navbar-brand[href="#"]
-    = t('terms')
+footer
+  ul.nav.navbar.navbar-expand-lg.navbar-dark.justify-content-end
+    li.nav-item
+      = link_to t('contact'), '#', class: 'navbar-brand'
+    li.nav-item
+      = link_to t('terms'), '#', class: 'navbar-brand'

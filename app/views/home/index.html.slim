@@ -1,8 +1,7 @@
-.container
-  / TODO: 暫定のボタン配置なので細かいレイアウトを作成する段階になったら変更します
-  / TODO: モーダルのレイアウトやコンテンツも仮で用意しているので決定次第変更します
-  = link_to 'Login with Twitter', auth_at_provider_path(provider: :twitter)
-  br
-  h2.link-like[data-toggle="modal" data-target=".bd-example-modal-lg"]
-    | スカウッターとは
-  = render 'about_modal'
+/ TODO: 暫定のボタン配置なので細かいレイアウトを作成する段階になったら変更します
+/ TODO: モーダルのレイアウトやコンテンツも仮で用意しているので決定次第変更します
+= link_to 'Login with Twitter', auth_at_provider_path(provider: :twitter)
+br
+h2.link-like[data-toggle="modal" data-target=".bd-example-modal-lg"]
+  | スカウッターとは
+= render 'about_modal'
