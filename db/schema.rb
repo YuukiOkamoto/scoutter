@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_023900) do
     t.index ["user_id"], name: "index_sum_powers_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "twitter_id"
     t.datetime "created_at", null: false

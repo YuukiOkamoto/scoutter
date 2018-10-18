@@ -35,13 +35,11 @@ class UsersController < ApplicationController
     end
   end
 
-<<<<<<< Updated upstream
   private
 
     def not_self_page
       redirect_to root_path if current_user&.id != params[:id].to_i
     end
-=======
   # twitterに画像およびテキスト、URL(Topページ)を投稿するための設定を行う
   def set_share_url
     tweet_url = URI.encode(
@@ -52,5 +50,4 @@ class UsersController < ApplicationController
     "テスト" 
   )
   end
->>>>>>> Stashed changes
 end
