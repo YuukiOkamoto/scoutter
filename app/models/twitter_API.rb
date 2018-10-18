@@ -138,13 +138,21 @@ class TwitterAPI
     end
 
     def update_user_info(user, uid)
-      if user.name != TwitterAPI.instance.client.user(uid).name
-        user.update(name: TwitterAPI.instance.client.user(uid).name)
-      elsif user.twitter_id != TwitterAPI.instance.client.user(uid).screen_name
-        user.update(twitter_id: TwitterAPI.instance.client.user(uid).screen_name)
-      elsif user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
-        user.update(image: TwitterAPI.instance.client.user(uid).profile_image_url_https)
-      end
+      update_name(user, uid)
+      update_twitter_id(user, uid)
+      update_image(user, uid)
+    end
+
+    def update_name(user, uid)
+      user.update(name: TwitterAPI.instance.client.user(uid).name) if user.name != TwitterAPI.instance.client.user(uid).name
+    end
+
+    def update_twitter_id(user, uid)
+      user.update(twitter_id: TwitterAPI.instance.client.user(uid).screen_name) if user.twitter_id != TwitterAPI.instance.client.user(uid).screen_name
+    end
+
+    def update_image(user, uid)
+      user.update(image: TwitterAPI.instance.client.user(uid).profile_image_url_https) if user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
     end
 
     def get_total_favorites_count(uid)
