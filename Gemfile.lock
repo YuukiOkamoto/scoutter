@@ -207,7 +207,6 @@ GEM
       websocket-driver (>= 0.2.0)
     popper_js (1.14.3)
     powerpack (0.1.2)
-<<<<<<< HEAD
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -219,8 +218,6 @@ GEM
       yard (~> 0.9.11)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
-=======
->>>>>>> 8f6d2e2dedd04b66cd654a69470af8582bc0aa9d
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
@@ -301,12 +298,8 @@ GEM
       activesupport (>= 3.1)
     settingslogic (2.0.9)
     sexp_processor (4.11.0)
-<<<<<<< HEAD
-    slim (4.0.1)
-=======
     simple_oauth (0.3.1)
     slim (3.0.9)
->>>>>>> 8f6d2e2dedd04b66cd654a69470af8582bc0aa9d
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
     slim-rails (3.2.0)
