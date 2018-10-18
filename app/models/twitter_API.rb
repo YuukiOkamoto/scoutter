@@ -119,14 +119,12 @@ class TwitterAPI
       convert_score_into_power(uid, user)
       # デイリー戦闘力をpower_levelsテーブルに保存
       # 今日一度も戦闘力を図っていなければデイリー戦闘力のレコードを作成し、一度でも測っていればデイリー戦闘力を更新する
-      @daily_power_record = PowerLevel.where('created_at > ?', Time.now.beginning_of_day).find_by(user_id: user.id)
-      if @daily_power_record.nil?
+      @daily_power_record = PowerLevel.find_by('created_at > ? && user_id = ?', Time.now.beginning_of_day, user.id)
+      if @daily_power_record
         PowerLevel.create(user_id: user.id, power: @daily_power)
       else
-        @daily_power_record.power = @daily_power
-        @daily_power_record.save
+        @daily_power_record.update(power: @daily_power)
       end
-
       # sum_powerテーブルに日時、週間、合計戦闘力を格納
       if user.sum_power.empty?
         SumPower.bundle_create(user)
@@ -135,21 +133,17 @@ class TwitterAPI
       end
 
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更
-      @power_levels = user.sum_power.find_by(period: 'total').power
-      user.character_id = Character.decide_character_id(@power_levels)
-      user.save
+      @power_level = user.sum_power.find_by(period: 'total').power
+      user.update(character_id: Character.decide_character_id(@power_level))
     end
 
     def update_user_info(user, uid)
       if user.name != TwitterAPI.instance.client.user(uid).name
-        user.name = TwitterAPI.instance.client.user(uid).name
-        user.save
+        user.update(name: TwitterAPI.instance.client.user(uid).name)
       elsif user.twitter_id != TwitterAPI.instance.client.user(uid).screen_name
-        user.twitter_id = TwitterAPI.instance.client.user(uid).screen_name
-        user.save
+        user.update(twitter_id: TwitterAPI.instance.client.user(uid).screen_name)
       elsif user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
-        user.image = TwitterAPI.instance.client.user(uid).profile_image_url_https
-        user.save
+        user.update(image: TwitterAPI.instance.client.user(uid).profile_image_url_https)
       end
     end
 
