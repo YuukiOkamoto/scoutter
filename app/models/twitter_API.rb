@@ -67,18 +67,9 @@ class TwitterAPI
       @retweet = @@retweet_point * retweet_count
     end
 
-    def quote(uid)
-      quote = []
-
-      TwitterAPI.get_tweets_from_today(uid).each do |tweet|
-        if tweet.quote?
-          quote << tweet
-        end
-      end
-      quote_count = quote.count
-      if quote_count > @@quote_limit
-        quote_count = @@quote_limit
-      end
+    def quote(uid, quote=[])
+      TwitterAPI.get_tweets_from_today(uid).each { |tweet| quote << tweet if tweet.quote? }
+      quote_count = quote.count > @@quote_limit ? @@quote_limit : quote.count
       @quote = @@quote_point * quote_count
     end
 
