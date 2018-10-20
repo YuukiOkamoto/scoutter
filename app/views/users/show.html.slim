@@ -6,6 +6,10 @@
   span.small.blink
     | ↑
     = @user.today_increase_power
+  p.small
+    | 次のキャラまで
+    = @user.up_to_next_character
+    | 戦闘力
 .name
   | あなたは
   = @user.character_name

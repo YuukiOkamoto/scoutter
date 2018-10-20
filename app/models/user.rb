@@ -28,4 +28,8 @@ class User < ApplicationRecord
   def today_increase_power
     power_levels.daily.first.power
   end
+
+  def up_to_next_character
+    character.maximum + 1 - power_levels.sum(:power)
+  end
 end
