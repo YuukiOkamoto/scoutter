@@ -35,8 +35,10 @@ function render_graph(data) {
         label: "Twitter戦闘力",
         data: data.data,
         borderColor: "rgb(75, 192, 192)",
+        borderWidth: 2,
         lineTension: 0.3,
-        pointRadius: 0,
+        pointRadius: 1,
+        pointHitRadius: 10,
         spanGaps: true
       }]
     },
