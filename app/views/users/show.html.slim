@@ -27,7 +27,7 @@ h3.text-center
     li.nav-item.col-3.col-lg-2.p-0.text-center
       a#year.nav-link[href="javascript:void(0)"]
         | 1year
-canvas#lineChartCanvas
+canvas#lineChartCanvas data-user_id = @user.id
 
 / jsファイルに分けるほうが、変数の受け渡しや可視性の面が劣るため、htmlに記述
 javascript:

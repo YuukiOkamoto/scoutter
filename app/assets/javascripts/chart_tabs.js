@@ -1,13 +1,14 @@
 $('#graph_tabs a').on('click', function (event) {
   const tab_id = $(event.target).attr('id');
-  graph_ajax(tab_id);
+  const user_id = jQuery("#lineChartCanvas").data('user_id');
+  graph_ajax(tab_id, user_id);
   toggle_active(tab_id);
   return false;
 });
 
-function graph_ajax(tab_id) {
+function graph_ajax(tab_id, user_id) {
   $.ajax({
-    url: '/users/101',
+    url: `/users/${user_id}`,
     type: 'GET',
     dataType: 'json',
     data: {
