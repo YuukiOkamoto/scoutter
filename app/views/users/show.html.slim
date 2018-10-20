@@ -10,21 +10,57 @@
 .text
   p
     = @user.character_introduction
-p
 script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
+h3.text-center
+  | 戦闘力遷移
+#graph_tabs.nav-tabs-custom
+  ul.nav.nav-tabs.nav-tabs-extend
+    li.nav-item.col-3.col-lg-2.p-0.text-center
+      a#week.nav-link[href="javascript:void(0)"]
+        | 1week
+    li.nav-item.col-3.col-lg-2.p-0.text-center
+      a#month.nav-link.tab--active[href="javascript:void(0)"]
+        | 1month
+    li.nav-item.col-3.col-lg-2.p-0.text-center
+      a#quarter.nav-link[href="javascript:void(0)"]
+        | 3months
+    li.nav-item.col-3.col-lg-2.p-0.text-center
+      a#year.nav-link[href="javascript:void(0)"]
+        | 1year
 canvas#lineChartCanvas
+
 / jsファイルに分けるほうが、変数の受け渡しや可視性の面が劣るため、htmlに記述
 javascript:
-  new Chart(document.getElementById("lineChartCanvas"), {
-    "type": "line",
-    "data": {
-      "labels": #{get_days_from_today(30)},
-      "datasets": [{
-        "label": "戦闘力遷移",
-        "data": #{@data_30days},
-        "borderColor": "rgb(75, 192, 192)",
-        "lineTension": 0.1
+  chart = new Chart(document.getElementById("lineChartCanvas"), {
+    type: "line",
+    data: {
+      labels: #{ raw(get_days_from_today(@period))},
+      datasets: [{
+        label: "Twitter戦闘力",
+        data: #{@data_xxx_days},
+        borderColor: "rgb(75, 192, 192)",
+        lineTension: 0.3,
+        pointRadius: 0,
+        spanGaps: true
       }]
     },
-    "options": {}
+    options: {
+      legend: {
+        labels: {
+          fontColor: 'darkgray'
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor: "darkgray"
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontColor: "darkgray"
+          }
+        }]
+      }
+    }
   });
