@@ -24,4 +24,8 @@ class User < ApplicationRecord
   scope :total_period, -> { merge(SumPower.total) }
   scope :week_period, -> { merge(SumPower.week) }
   scope :day_period, -> { merge(SumPower.day) }
+
+  def today_increase_power
+    power_levels.daily.first.power
+  end
 end

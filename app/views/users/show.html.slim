@@ -3,6 +3,9 @@
   | あなたの戦闘力は
   = get_sum_power(@user, 'total')
   | です
+  span.small.blink
+    | ↑
+    = @user.today_increase_power
 .name
   | あなたは
   = @user.character_name
