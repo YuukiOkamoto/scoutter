@@ -5,7 +5,6 @@
 var page = require('webpage').create();
 var system = require('system');
 
-
 // キャプチャの取得範囲を決定する箇所だが、今は使わない
 // デザインが決定次第、数値調整のうえ使用
 // page.viewportSize = { width: 1200, height: 600 };
@@ -16,9 +15,11 @@ var system = require('system');
 //   height: 600
 // };
 
+var url = system.args[1] + '?access=phantomjs'
+
 // コマンドライン引数1個目：system.args[1]
 // コマンドライン引数2個目：キャプチャ取得サイトURL
-page.open(system.args[1], function (status) {
+page.open(url, function (status) {
   console.log('Status: ' + status);
   if (status == "success") {
     page.render(system.args[2]);

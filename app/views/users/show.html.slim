@@ -19,10 +19,10 @@
   | あなたの戦闘力は
   = get_sum_power(@user, 'total')
   | です
-.name
-  | あなたは
-  = @user.character_name
-  | です
+/ .name
+/   | あなたは
+/   = @user.character_name
+/   | です
 .text
   p
     = @user.character_introduction

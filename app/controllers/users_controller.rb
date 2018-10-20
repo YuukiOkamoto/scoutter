@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   require 'open3'
   require 'uri'
 
-  before_action :not_self_page, only: :show
+  #before_action :not_self_page, only: [:show]
+
   PATH_TO_PHANTOM_SCRIPT = Rails.root.join('app', 'assets', 'javascripts', 'screenshot.js')
 
   def show
+    #redirect_to root_path if request.referrer == 'https://t.co/'
     @data_30days = PowerLevel.get_target_period_array(30, params[:id])
     @user = User.find(params[:id])
     @url = request.url
@@ -13,6 +15,10 @@ class UsersController < ApplicationController
     @screenshot_path = Rails.root.join("app", "assets", "images", "#{@screenshot_name}")
     #事前に、キャプチャの保存先をmetaタグに設定する
     @asset_path = view_context.root_url.concat('assets/', "#{@screenshot_name}")
+    # testurl = request.referer || ''
+    # if testurl.include?('t.co')
+    #   redirect_to root_path
+    # end
   end
 
   # ボタン押下時にスクショを取るアクション
@@ -38,17 +44,21 @@ class UsersController < ApplicationController
 
   private
 
-    def not_self_page
-      redirect_to root_path if current_user&.id != params[:id].to_i
-    end
+  # twitterからのアクセスを、topページにリダイレクトさせる
+  # phantomjsからのアクセスを判別し、skipさせる
+  def not_self_page
+    return true if params[:access] == 'phantomjs'
+    redirect_to root_path if current_user&.id != params[:id].to_i
+  end
+
   # twitterに画像およびテキスト、URL(Topページ)を投稿するための設定を行う
   def set_share_url
     tweet_url = URI.encode(
     "https://twitter.com/intent/tweet?" +
     "&url=" +
-    "#{params[:url]}" +
+    "#{view_context.root_url}" +
     "&text=" +
-    "テスト" 
+    "テスト"
   )
   end
 end
