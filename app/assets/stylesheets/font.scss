@@ -41,3 +41,18 @@
 .half {
   font-size: 0.5rem;
 }
+
+.little-big {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 991px) {
+  .rank_power {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 991px) {
+  .rank_power {
+    font-size: 1.3rem;
+  }
+}
