@@ -73,6 +73,7 @@
 .db-spin {
   animation: rotate-anime 0.1s linear infinite;
 }
+
 @keyframes rotate-anime {
   0%  {transform: rotate(0);}
   100%  {transform: rotate(360deg);}

@@ -13,3 +13,5 @@
       = link_to t('result'), user_path(current_user.id), class: 'nav-link nav-link--extend'
     li.nav-item.col-4.col-lg-2.p-0.text-center class = ('tab--active' if displaying?(controller_name: 'users', action_name: 'rank'))
       = link_to t('ranking'), ranking_path, class: 'nav-link nav-link--extend'
+- else
+  .header-empty
