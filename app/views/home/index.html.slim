@@ -1,7 +1,14 @@
 / TODO: 暫定のボタン配置なので細かいレイアウトを作成する段階になったら変更します
 / TODO: モーダルのレイアウトやコンテンツも仮で用意しているので決定次第変更します
-= link_to 'Login with Twitter', auth_at_provider_path(provider: :twitter)
+= image_tag('/images/logo.png', width: '75%;', height: '100%;')
+br
+= image_tag('/images/dragonball1.png', width: '8%;', height: '100%;')
+br
+ = link_to auth_at_provider_path(provider: :twitter) do
+  .btn
+   span 戦闘力を測る
+   .dot
 br
 h2.link-like[data-toggle="modal" data-target=".bd-example-modal-lg"]
-  | スカウッターとは
+  | スカウッターとは？
 = render 'about_modal'
