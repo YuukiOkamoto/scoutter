@@ -4,7 +4,8 @@
   .col-10.offset-1
     = image_tag('/images/logo.png', width: '100%;')
   .col-4.offset-4.col-lg-4.offset-lg-4
-    = image_tag('/images/dragonball1.png', size:'200x200', class: 'img-fluid db-btn')
+    = link_to auth_at_provider_path(provider: :twitter) do
+      = image_tag('/images/dragonball1.png', size:'200x200', class: 'img-fluid db-btn')
   .col-8.offset-2.col-lg-4.offset-lg-4
      = link_to auth_at_provider_path(provider: :twitter) do
       .btn.power-btn
