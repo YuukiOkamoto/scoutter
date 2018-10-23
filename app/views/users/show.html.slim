@@ -1,18 +1,4 @@
-/ 戦闘力表示画面
-    表示：
-    戦闘力
-    キャラ名
-    テキスト
-    twitterへのシェアボタン
-      シェアボタン押下で戦闘力、キャラ名、テキスト部分のスクリーンショットを取り、
-      twitterへ投稿
-
-/ twitterシェアボタン：
-  ・ボタン押下時にキャプチャ取得する
-    →user#take_screenshotに移る
-  ・「リンクをあなたのフォロワーに共有する」画面に遷移する
-  ・取得したキャプチャをtwittercardで作成する際に、twitter:imageに指定します
-= link_to 'アクション', share_twitter_path(url: @url, path: @screenshot_path, file_name: @screenshot_name)
+= link_to 'アクション', share_twitter_path(url: @url, file_name: @screenshot_name)
 
 / TODO デザインは未反映
 .power
