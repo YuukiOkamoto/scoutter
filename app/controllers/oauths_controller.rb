@@ -18,7 +18,7 @@ class OauthsController < ApplicationController
         auto_login(@user)
         @uid = @user.authentications.set_uid(provider)
         # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
-        @user.image.delete!('_normal')
+        @user.image.slice!('_normal')
         if TwitterAPI.instance.client.user(@uid).protected?
           @user.destroy
           redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
