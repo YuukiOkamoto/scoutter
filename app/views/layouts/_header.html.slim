@@ -2,9 +2,9 @@
 header
   .text-center
     = link_to root_path, class: 'navbar-brand text-center' do
-      = image_tag '/images/dragonball1.png', size: '40x40', class: 'rounded-circle text-center'
-      = image_tag '/images/logo.png', size: '180x60', class: 'text-center'
-      = image_tag '/images/dragonball1.png', size: '40x40', class: 'rounded-circle text-center'
+      = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
+      = image_tag '/images/logo.png', class: 'text-center logo'
+      = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
     end
 - if current_user != nil
   ul.nav.nav-tabs.nav-tabs--extend.sticky-top.tab-image
