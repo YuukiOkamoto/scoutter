@@ -37,6 +37,10 @@
 * {box-sizing: border-box;}
 *:before, *:after {box-sizing: border-box;}
 
+.db-spin {
+  animation: rotate-anime 0.1s linear infinite;
+}
+
 .power-btn {
   position: relative;
   margin-top: 30px;
@@ -62,8 +66,10 @@
   }
 }
 
-.db-spin {
-  animation: rotate-anime 0.1s linear infinite;
+.db-hover {
+    color: #fff;
+    background-color: #d23430;
+    border-color: #c9302c;
 }
 
 @keyframes rotate-anime {
