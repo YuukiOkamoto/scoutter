@@ -19,23 +19,21 @@
 @import "font-awesome";
 @import "custom_bootstrap";
 
+:root {
+  --primary: goldenrod;
+}
+
 .link-like {
   color: white;
+  font-size: 1em;
   font-weight: bold;
   margin-top: 30px;
-  font-size: 1em;
   &:hover {
     text-decoration: none;
     color: #BBBBBB;
     cursor: pointer;
   }
 }
-
-:root {
-  --primary: goldenrod;
-}
-* {box-sizing: border-box;}
-*:before, *:after {box-sizing: border-box;}
 
 .db-spin {
   animation: rotate-anime 0.1s linear infinite;
