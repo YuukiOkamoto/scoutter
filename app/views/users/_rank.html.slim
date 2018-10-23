@@ -3,16 +3,24 @@ tr
   th scope="row" = rank_counter + prev_page_last_rank(ranks)
   td
     |
-    = link_to "https://twitter.com/#{rank.twitter_id}", target: '_blank' do
-      = image_tag rank.image, class: 'rounded-circle', width: '100x100'
-      |
-      '
-      = rank.name
-    | 戦闘力
-    = get_sum_power(rank, period)
-    | キャラクター
-    = rank.character&.name
-    | 紹介
-    = rank.character&.introduction
-
-
+    .row
+      .col-4.col-lg-2.p-0.pt-3.text-center
+        = link_to "https://twitter.com/#{rank.twitter_id}", target: '_blank' do
+          = image_tag rank.image, class: 'rounded-circle img-fluid profile-s'
+          br
+          .half.initial-font
+            = rank.name
+          = fa_icon 'twitter'
+      .col-8.col-lg-10.bit-12.p-1.align-top
+        .row
+          .col-12
+            span.half.text-muted
+              = t(".#{period}_power")
+            '
+            .bit-12-bold.rank_power
+              = get_sum_power(rank, period).to_j
+        .row
+          .col-12.col-lg-3.pr-0.little-big
+            = rank.character&.name
+          .col-12.col-lg-9
+            = rank.character&.introduction

@@ -40,6 +40,7 @@ gem 'twitter'
 gem 'rails-i18n', '~> 5.0.0'
 gem 'jbuilder', '~> 2.5'
 gem 'chart-js-rails'
+gem 'yen'
 
 # Storage
 gem 'mini_magick', '~> 4.8'
