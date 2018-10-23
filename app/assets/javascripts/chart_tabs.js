@@ -3,7 +3,7 @@ $('#graph_tabs .ajax-link').on('click', function (event) {
   const user_id = jQuery("#lineChartCanvas").data('user_id');
   graphAjax(tab_id, user_id);
   toggle_active(tab_id);
-  return false;
+  event.preventDefault();
 });
 
 function graphAjax(tab_id, user_id) {
