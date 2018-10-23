@@ -37,10 +37,6 @@
 
 :root {
   --primary: goldenrod;
-  --solid: #fff;
-  --btn-w: 12em;
-  --dot-w: calc(var(--btn-w)*.2);
-  --tr-X: calc(var(--btn-w) - var(--dot-w));
 }
 * {box-sizing: border-box;}
 *:before, *:after {box-sizing: border-box;}
