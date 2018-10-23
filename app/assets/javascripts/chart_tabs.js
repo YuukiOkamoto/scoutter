@@ -1,4 +1,4 @@
-$('#graph_tabs a').on('click', function (event) {
+$('#graph_tabs .ajax-link').on('click', function (event) {
   const tab_id = $(event.target).attr('id');
   const user_id = jQuery("#lineChartCanvas").data('user_id');
   graph_ajax(tab_id, user_id);
