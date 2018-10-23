@@ -74,3 +74,17 @@
   0%  {transform: rotate(0);}
   100%  {transform: rotate(360deg);}
 }
+
+.blink {
+  animation-name: flash;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: running;
+}
+
+@keyframes flash {
+  50% {
+    opacity: 0;
+  }
+}
