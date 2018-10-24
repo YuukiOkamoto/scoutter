@@ -38,8 +38,6 @@ class TwitterAPI
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['CONSUMER_KEY']
       config.consumer_secret = ENV['CONSUMER_SECRET']
-      config.access_token = ENV['ACCESS_TOKEN']
-      config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
     end
   end
 
@@ -53,7 +51,7 @@ class TwitterAPI
         Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav)
         yesterday_fav = total_fav
         @fav = @@fav_point * (total_fav - yesterday_fav)
-      # 初期値を入れた後は、戦闘力を測るたびにlatest_valueに最新のトータルいいね数が更新され続け、yesterday_valueとの差分で1日のいいね数を計測。latest_valueはcronにより毎日0時に更新され、yesterday_valueに格納される
+        # 初期値を入れた後は、戦闘力を測るたびにlatest_valueに最新のトータルいいね数が更新され続け、yesterday_valueとの差分で1日のいいね数を計測。latest_valueはcronにより毎日0時に更新され、yesterday_valueに格納される
       else
         yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
         fav_count = (total_fav - yesterday_fav) > @@fav_limit ? @@fav_limit : (total_fav - yesterday_fav)
@@ -69,7 +67,7 @@ class TwitterAPI
       @retweet = @@retweet_point * retweet_count
     end
 
-    def quote(uid, quote=[])
+    def quote(uid, quote = [])
       TwitterAPI.get_tweets_from_today(uid).each { |tweet| quote << tweet if tweet.quote? }
       quote_count = quote.count > @@quote_limit ? @@quote_limit : quote.count
       @quote = @@quote_point * quote_count

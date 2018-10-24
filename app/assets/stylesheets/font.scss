@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "PixelMplus10-Regular";
+  src: font-url('PixelMplus10-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus12-Regular";
+  src: font-url('PixelMplus12-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus10-Bold";
+  src: font-url('PixelMplus10-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus12-Bold";
+  src: font-url('PixelMplus12-Bold.ttf') format('truetype');
+}
+
+.bit-10 {
+  font-family: "PixelMplus10-Regular";
+}
+
+.bit-12 {
+  font-family: "PixelMplus12-Regular";
+}
+
+.bit-10-bold {
+  font-family: "PixelMplus10-Bold";
+}
+
+.bit-12-bold {
+  font-family: "PixelMplus12-Bold";
+}
+
+.initial-font {
+  font-family: initial;
+}
+
+.half {
+  font-size: 0.5rem;
+}
+
+.little-big {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 991px) {
+  .rank_power {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 991px) {
+  .rank_power {
+    font-size: 1.3rem;
+  }
+}

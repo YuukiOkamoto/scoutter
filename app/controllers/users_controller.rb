@@ -2,12 +2,13 @@ class UsersController < ApplicationController
   require 'open3'
   require 'uri'
 
-  before_action :not_self_page, only: [:show]
+  before_action :not_self_page, only: :show
+  before_action :set_period, only: :show
 
   PATH_TO_PHANTOM_SCRIPT = Rails.root.join('app', 'assets', 'javascripts', 'screenshot.js')
-
+  
   def show
-    @data_30days = PowerLevel.get_target_period_array(30, params[:id])
+    @data_xxx_days = PowerLevel.get_target_period_array(@period, params[:id])
     @user = User.find(params[:id])
     @url = request.url
     @screenshot_name  = @url.gsub(/\//, '¥').concat(".jpg")
@@ -55,4 +56,20 @@ class UsersController < ApplicationController
     "テスト"
   )
   end
+
+    def set_period
+      # デフォルトの期間は30日
+      @period = case params[:period]
+                when 'week' then
+                  7
+                when 'month' then
+                  30
+                when 'quarter' then
+                  90
+                when 'year' then
+                  365
+                else
+                  30
+                end
+    end
 end
