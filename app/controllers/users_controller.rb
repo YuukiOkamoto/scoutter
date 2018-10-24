@@ -6,12 +6,12 @@ class UsersController < ApplicationController
   before_action :set_period, only: :show
 
   PATH_TO_PHANTOM_SCRIPT = Rails.root.join('app', 'assets', 'javascripts', 'screenshot.js')
-  
+
   def show
     @data_xxx_days = PowerLevel.get_target_period_array(@period, params[:id])
     @user = User.find(params[:id])
     @url = request.url
-    @screenshot_name  = @url.gsub(/\//, '¥').concat(".jpg")
+    @screenshot_name = @url.gsub(/\//, '¥').concat(".jpg")
   end
 
   def take_screenshot
@@ -42,13 +42,13 @@ class UsersController < ApplicationController
     if params[:accesstype]
       file_name = request.url.gsub(/\//, '¥').gsub(/\?accesstype=tweet/, "").concat(".jpg")
       asset_path = view_context.root_url.concat('assets/', "#{file_name}")
-      redirect_to root_path(asset_path: asset_path) and return
+      redirect_to root_path(asset_path: asset_path) && return
     end
     redirect_to root_path if current_user&.id != params[:id].to_i
   end
 
   def set_share_url
-    tweet_url = URI.encode(
+    tweet_url = URI.encode_www_form_component(
     "https://twitter.com/intent/tweet?" +
     "&url=" +
     "#{params[:url]}?accesstype=tweet" +
