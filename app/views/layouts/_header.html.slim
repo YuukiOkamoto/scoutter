@@ -1,12 +1,11 @@
-/ TODO ログイン前はヘッダーをレンダリングせず、ログイン後コンテンツを表示する
-header
-  .text-center
-    = link_to root_path, class: 'navbar-brand text-center' do
-      = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
-      = image_tag '/images/logo.png', class: 'text-center logo'
-      = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
-    end
 - if current_user != nil
+  header
+    .text-center
+      = link_to root_path, class: 'navbar-brand text-center' do
+        = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
+        = image_tag '/images/logo.png', class: 'text-center logo'
+        = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
+      end
   ul.nav.nav-tabs.nav-tabs--extend.sticky-top.tab-image
     li.nav-item.col-4.col-lg-2.offset-lg-3.p-0.text-center class = ('tab--active' if displaying?(controller_name: 'home'))
       = link_to t('home'), root_path, class: 'nav-link nav-link--extend'
