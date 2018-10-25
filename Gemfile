@@ -64,8 +64,6 @@ gem 'kaminari-i18n'
 gem 'bootstrap4-kaminari-views'
 
 group :development, :test do
-  gem 'capybara'
-  gem 'poltergeist'
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
