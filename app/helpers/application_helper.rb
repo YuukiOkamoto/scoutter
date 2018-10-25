@@ -2,11 +2,11 @@ module ApplicationHelper
   def default_meta_tags
     {
       twitter: {
-        image: "",
+        url: "#{root_url}",
+        image: "#{root_url.concat('assets/', 'top.png')}",
         card: 'summary_large_image',
-        # twitter cardのタイトルと本文は固定？
         title: 'すかうったー',
-        description: 'Twitterでのあなたの戦闘力は??'
+        description: 'あなたの戦闘力を測ってみよう！'
       }
     }
   end

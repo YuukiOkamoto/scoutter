@@ -19,8 +19,10 @@
     p
       = @user.character_introduction
 
-  = link_to 'Twitterにシェア', share_twitter_path(url: @url, file_name: @screenshot_name), style: "font-size: 30px;"
-  
+  = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'), 
+                                                character: @user.character_name), 
+                                                style: "font-size: 30px;"
+
   script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
   .power-graph
     h3.text-center
