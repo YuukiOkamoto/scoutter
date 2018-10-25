@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   before_action :not_self_page, only: :show
   before_action :set_period, only: :show
 
-  PATH_TO_PHANTOM_SCRIPT = Rails.root.join('app', 'assets', 'javascripts', 'screenshot.js')
-
   def show
     @data_xxx_days = PowerLevel.get_target_period_array(@period, params[:id])
     @user = User.find(params[:id])
