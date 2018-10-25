@@ -39,23 +39,23 @@ class UsersController < ApplicationController
 
   private
 
-  def not_self_page
-    redirect_to root_path if current_user&.id != params[:id].to_i
-  end
+    def not_self_page
+      redirect_to root_path if current_user&.id != params[:id].to_i
+    end
 
-  def set_period
-    # デフォルトの期間は30日
-    @period = case params[:period]
-              when 'week' then
-                7
-              when 'month' then
-                30
-              when 'quarter' then
-                90
-              when 'year' then
-                365
-              else
-                30
-              end
-  end
+    def set_period
+      # デフォルトの期間は30日
+      @period = case params[:period]
+                when 'week' then
+                  7
+                when 'month' then
+                  30
+                when 'quarter' then
+                  90
+                when 'year' then
+                  365
+                else
+                  30
+                end
+    end
 end

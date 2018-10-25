@@ -11,11 +11,11 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Assets
 gem 'bootstrap', '~> 4.1.3'
 gem 'bootswatch', github: 'thomaspark/bootswatch'
+gem 'font-awesome-rails'
+gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'phantomjs', '1.9.8'
 gem 'meta-tags'
-gem 'settingslogic'
 
 # Application server
 gem 'puma', '~> 3.11'
@@ -34,13 +34,6 @@ gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'slim-rails'
 gem 'html2slim'
 
-# jqury-rails
-gem 'jquery-rails'
-
-# font-awesome
-gem 'font-awesome-rails'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # Twitter
 gem 'twitter'
 
