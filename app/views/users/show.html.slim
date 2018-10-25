@@ -1,20 +1,20 @@
 / TODO デザインは未反映
-.power-result-wrap
+.power-result-wrap.text-center
   .power
-    | あなたの戦闘力は
-    = get_sum_power(@user, 'total')
-    | です
-    span.small.blink
-      | ↑
-      = @user.today_increase_power
-    p.small
+    | あなたの戦闘力は…
+    #power-level
+      = get_sum_power(@user, 'total').to_j
+      span.growing
+        | ↑
+        = @user.today_increase_power.to_j
+    p.next-level
       | 次のキャラまで
-      = @user.up_to_next_character
+      = @user.up_to_next_character.to_j
       | 戦闘力
   .name
-    | あなたは
     = @user.character_name
-    | です
+  .chara-img
+    = image_tag @user.character.image
   .text
     p
       = @user.character_introduction
