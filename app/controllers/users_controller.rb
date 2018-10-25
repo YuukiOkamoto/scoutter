@@ -26,15 +26,15 @@ class UsersController < ApplicationController
   def set_share_url
     @user = User.find(params[:id])
     tweet_url = URI.encode(
-    "http://twitter.com/intent/tweet?" +
-    "&hashtags=" +
-    "すかうったー" +
-    "&text=" +
-    "わたしの戦闘力は　＜＜　#{params[:power]}  ＞＞\n\nわたしは　＜＜　#{params[:character]} ＞＞　です！\n\n" +
-    "&url=" +
-    "#{view_context.root_url}"
-  )
-  redirect_to tweet_url
+      "http://twitter.com/intent/tweet?" +
+      "&hashtags=" +
+      "すかうったー" +
+      "&text=" +
+      "わたしの戦闘力は　＜＜　#{params[:power]}  ＞＞\n\nわたしは　＜＜　#{params[:character]} ＞＞　です！\n\n" +
+      "&url=" +
+      "#{view_context.root_url}"
+    )
+    redirect_to tweet_url
   end
 
   private
