@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.text "introduction"
     t.bigint "minimum"
     t.bigint "maximum"
-    t.string "image"
+    t.string "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
