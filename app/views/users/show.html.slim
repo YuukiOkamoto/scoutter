@@ -4,7 +4,7 @@
     | あなたの戦闘力は…
     #power-level
       = get_sum_power(@user, 'total').to_j
-      span.growing
+      span.growing.blink
         | ↑
         = @user.today_increase_power.to_j
     p.next-level
