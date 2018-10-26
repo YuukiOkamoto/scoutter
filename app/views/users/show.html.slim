@@ -18,7 +18,6 @@
   .text
     p
       = @user.character_introduction
-
   = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'),
                                               character: @user.character_name),
                                               style: "font-size: 30px;"
