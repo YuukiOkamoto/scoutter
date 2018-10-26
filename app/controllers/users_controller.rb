@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   def set_share_url
-    @user = User.find(params[:id])
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
       "&hashtags=" +
