@@ -36,5 +36,3 @@
 config/database.yml
 
 .env
-
-yarn.lock
