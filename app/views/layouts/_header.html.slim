@@ -1,4 +1,4 @@
-- if current_user != nil
+- if current_user.present?
   header
     .text-center
       = link_to root_path, class: 'navbar-brand text-center' do
