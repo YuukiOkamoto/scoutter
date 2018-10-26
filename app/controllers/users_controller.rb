@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   def show
     @data_xxx_days = PowerLevel.get_target_period_array(@period, params[:id])
     @user = User.find(params[:id])
-    @url = request.url
   end
 
   def rank
