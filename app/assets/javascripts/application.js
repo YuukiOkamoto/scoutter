@@ -16,4 +16,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require Chart.min
+//= require iziModal
 //= require_tree .

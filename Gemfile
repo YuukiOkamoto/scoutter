@@ -38,6 +38,7 @@ gem 'html2slim'
 gem 'twitter'
 
 # UI/UX
+gem 'izimodal'
 gem 'rails-i18n', '~> 5.0.0'
 gem 'jbuilder', '~> 2.5'
 gem 'chart-js-rails'
