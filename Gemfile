@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # Application server
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'mini_racer', platforms: :ruby
 
 # Authentication
 gem 'sorcery'
@@ -73,7 +74,11 @@ group :development, :test do
   gem 'slim_lint'
 
   # Deploy
-  # gem 'capistrano-rails'
+  # gem 'capistrano', require: false
+  # gem 'capistrano-bundler', require: false
+  # gem 'capistrano-rails', require: false
+  # gem 'capistrano-rbenv', require: false
+  # gem 'capistrano3-puma', require: false
 
   # CLI
   gem 'spring'
