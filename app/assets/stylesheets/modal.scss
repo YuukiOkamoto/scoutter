@@ -1,3 +1,71 @@
+#what-scoutter {
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  &:hover {
+    text-decoration: none;
+    color: #BBBBBB;
+    cursor: pointer;
+  }
+}
+
 .modal-body--extend {
   padding: 2rem;
+}
+
+.modal-content {
+  background-image: url('/images/back.png');
+}
+
+.modal-comment{
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  margin-top: 20px;
+}
+
+.modal-img {
+  width: 100%;
+}
+
+.iziModal {
+  color: #13171b;
+  font-weight: bold;
+  font-size: 1.3em;
+  border-bottom: none !important;
+  max-width: 800px !important;
+  margin-left: -400px !important;
+
+  button {
+    margin-bottom: 20px;
+    background: var(--primary);
+    border: .15em solid var(--primary);
+    border-radius: 5em;
+    width: 20%;
+    line-height: 2em;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.iziModal-header {
+  background-color: black !important;
+}
+
+.iziModal-header-title {
+  font-family: "PixelMplus12-Regular" !important;
+  font-weight: bold !important;
+  font-size: 1.5em !important;
+}
+
+.iziModal-content {
+  background-image: url('/images/back.png');
+  background-size: cover;
+}
+
+.iziModal-navigate-prev {
+  margin-left: -500px !important;
+}
+
+.iziModal-navigate-next {
+  margin-right: -500px !important;
 }

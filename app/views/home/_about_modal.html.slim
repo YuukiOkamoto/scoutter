@@ -1,17 +1,24 @@
-.modal.fade.bd-example-modal-lg[tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"]
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        .h3.modal-title
-          | スカウッターとは？
-        button.close[type="button" data-dismiss="modal" aria-label="Close"]
-          span[aria-hidden="true"]
-            | ×
-      .modal-body.modal-body--extend
-        p
-          | Twitterの活動量をもとに戦闘力を測定し、
-              少しずつ強くなっていくアプリです！
-              Twitterでの強さの基準となるフォロワー数や
-              RT数いいね数とは別軸で強さを測定します！
-              戦闘力を強くしキャラを育てていけば、
-              Twitterでの強さも強くなっていけるように工夫しています。
+#modal-top.iziModal.bit-12 data-iziModal-fullscreen="true" data-iziModal-title="スカウッターとは？" data-iziModal-icon="icon-home" data-iziModal-group="scoutter"
+  .col-10.offset-1.modal-comment
+    p
+      | あなたのTwitter上の活動量をもとに、戦闘力を測定し、少しずつ強くなっていくアプリです！
+              フォロワー数の多さは関係ありません！いかにたくさんTwitterでアクティブに活動したかが、日々の戦闘力向上に繋がります！
+              毎日測って最強戦士を目指しましょう！！！
+  .col-8.offset-2
+    = image_tag 'scouter.png', class: 'modal-img'
+  button data-iziModal-next=""
+    | 次へ
+#modal-power.iziModal data-iziModal-fullscreen="true" data-iziModal-title="戦闘力をはかろう！" data-iziModal-icon="icon-home" data-iziModal-group="scoutter"
+  .col-10.offset-1.modal-comment
+    p
+      | 戦闘力を測る説明欄です
+  button data-iziModal-prev=""
+    | 前へ
+  button data-iziModal-next=""
+    | 次へ
+#modal-result.iziModal data-iziModal-fullscreen="true" data-iziModal-title="あなたの戦闘力は！？" data-iziModal-icon="icon-home" data-iziModal-group="scoutter"
+  .col-10.offset-1.modal-comment
+    p
+      | 戦闘力の結果の説明欄です
+  button data-iziModal-prev=""
+    | 前へ
