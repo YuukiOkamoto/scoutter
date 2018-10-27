@@ -4,6 +4,18 @@ $(document).on('click', '.trigger', function (event) {
     $('#modal-top').iziModal('open', { zindex: 99999 });
     $('#modal-top').iziModal('open');
 });
-$("#modal-top").iziModal();
-$("#modal-power").iziModal();
-$("#modal-result").iziModal();
+$("#modal-top").iziModal({
+    title: 'スカウッターとは？',
+    group: 'scoutter',
+    width: 800
+});
+$("#modal-power").iziModal({
+    title: '戦闘力をはかろう！',
+    group: 'scoutter',
+    width: 800
+});
+$("#modal-result").iziModal({
+    title: 'あなたの戦闘力は！？',
+    group: 'scoutter',
+    width: 800
+});

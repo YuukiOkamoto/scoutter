@@ -32,9 +32,6 @@
   font-weight: bold;
   font-size: 1.3em;
   border-bottom: none !important;
-  max-width: 800px !important;
-  margin-left: -400px !important;
-
   button {
     margin-bottom: 20px;
     background: var(--primary);
@@ -60,12 +57,4 @@
 .iziModal-content {
   background-image: url('/images/back.png');
   background-size: cover;
-}
-
-.iziModal-navigate-prev {
-  margin-left: -500px !important;
-}
-
-.iziModal-navigate-next {
-  margin-right: -500px !important;
 }
