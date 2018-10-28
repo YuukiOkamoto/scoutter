@@ -7,3 +7,16 @@
   padding-left: 0;
   margin-right: 10px;
 }
+
+.btn-info{
+  font-size: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+}
+
+.btn-info:hover{
+  background-color: blue;
+  border-color: blue;
+}

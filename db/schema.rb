@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "action_id"
     t.integer "yesterday_value"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["user_id"], name: "index_power_levels_on_user_id"
   end
 
-  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "sum_powers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "power"
     t.integer "period"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["user_id"], name: "index_sum_powers_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "twitter_id"
     t.datetime "created_at", null: false
