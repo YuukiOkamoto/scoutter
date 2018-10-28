@@ -20,7 +20,15 @@
 .modal-comment{
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 30px;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  p {
+    padding: 10px;
+  }
+}
+
+.modal-highlight {
+  font-size: 1.5em;
 }
 
 .modal-img {
@@ -30,10 +38,10 @@
 .iziModal {
   color: #13171b;
   font-weight: bold;
-  font-size: 1.3em;
   border-bottom: none !important;
   button {
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     background: var(--primary);
     border: .15em solid var(--primary);
     border-radius: 5em;
@@ -57,4 +65,14 @@
 .iziModal-content {
   background-image: url('/images/back.png');
   background-size: cover;
+}
+
+.iziModal-prev {
+  float: left;
+  margin-left: 50px;
+}
+
+.iziModal-next {
+  float: right;
+  margin-right: 50px;
 }
