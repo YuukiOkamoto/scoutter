@@ -15,6 +15,7 @@ gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'meta-tags'
 
 # Application server
 gem 'puma', '~> 3.11'
@@ -66,6 +67,9 @@ gem 'bootstrap4-kaminari-views'
 group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
 
   # Code analyze
   gem 'rubocop-rails_config'

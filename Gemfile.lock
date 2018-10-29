@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/thomaspark/bootswatch.git
-  revision: a53d1011b5d8548729a24de690e47ba36eb6e96d
+  revision: cfc74ca5aae81d2944e6bd0f10c341088b818d7a
   specs:
     bootswatch (4.1.3)
 
@@ -106,6 +106,7 @@ GEM
     chronic (0.10.2)
     code_analyzer (0.4.8)
       sexp_processor
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     domain_name (0.5.20180417)
@@ -189,6 +190,8 @@ GEM
       mimemagic (~> 0.3.2)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    meta-tags (2.10.0)
+      actionpack (>= 3.2.0, < 5.3)
     method_source (0.9.0)
     mimemagic (0.3.2)
     mini_magick (4.9.2)
@@ -225,6 +228,17 @@ GEM
       ast (~> 2.4.0)
     popper_js (1.14.3)
     powerpack (0.1.2)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
+    pry-doc (0.13.4)
+      pry (~> 0.11)
+      yard (~> 0.9.11)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_suffix (3.0.3)
     puma (3.12.0)
     raabro (1.1.6)
@@ -331,11 +345,11 @@ GEM
       tilt (~> 2.0)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
-      tilt (>= 1.3.3, < 2.1)
-    slim-rails (3.1.3)
+      tilt (>= 2.0.6, < 2.1)
+    slim-rails (3.2.0)
       actionpack (>= 3.1)
       railties (>= 3.1)
-      slim (~> 3.0)
+      slim (>= 3.0, < 5.0)
     slim_lint (0.16.1)
       rake (>= 10, < 13)
       rubocop (>= 0.50.0)
@@ -398,6 +412,7 @@ GEM
     websocket-extensions (0.1.3)
     whenever (0.10.0)
       chronic (>= 0.6.3)
+    yard (0.9.16)
     yen (0.0.2)
 
 PLATFORMS
@@ -427,10 +442,14 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   listen (>= 3.0.5, < 3.2)
+  meta-tags
   mini_magick (~> 4.8)
   mini_racer
   mysql2 (>= 0.4.4, < 0.6.0)
   paranoia
+  pry-byebug
+  pry-doc
+  pry-rails
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails-i18n (~> 5.0.0)
@@ -454,4 +473,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.16.5

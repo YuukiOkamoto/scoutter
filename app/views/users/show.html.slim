@@ -1,23 +1,27 @@
 / TODO デザインは未反映
-.power-result-wrap
+.power-result-wrap.text-center
   .power
-    | あなたの戦闘力は
-    = get_sum_power(@user, 'total')
-    | です
-    span.small.blink
-      | ↑
-      = @user.today_increase_power
-    p.small
+    | あなたの戦闘力は…
+    #power-level
+      = get_sum_power(@user, 'total').to_j
+      span.growing.blink
+        | ↑
+        = @user.today_increase_power.to_j
+    p.next-level
       | 次のキャラまで
-      = @user.up_to_next_character
+      = @user.up_to_next_character.to_j
       | 戦闘力
   .name
-    | あなたは
     = @user.character_name
-    | です
+  .chara-img
+    = image_tag @user.character.image_path
   .text
     p
       = @user.character_introduction
+  = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'),
+                                              character: @user.character_name),
+                                              style: "font-size: 30px;"
+
   script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
   .power-graph
     h3.text-center

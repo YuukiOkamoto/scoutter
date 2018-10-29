@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  require 'uri'
+
   before_action :not_self_page, only: :show
   before_action :set_period, only: :show
 
@@ -16,6 +18,19 @@ class UsersController < ApplicationController
     when 'day'
       @ranks = User.power_rank.day_period.page(params[:page]).per(25)
     end
+  end
+
+  def set_share_url
+    tweet_url = URI.encode(
+      "http://twitter.com/intent/tweet?" +
+      "&hashtags=" +
+      "すかうったー" +
+      "&text=" +
+      "わたしの戦闘力は　＜＜　#{params[:power]}  ＞＞\n\nわたしは　＜＜　#{params[:character]} ＞＞　です！\n\n" +
+      "&url=" +
+      "#{view_context.root_url}"
+    )
+    redirect_to tweet_url
   end
 
   private
