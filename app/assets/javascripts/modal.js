@@ -1,4 +1,4 @@
-$(document).on('click', '.trigger', function (event) {
+$(document).on('click', '#what-scoutter', function (event) {
     event.preventDefault();
     $('#modal-top').iziModal('setZindex', 99999);
     $('#modal-top').iziModal('open', { zindex: 99999 });
