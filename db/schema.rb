@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_10_25_104712) do
 
-  create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "point"
     t.bigint "action_qualities_id"
     t.datetime "created_at", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["deleted_at"], name: "index_action_points_on_deleted_at"
   end
 
-  create_table "action_qualities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "action_qualities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "action_id"
     t.integer "minimum"
     t.integer "maximum"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["deleted_at"], name: "index_action_qualities_on_deleted_at"
   end
 
-  create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "limit"
     t.datetime "created_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["deleted_at"], name: "index_actions_on_deleted_at"
   end
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
-  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
     t.bigint "uid", null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "introduction"
     t.bigint "minimum"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_104712) do
     t.index ["deleted_at"], name: "index_characters_on_deleted_at"
   end
 
-  create_table "power_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "power_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "power"
     t.datetime "created_at", null: false
