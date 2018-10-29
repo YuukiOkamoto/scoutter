@@ -75,10 +75,12 @@ group :development, :test do
 
   # Deploy
   gem 'capistrano', '3.9.0'
-  gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-console'
   gem 'capistrano-rbenv'
-  gem 'capistrano-rbenv-vars'
+  gem 'capistrano-resque', require: false
+  gem 'capistrano3-puma'
 
   # CLI
   gem 'spring'
