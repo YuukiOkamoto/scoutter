@@ -1,3 +1,82 @@
+#what-scoutter {
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  &:hover {
+    text-decoration: none;
+    color: #BBBBBB;
+    cursor: pointer;
+  }
+}
+
+.header-for-modal {
+  z-index: 997 !important;
+}
+
 .modal-body--extend {
   padding: 2rem;
+}
+
+.modal-content {
+  background-image: url('/images/back.png');
+}
+
+.modal-comment{
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  p {
+    padding: 10px;
+  }
+}
+
+.modal-highlight {
+  font-size: 1.5em;
+}
+
+.modal-img {
+  width: 100%;
+}
+
+.iziModal {
+  color: #13171b;
+  font-weight: bold;
+  border-bottom: none !important;
+  button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: var(--primary);
+    border: .15em solid var(--primary);
+    border-radius: 5em;
+    width: 20%;
+    line-height: 2em;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.iziModal-header {
+  background-color: #111111 !important;
+}
+
+.iziModal-header-title {
+  font-family: "PixelMplus12-Regular" !important;
+  font-weight: bold !important;
+  font-size: 1.5em !important;
+}
+
+.iziModal-content {
+  background-image: url('/images/back.png');
+  background-size: cover;
+}
+
+.iziModal-prev {
+  float: left;
+  margin-left: 50px;
+}
+
+.iziModal-next {
+  float: right;
+  margin-right: 50px;
 }
