@@ -5,7 +5,8 @@
       SumPower.periods,
       :first,
       :first,
-      checked: @period
+      checked: @period do |b|
+        - b.radio_button(class: 'mr-1 align-text-bottom') + b.label
   table.table.table-hover.col-lg-10
     tbody
       = render partial: 'users/rank', collection: @ranks, locals: { period: @period, ranks: @ranks }
