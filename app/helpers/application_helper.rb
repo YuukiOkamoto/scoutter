@@ -3,9 +3,9 @@ module ApplicationHelper
     {
       twitter: {
         url: "#{root_url}",
-        image: "#{root_url.concat('assets/', 'top.png')}",
+        image: "#{asset_url('top.png')}",
         card: 'summary_large_image',
-        title: 'すかうったー',
+        title: 'スカウッター',
         description: 'あなたの戦闘力を測ってみよう！'
       }
     }

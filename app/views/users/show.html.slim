@@ -18,9 +18,13 @@
   .text
     p
       = @user.character_introduction
-  = link_to "Twitterに結果をシェア", share_twitter_path(power: get_sum_power(@user, 'total'),
-                                              character: @user.character_name),
-                                              class: 'btn btn-info btn-lg'
+  = link_to share_twitter_path(power: get_sum_power(@user, 'total'),
+                              character: @user.character_name,
+                              introduce: @user.character_introduction),
+                              class: 'btn btn-info' do
+    i.fa.fa-twitter.share-twitter.fa-fw
+    span シェアする！！
+  
 
   script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
   .power-graph

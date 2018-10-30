@@ -23,10 +23,10 @@ class UsersController < ApplicationController
   def set_share_url
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
-      "&hashtags=" +
-      "すかうったー" +
       "&text=" +
-      "わたしの戦闘力は　＜＜　#{params[:power]}  ＞＞\n\nわたしは　＜＜　#{params[:character]} ＞＞　です！\n\n" +
+      "わたしのTwitter戦闘力は・・・【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは・・・【 #{params[:character]} 】!!!\n" +
+      "毎日測ってTwitter戦闘力を上げていこう!!!\n\n" +
+      "#スカウッター\n#あなたのTwitter戦闘力" +
       "&url=" +
       "#{view_context.root_url}"
     )
