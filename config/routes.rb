@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: %i[show]
   get '/users/:id/share_twitter' => 'users#set_share_url', as: :share_twitter
   root to: 'home#index'
+  get '/term' => 'home#term'
 end

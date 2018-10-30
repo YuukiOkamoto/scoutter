@@ -1,12 +1,11 @@
 - if current_user.present?
   header
     .text-center
-      = link_to root_path, class: 'navbar-brand text-center' do
+      = link_to root_path, class: 'navbar-brand text-center mr-0' do
         = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
-        = image_tag '/images/logo.png', class: 'text-center logo'
+        = image_tag 'scoutter-logo.png', class: 'text-center header-logo'
         = image_tag '/images/dragonball1.png', class: 'rounded-circle text-center ball-logo'
-      end
-  ul.nav.nav-tabs.nav-tabs--extend.sticky-top.tab-image
+  ul.nav.nav-tabs.nav-tabs--extend.sticky-top.tab-image.header-for-modal
     li.nav-item.col-4.col-lg-2.offset-lg-3.p-0.text-center class = ('tab--active' if displaying?(controller_name: 'home'))
       = link_to t('home'), root_path, class: 'nav-link nav-link--extend'
     li.nav-item.col-4.col-lg-2.p-0.text-center class = ('tab--active' if displaying?(controller_name: 'users', action_name: 'show'))
