@@ -46,6 +46,19 @@
   font-size: 1.1rem;
 }
 
+.text-black {
+  color: black;
+  :hover {
+    color: white;
+  }
+}
+
+.text-black:hover {
+  color: white;
+}
+
+
+
 @media (min-width: 991px) {
   .rank_power {
     font-size: 2.5rem;
