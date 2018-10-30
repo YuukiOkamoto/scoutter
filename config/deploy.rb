@@ -4,10 +4,10 @@ set :application, 'scoutter'
 set :repo_url, 'git@github.com:YuukiOkamoto/scoutter.git'
 
 # Default branch is :master
-set :branch, ENV['BRANCH'] || 'deploy'
+set :branch, ENV['BRANCH'] || 'master'
 
 # Default value for :linked_files is []
-set :linked_files, %w(.env config/database.yml)
+set :linked_files, %w(.env config/database.yml config/master.key)
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
