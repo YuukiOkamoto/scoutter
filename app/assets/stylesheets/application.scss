@@ -56,14 +56,18 @@
 }
 
 .db-hover {
-    color: #fff;
-    background-color: #d23430;
-    border-color: #c9302c;
+  color: #fff;
+  background-color: #d23430;
+  border-color: #c9302c;
 }
 
 @keyframes rotate-anime {
-  0%  {transform: rotate(0);}
-  100%  {transform: rotate(360deg);}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .blink {
