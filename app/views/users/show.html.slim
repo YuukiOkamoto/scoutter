@@ -21,24 +21,22 @@
   = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'),
                                               character: @user.character_name),
                                               style: "font-size: 30px;"
-
-  script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"
-  .power-graph
-    h3.text-center
-      | 戦闘力遷移
-    #graph_tabs.nav-tabs-custom
-      ul.nav.nav-tabs.nav-tabs-extend
-        li.nav-item.col-3.col-lg-2.p-0.text-center
-          a#week.ajax-link.nav-link[href="javascript:void(0)"]
-            | 1week
-        li.nav-item.col-3.col-lg-2.p-0.text-center
-          a#month.ajax-link.nav-link.tab--active[href="javascript:void(0)"]
-            | 1month
-        li.nav-item.col-3.col-lg-2.p-0.text-center
-          a#quarter.ajax-link.nav-link[href="javascript:void(0)"]
-            | 3months
-        li.nav-item.col-3.col-lg-2.p-0.text-center
-          a#year.ajax-link.nav-link[href="javascript:void(0)"]
-            | 1year
-    .lineChartCanvas
-      canvas#lineChartCanvas data-user_id = @user.id
+.power-graph
+  h3.text-center
+    | 戦闘力遷移
+  #graph_tabs.nav-tabs-custom
+    ul.nav.nav-tabs.nav-tabs-extend.text-tab
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#week.ajax-link.nav-link[href="javascript:void(0)"]
+          | 1week
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#month.ajax-link.nav-link.tab--active[href="javascript:void(0)"]
+          | 1month
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#quarter.ajax-link.nav-link[href="javascript:void(0)"]
+          | 3months
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#year.ajax-link.nav-link[href="javascript:void(0)"]
+          | 1year
+  .lineChartCanvas
+    canvas#lineChartCanvas data-user_id = @user.id
