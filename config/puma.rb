@@ -11,10 +11,6 @@ threads threads_count, threads_count
 #
 # port        ENV.fetch("PORT") { 3000 }
 
-# socketの設定
-app_dir = File.expand_path('../..', __FILE__)
-bind "unix://#{app_dir}/tmp/sockets/puma.sock"
-
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch('RAILS_ENV') { 'development' }
