@@ -1,6 +1,5 @@
-/ TODO デザインは未反映
 .power-result-wrap.text-center
-  .power
+  p
     | あなたの戦闘力は…
     #power-level
       = get_sum_power(@user, 'total').to_j
@@ -11,11 +10,11 @@
       | 次のキャラまで
       = @user.up_to_next_character.to_j
       | 戦闘力
-  .name
+  .chara-name
     = @user.character_name
   .chara-img
     = image_tag @user.character.image_path
-  .text
+  .cahra-text
     p
       = @user.character_introduction
   = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'),
