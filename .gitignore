@@ -38,3 +38,5 @@ config/database.yml
 .env
 
 .DS_Store
+
+.vscode/settings.json

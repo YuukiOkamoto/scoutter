@@ -17,9 +17,13 @@
   .cahra-text
     p
       = @user.character_introduction
-  = link_to 'Twitterにシェア', share_twitter_path(power: get_sum_power(@user, 'total'),
-                                              character: @user.character_name),
-                                              style: "font-size: 30px;"
+  = link_to share_twitter_path(power: get_sum_power(@user, 'total'),
+                              character: @user.character_name,
+                              introduce: @user.character_introduction),
+                              class: 'btn btn-share twitter' do
+    i.fa.fa-twitter.share-twitter.fa-fw
+    span オラにシェアを分けてくれ！
+
 .power-graph
   h3.text-center
     | 戦闘力遷移
