@@ -15,6 +15,7 @@
  */
 @import "superhero/variables";
 @import "bootstrap";
+@import "btn";
 @import "superhero/bootswatch";
 @import "font-awesome";
 @import "custom_bootstrap";
@@ -27,32 +28,6 @@
 
 .db-spin {
   animation: rotate-anime 0.1s linear infinite;
-}
-
-.power-btn {
-  position: relative;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 80%;
-  color: var(--btnblack);
-  background: var(--primary);
-  border: .15em solid var(--primary);
-  border-radius: 5em;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 2em;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 5px 2px #2E2F30;
-  &:active {
-    box-shadow: none;
-    transform: translateY(5px);
-  }
-  &:hover {
-    color: #fff;
-    background-color: #d23430;
-    border-color: #c9302c;
-  }
 }
 
 .db-hover {
@@ -82,4 +57,10 @@
   50% {
     opacity: 0;
   }
+}
+
+/*twitter用のシェアボタンについての設定*/
+.twitter{
+  color: #FFFFFF;
+  background-color: #1DA1F2;
 }
