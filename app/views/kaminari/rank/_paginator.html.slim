@@ -3,11 +3,11 @@
     .page-btn
       ul.pagination.m-0
         == prev_page_tag unless current_page.first?
-        == first_page_tag unless MyKaminari::forward_page?(current_page)
+        == first_page_tag unless MyKaminari.forward_page?(current_page)
         - each_page do |page|
           - if page.display_tag?
             == page_tag page
           - elsif !page.was_truncated?
             == gap_tag
-        == last_page_tag unless MyKaminari::backward_page?(current_page, total_pages)
+        == last_page_tag unless MyKaminari.backward_page?(current_page, total_pages)
         == next_page_tag unless current_page.last?
