@@ -1,6 +1,9 @@
 module ApplicationHelper
   def default_meta_tags
     {
+      og: {
+        image: "#{asset_url('top.png')}"
+      },
       twitter: {
         url: "#{root_url}",
         image: "#{asset_url('top.png')}",
