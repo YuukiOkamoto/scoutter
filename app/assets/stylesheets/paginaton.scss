@@ -37,13 +37,14 @@
     background:linear-gradient(#FFF, #fbbc42);
     font-weight: 700;
     letter-spacing: .03em;
-  }
-  &_i :not(.selected):hover {
-    height: 38px;
-    min-width: 38px;
-    border-radius: 38px;
-    color: black;
-    background:linear-gradient(#FFF, #d23430);
+
+    :not(.selected):hover {
+      height: 38px;
+      min-width: 38px;
+      border-radius: 38px;
+      color: black;
+      background:linear-gradient(#FFF, #d23430);
+    }
   }
 }
 
