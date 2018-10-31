@@ -10,5 +10,5 @@
   table.table.table-hover.col-lg-10
     tbody
       = render partial: 'users/rank', collection: @ranks, locals: { period: @period, ranks: @ranks }
-  = paginate @ranks, theme: 'twitter-bootstrap-4',
+  = paginate @ranks, theme: 'rank',
     pagination_class: 'pagination-sm'

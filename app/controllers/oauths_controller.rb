@@ -9,6 +9,8 @@ class OauthsController < ApplicationController
     if @user = login_from(provider)
       @uid = @user.authentications.set_uid(provider)
       TwitterAPI.update_user_info(@user, @uid)
+      # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
+      @user.image.slice!('_normal')
       TwitterAPI.powering(@uid, @user)
       redirect_to user_path(@user.id)
     else

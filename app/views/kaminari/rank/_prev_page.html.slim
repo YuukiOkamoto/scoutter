@@ -1,0 +1,2 @@
+li.page-btn_i.mr-2
+  = link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, rel: 'prev', remote: remote, class: 'text-black align-middle d-block'
