@@ -31,32 +31,35 @@
     height: 38px;
     min-width: 38px;
     border-radius: 38px;
-    line-height: 34px;
+    line-height: 35px;
     padding: 0;
     color: black;
     background:linear-gradient(#FFF, #fbbc42);
     font-weight: 700;
     letter-spacing: .03em;
   }
-  &_i:hover {
-    background-color: navy;
-    color: #e76a24;
+  &_i :not(.selected):hover {
+    height: 38px;
+    min-width: 38px;
+    border-radius: 38px;
+    color: black;
+    background:linear-gradient(#FFF, #d23430);
   }
 }
 
 @media (max-width: 991px) {
-  .page-btn_i {
+  .page-btn_i, .page-btn_i :not(.selected):hover {
     font-size: 13px;
     height: 35px;
     min-width: 35px;
-    line-height: 30px;
+    line-height: 35px;
   }
 }
 @media (max-width: 767px) {
-  .page-btn_i {
+  .page-btn_i, .page-btn_i :not(.selected):hover {
     font-size: 11px;
     height: 30px;
     min-width: 30px;
-    line-height: 24px;
+    line-height: 30px;
   }
 }
