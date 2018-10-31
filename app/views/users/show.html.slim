@@ -19,7 +19,8 @@
   = link_to share_twitter_path(power: get_sum_power(@user, 'total'),
                               character: @user.character_name,
                               introduce: @user.character_introduction),
-                              class: 'btn btn-share twitter' do
+                              class: 'btn btn-share twitter',
+                              target: '_blank'  do
     i.fa.fa-twitter.share-twitter.fa-fw
     span オラにシェアを分けてくれ！
 
