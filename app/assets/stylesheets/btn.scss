@@ -26,12 +26,18 @@
 
 /*シェアボタンの基本形（ボタン自体のサイズ、フォントサイズ）*/
 .btn-share {
-  font-size: 2vmin;
+  font-size: 1rem;
   padding: 0.4rem 2rem;
   margin: 2rem 0;
   border-radius: 15px;
   &:hover {
     color: #FFFFFF;
     background-color: #0000FF;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-share {
+    font-size: 0.6rem;
   }
 }
