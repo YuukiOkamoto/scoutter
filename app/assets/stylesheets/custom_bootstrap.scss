@@ -7,3 +7,22 @@
   padding-left: 0;
   margin-right: 10px;
 }
+
+/*シェアボタンの基本形（ボタン自体のサイズ、フォントサイズ）*/
+.btn-share {
+  font-size: 2.3vw;
+  padding-left: 2.0rem;
+  padding-right: 2.0rem;
+  margin-bottom: 2.0rem;
+  border-radius: 15px;
+  &:hover {
+    color: #FFFFFF;
+    background-color: #0000FF;
+  }
+}
+
+/*twitter用のシェアボタンについての設定*/
+.twitter{
+  color: #FFFFFF;
+  background-color: #1DA1F2;
+}
