@@ -48,9 +48,8 @@ class TwitterAPI
 
       # 初回ログイン時にいいねのトータル回数の初期値を入れるため、yesterday_valueにtotal_favを代入している。よって初回ログイン時のいいねのポイントは無効化。
       if activity == nil
-        Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav)
-        yesterday_fav = total_fav
-        @fav = @@fav_point * (total_fav - yesterday_fav)
+        Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav, latest_value: total_fav)
+        @fav = @@fav_point * 0
         # 初期値を入れた後は、戦闘力を測るたびにlatest_valueに最新のトータルいいね数が更新され続け、yesterday_valueとの差分で1日のいいね数を計測。latest_valueはcronにより毎日0時に更新され、yesterday_valueに格納される
       else
         yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
