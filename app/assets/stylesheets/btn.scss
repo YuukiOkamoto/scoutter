@@ -1,0 +1,37 @@
+.power-btn {
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 80%;
+  color: var(--btnblack);
+  background: var(--primary);
+  border: .15em solid var(--primary);
+  border-radius: 5em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2em;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 5px 2px #2E2F30;
+  &:active {
+    box-shadow: none;
+    transform: translateY(5px);
+  }
+  &:hover {
+    color: #fff;
+    background-color: #d23430;
+    border-color: #c9302c;
+  }
+}
+
+/*シェアボタンの基本形（ボタン自体のサイズ、フォントサイズ）*/
+.btn-share {
+  font-size: 2vmin;
+  padding: 0.4rem 2rem;
+  margin: 2rem 0;
+  border-radius: 15px;
+  &:hover {
+    color: #FFFFFF;
+    background-color: #0000FF;
+  }
+}
