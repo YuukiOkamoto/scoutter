@@ -19,3 +19,8 @@ $("#modal-result").iziModal({
     group: 'scoutter',
     width: 800
 });
+$("#modal-last").iziModal({
+    title: 'Let\'s Start!!!',
+    group: 'scoutter',
+    width: 800
+});
