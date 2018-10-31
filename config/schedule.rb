@@ -1,5 +1,4 @@
-# TODO: 動作確認のため実行環境をdevelopmentに指定しているが、本番環境では変更の必要あり
-set :environment, :development
+set :output, '/usr/src/app/log/crontab.log'
 
 every 1.day, at: '0:00 am' do
   rake 'yesterday_value:update'
