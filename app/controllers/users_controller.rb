@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   # FIXME：コントローラ内でURLの設定はしたくないので、concerns等の他の場所に退避する
+  #        その際に、link_toから戦闘力、キャラ名を受け取るのではなく、直接取得出来るようにすることが望ましい
   def set_share_url
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
