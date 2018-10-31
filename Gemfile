@@ -20,6 +20,7 @@ gem 'meta-tags'
 # Application server
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'mini_racer', platforms: :ruby
 
 # Authentication
 gem 'sorcery'
@@ -38,6 +39,7 @@ gem 'html2slim'
 gem 'twitter'
 
 # UI/UX
+gem 'izimodal'
 gem 'rails-i18n', '~> 5.0.0'
 gem 'jbuilder', '~> 2.5'
 gem 'chart-js-rails'
@@ -77,7 +79,13 @@ group :development, :test do
   gem 'slim_lint'
 
   # Deploy
-  # gem 'capistrano-rails'
+  gem 'capistrano', '3.9.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-resque', require: false
+  gem 'capistrano3-puma'
 
   # CLI
   gem 'spring'
