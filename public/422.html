@@ -5,11 +5,15 @@
   <title>422Error</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <style>
     html {
       background-image: url('/images/back.png');
       background-size: cover;
       height: 100%;
+    }
+    body {
+      background-color: transparent;
     }
     .rails-default-error-page {
       color: #2E2F30;
@@ -49,20 +53,22 @@
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/422.html -->
-  <div class="comment-box">
-    <a href="/">
-      <img src="/images/scoutter-logo.png" alt="scoutter-logo" class="error-scoutter-logo">
-    </a>
-    <h1>
-      <span class="error-status">422 Unprocessable Entity</span>
-      <br>
-      <br>
-      ページが表示できません。
-    </h1>
-    <p>ご不便をおかけし申し訳ございません。</p>
-    <p>正常にご覧いただけるよう、解決に取り組んでおります。</p>
-    <p>繰り返し同様の操作をしても改善されない場合、お手数ですが、下記リンクまでDMにてお問い合わせください。</p>
-    <a href="https://twitter.com/team_scoutter" target="_blank">Scoutter公式Twitterアカウント</a>
+  <div class="container">
+    <div class="comment-box">
+      <a href="/">
+        <img src="/images/scoutter-logo.png" alt="scoutter-logo" class="error-scoutter-logo">
+      </a>
+      <h1>
+        <span class="error-status">422 Unprocessable Entity</span>
+        <br>
+        <br>
+        ページが表示できません。
+      </h1>
+      <p>ご不便をおかけし申し訳ございません。</p>
+      <p>正常にご覧いただけるよう、解決に取り組んでおります。</p>
+      <p>繰り返し同様の操作をしても改善されない場合、お手数ですが、下記リンクまでDMにてお問い合わせください。</p>
+      <a href="https://twitter.com/team_scoutter" target="_blank">Scoutter公式Twitterアカウント</a>
+    </div>
   </div>
 </body>
 </html>
