@@ -65,6 +65,9 @@ gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'bootstrap4-kaminari-views'
 
+# Analytics
+gem 'google-analytics-rails'
+
 group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
