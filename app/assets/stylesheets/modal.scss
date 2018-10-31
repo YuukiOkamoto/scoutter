@@ -17,10 +17,6 @@
   padding: 2rem;
 }
 
-.modal-content {
-  background-image: url('/images/back.png');
-}
-
 .modal-highlight {
   font-size: 1.5em;
 }
@@ -43,6 +39,7 @@
     line-height: 2em;
     cursor: pointer;
     font-weight: bold;
+    outline: none !important;
   }
 }
 
