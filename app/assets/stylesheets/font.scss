@@ -46,6 +46,29 @@
   font-size: 1.1rem;
 }
 
+.text-rank {
+  font-size: 2rem;
+  color: #e76a24;
+  background:linear-gradient(#FFF, #fbbc42);
+  height: 3rem;
+  width: 3rem;
+  border-radius: 3rem;
+}
+
+.text-tab {
+  font-size: 3vmin;
+}
+
+.text-orange {
+  color: #e76a24;
+}
+
+.text-orange:hover {
+  color: black;
+}
+
+
+
 @media (min-width: 991px) {
   .rank_power {
     font-size: 2.5rem;

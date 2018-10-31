@@ -26,7 +26,7 @@ class User < ApplicationRecord
   scope :day_period, -> { merge(SumPower.day) }
 
   def today_increase_power
-    power_levels.daily.first.power
+    power_levels.daily&.first&.power || 0
   end
 
   def up_to_next_character

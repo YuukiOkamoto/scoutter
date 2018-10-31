@@ -1,0 +1,6 @@
+- if page.current?
+  li.active.page-btn_i.mr-1.ml-1
+    = content_tag :a, page, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)), class: 'align-middle d-block'
+- else
+  li.page-btn_i.mr-1.ml-1
+    = link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)), class: 'text-orange align-middle d-block'
