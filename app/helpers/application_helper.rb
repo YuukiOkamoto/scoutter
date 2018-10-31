@@ -5,7 +5,7 @@ module ApplicationHelper
         url: "#{root_url}",
         image: "#{asset_url('top.png')}",
         card: 'summary_large_image',
-        title: 'スカウッター',
+        title: 'Scoutter',
         description: 'あなたの戦闘力を測ってみよう！'
       }
     }

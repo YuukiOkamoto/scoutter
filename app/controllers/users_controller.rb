@@ -20,13 +20,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # FIXME：コントローラ内でURLの設定はしたくないので、concerns等の他の場所に退避する
   def set_share_url
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
       "&text=" +
       "わたしのTwitter戦闘力は・・・【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは・・・【 #{params[:character]} 】!!!\n\n" +
       "毎日測ってTwitter戦闘力を上げていこう!!!\n\n" +
-      "#スカウッター\n#あなたのTwitter戦闘力" +
+      "#Scoutter\n#あなたのTwitter戦闘力" +
       "&url=" +
       "#{view_context.root_url}"
     )
