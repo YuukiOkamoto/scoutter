@@ -1,10 +1,11 @@
-- if current_user.present?
+- if current_user.present? || displaying?(controller_name: 'home', action_name: 'term')
   header
     .text-center
       = link_to root_path, class: 'navbar-brand text-center mr-0' do
         = image_tag 'dragonball1.png', class: 'rounded-circle text-center ball-logo'
         = image_tag 'scoutter-logo.png', class: 'text-center header-logo'
         = image_tag 'dragonball1.png', class: 'rounded-circle text-center ball-logo'
+- if current_user.present?
   ul.nav.nav-tabs.nav-tabs--extend.sticky-top.tab-image.header-for-modal
     li.nav-item.col-4.col-lg-2.offset-lg-3.p-0.text-center class = ('tab--active' if displaying?(controller_name: 'home'))
       = link_to t('home'), root_path, class: 'nav-link nav-link--extend'
