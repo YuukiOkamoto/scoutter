@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title
+      | Scoutter
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all'
+    = favicon_link_tag('favicon.ico')
+    meta[name="viewport" content="width=device-width,initial-scale=1.0"]
+    = render 'layouts/meta_tags'
+    = analytics_init if Rails.env.production?
+
+  body.bit-12
+    = render 'layouts/header'
+    = render 'layouts/flash_message'
+    .container
+      main = yield
+    = render 'layouts/footer'
+    = javascript_include_tag 'application'

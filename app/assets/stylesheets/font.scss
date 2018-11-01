@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "PixelMplus10-Regular";
+  src: font-url('PixelMplus10-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus12-Regular";
+  src: font-url('PixelMplus12-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus10-Bold";
+  src: font-url('PixelMplus10-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "PixelMplus12-Bold";
+  src: font-url('PixelMplus12-Bold.ttf') format('truetype');
+}
+
+.bit-10 {
+  font-family: "PixelMplus10-Regular";
+}
+
+.bit-12 {
+  font-family: "PixelMplus12-Regular";
+}
+
+.bit-10-bold {
+  font-family: "PixelMplus10-Bold";
+}
+
+.bit-12-bold {
+  font-family: "PixelMplus12-Bold";
+}
+
+.initial-font {
+  font-family: initial;
+}
+
+.half {
+  font-size: 0.5rem;
+}
+
+.little-big {
+  font-size: 1.1rem;
+}
+
+.text-rank {
+  font-size: 2rem;
+  color: #e76a24;
+  background:linear-gradient(#FFF, #fbbc42);
+  height: 3rem;
+  width: 3rem;
+  border-radius: 3rem;
+}
+
+.text-tab {
+  font-size: 3vmin;
+}
+
+.text-orange {
+  color: #e76a24;
+}
+
+.text-orange:hover {
+  color: black;
+}
+
+
+
+@media (min-width: 991px) {
+  .rank_power {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 991px) {
+  .rank_power {
+    font-size: 1.3rem;
+  }
+}

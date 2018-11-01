@@ -28,3 +28,15 @@
 
 # RubyMine
 .idea/
+
+# bundle
+/vendor/bundle
+
+# database.yml
+config/database.yml
+
+.env
+
+.DS_Store
+
+.vscode/settings.json

@@ -1,0 +1,16 @@
+.text-center
+  .row
+    .col-10.offset-1.top-logo
+      = image_tag('scoutter-logo.png', width: '90%;')
+    .col-4.offset-4.col-lg-4.offset-lg-4
+      = link_to auth_at_provider_path(provider: :twitter) do
+        = image_tag('dragonball1.png', size:'200x200', class: 'img-fluid db-btn')
+    .col-8.offset-2.col-lg-4.offset-lg-4
+      = link_to auth_at_provider_path(provider: :twitter) do
+        .btn.power-btn
+          | 戦闘力を測る
+    .col-6.offset-3.fuwafuwa
+      a href="" id="what-scoutter"
+        | スカウッターとは？
+    .col-6.offset-3
+      = render 'about_modal'

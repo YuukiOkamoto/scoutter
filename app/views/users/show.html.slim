@@ -1,0 +1,45 @@
+.power-result-wrap.text-center
+  p
+    | あなたの戦闘力は…
+    #power-level
+      = get_sum_power(@user, 'total').to_j
+      span.growing.blink
+        | ↑
+        = @user.today_increase_power.to_j
+    p.next-level
+      | 次のキャラまで
+      = @user.up_to_next_character.to_j
+      | 戦闘力
+  .chara-name
+    = @user.character_name
+  .chara-img
+    = image_tag @user.character.image_path
+  .chara-text
+    = @user.character_introduction
+  = link_to share_twitter_path(power: get_sum_power(@user, 'total'),
+                              character: @user.character_name,
+                              introduce: @user.character_introduction),
+                              class: 'btn btn-share twitter fuwafuwa',
+                              target: '_blank'  do
+    i.fa.fa-twitter.share-twitter.fa-fw
+    span オラにシェアを分けてくれ！
+
+.power-graph
+  h3.text-center
+    | 戦闘力遷移
+  #graph_tabs.nav-tabs-custom
+    ul.nav.nav-tabs.nav-tabs-extend.text-tab
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#week.ajax-link.nav-link[href="javascript:void(0)"]
+          | 1week
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#month.ajax-link.nav-link.tab--active[href="javascript:void(0)"]
+          | 1month
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#quarter.ajax-link.nav-link[href="javascript:void(0)"]
+          | 3months
+      li.nav-item.col-3.col-lg-2.p-0.text-center
+        a#year.ajax-link.nav-link[href="javascript:void(0)"]
+          | 1year
+  .lineChartCanvas
+    canvas#lineChartCanvas data-user_id = @user.id
