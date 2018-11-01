@@ -6,6 +6,7 @@ class OauthsController < ApplicationController
 
   def callback
     provider = params[:provider]
+    return redirect_to root_path unless params[:denied].nil?
     if @user = login_from(provider)
       @uid = @user.authentications.set_uid(provider)
       TwitterAPI.update_user_info(@user, @uid)
