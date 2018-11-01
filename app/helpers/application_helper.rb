@@ -2,14 +2,16 @@ module ApplicationHelper
   def default_meta_tags
     {
       og: {
-        image: "#{asset_url('top.png')}"
+        site_name: 'Scoutter',
+        description: 'あなたの戦闘力を測ってみよう！',
+        'format-detection' => 'telephone=no,address=no,email=no',
+        image: "#{asset_url('top.png')}",
+        url: "#{root_url}",
       },
       twitter: {
-        url: "#{root_url}",
-        image: "#{asset_url('top.png')}",
         card: 'summary_large_image',
-        title: 'Scoutter',
-        description: 'あなたの戦闘力を測ってみよう！'
+        site: '@team_scoutter',
+        player: '@team_scoutter',
       }
     }
   end
