@@ -3,6 +3,7 @@ module ApplicationHelper
     {
       og: {
         site_name: 'Scoutter 〜Twitter戦闘力診断〜',
+        title: 'Scoutter 〜Twitter戦闘力診断〜',
         description: 'あなたの戦闘力を測ってみよう！',
         'format-detection' => 'telephone=no,address=no,email=no',
         image: "#{asset_url('top.png')}",
