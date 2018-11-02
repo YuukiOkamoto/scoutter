@@ -1,0 +1,31 @@
+.rails-default-error-page {
+  color: #2E2F30;
+  text-align: center;
+  font-family: arial, sans-serif;
+  margin: 0;
+}
+.rails-default-error-page div.comment-box {
+  width: 90%;
+  max-width: 70em;
+  margin: 2em auto 0;
+}
+
+.rails-default-error-page .comment-box {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+}
+
+.rails-default-error-page .comment-box h1 {
+  font-size: 100%;
+  color: #730E15;
+  line-height: 1.5em;
+  padding: 30px 0 30px 0;
+}
+
+.error-status {
+  font-size: 2em;
+}
+
+.access-over-img {
+  width: 100%;
+}
