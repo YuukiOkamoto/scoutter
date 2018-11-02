@@ -21,6 +21,19 @@ class UsersController < ApplicationController
     @ranks = @users.page(params[:page]).per(25)
   end
 
+  def my_rank
+    case @period = params[:period] || 'total'
+    when 'total'
+      @users = User.power_rank.total_period
+    when 'week'
+      @users = User.power_rank.week_period
+    when 'day'
+      @users = User.power_rank.day_period
+    end
+    @ranks = @users.page(params[:page]).per(25)
+    redirect_to ranking_path(view_context.my_rank_query)
+  end
+
   # FIXME：コントローラ内でURLの設定はしたくないので、concerns等の他の場所に退避する
   #        その際に、link_toから戦闘力、キャラ名を受け取るのではなく、直接取得出来るようにすることが望ましい
   def set_share_url
