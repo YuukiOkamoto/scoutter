@@ -18,8 +18,7 @@ class User < ApplicationRecord
   scope :power_rank, -> do
     joins(:sum_power)
       .includes(:character, :sum_power)
-      .with_attached_icon
-      .order('sum_powers.power desc')
+      .order('sum_powers.power desc, users.id desc')
   end
   scope :total_period, -> { merge(SumPower.total) }
   scope :week_period, -> { merge(SumPower.week) }
