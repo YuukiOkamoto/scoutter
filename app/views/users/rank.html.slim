@@ -12,3 +12,7 @@
       = render partial: 'users/rank', collection: @ranks, locals: { period: @period, ranks: @ranks }
   = paginate @ranks, theme: 'rank',
     pagination_class: 'pagination-sm'
+  .text-center
+    = link_to ranking_path(my_rank_query), class: 'btn btn-rank fuwafuwa m-0 bit-10' do
+      | 自分の順位を見る
+    end
