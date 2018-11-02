@@ -10,6 +10,6 @@ module RankHelper
       page_number += 1
       order = nil
     end
-    { page: page_number, anchor: order }
+    { page: page_number, period: @period, anchor: order }
   end
 end
