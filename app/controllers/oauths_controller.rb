@@ -1,6 +1,6 @@
 class OauthsController < ApplicationController
   skip_before_action :require_login, raise: false
-  rescue_from Twitter::Error::ServiceUnavailable, with: :redirect_503_twitter
+  rescue_from Twitter::Error::ServiceUnavailable, with: :render_api_restriction
   def oauth
     login_at(params[:provider])
   end
@@ -39,7 +39,7 @@ class OauthsController < ApplicationController
 
   protected
 
-  def redirect_503_twitter
-    redirect_to errors_twitter_server_path
+  def render_api_restriction
+    render 'errors/api_restriction'
   end
 end
