@@ -11,9 +11,9 @@ class SumPower < ApplicationRecord
 
   class << self
     def personal_bulk_update(user)
-      daily = PowerLevel.daily.get_total_power(user_id: user.id)
-      weekly = PowerLevel.weekly.get_total_power(user_id: user.id)
-      total = PowerLevel.get_total_power(user_id: user.id)
+      daily = user.daily_power
+      weekly = user.weekly_power
+      total = user.total_power
 
       user.sum_power.day.update(power: daily) if user.sum_power.day != daily
       user.sum_power.week.update(power: weekly) if user.sum_power.week != weekly
@@ -21,9 +21,9 @@ class SumPower < ApplicationRecord
     end
 
     def personal_bulk_create(user)
-      daily = PowerLevel.daily.get_total_power(user_id: user.id)
-      weekly = PowerLevel.weekly.get_total_power(user_id: user.id)
-      total = PowerLevel.get_total_power(user_id: user.id)
+      daily = user.daily_power
+      weekly = user.weekly_power
+      total = user.total_power
 
       user.sum_power.day.create(power: daily)
       user.sum_power.week.create(power: weekly)
