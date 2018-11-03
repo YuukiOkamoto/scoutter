@@ -10,27 +10,14 @@ class UsersController < ApplicationController
   end
 
   def rank
-    case @period = params[:period] || 'total'
-    when 'total'
-      @users = User.power_rank.total_period
-    when 'week'
-      @users = User.power_rank.week_period
-    when 'day'
-      @users = User.power_rank.day_period
-    end
-    @ranks = @users.page(params[:page]).per(25)
+    set_ranks
   end
 
   def my_rank
-    case @period = params[:period] || 'total'
-    when 'total'
-      @users = User.power_rank.total_period
-    when 'week'
-      @users = User.power_rank.week_period
-    when 'day'
-      @users = User.power_rank.day_period
-    end
-    @ranks = @users.page(params[:page]).per(25)
+    set_ranks
+    # 自分のランキング位置に飛ぶクエリとフラグをつけてリダイレクト
+    # renderせずわざわざリダイレクトするのは、URL(/ranking?page○#△)がkaminariのページネーションのURLと似てほしいため。
+    # このままrenderすると、/ranking/selfとなってしまう。
     redirect_to ranking_path(view_context.my_rank_query)
   end
 
@@ -39,12 +26,12 @@ class UsersController < ApplicationController
   def set_share_url
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
-      "&text=" +
-      "わたしのTwitter戦闘力は…【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは…【 #{params[:character]} 】!!!\n" +
-      "毎日測ってTwitter戦闘力を上げていこう!!!\n" +
-      "#Scoutter\n#Twitter戦闘力\n" +
-      "&url=" +
-      "#{view_context.root_url}"
+        "&text=" +
+        "わたしのTwitter戦闘力は…【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは…【 #{params[:character]} 】!!!\n" +
+        "毎日測ってTwitter戦闘力を上げていこう!!!\n" +
+        "#Scoutter\n#Twitter戦闘力\n" +
+        "&url=" +
+        "#{view_context.root_url}"
     )
     redirect_to tweet_url
   end
@@ -69,5 +56,17 @@ class UsersController < ApplicationController
                 else
                   30
                 end
+    end
+
+    def set_ranks
+      case @period = params[:period] || 'total'
+      when 'total'
+        @users = User.power_rank.total_period
+      when 'week'
+        @users = User.power_rank.week_period
+      when 'day'
+        @users = User.power_rank.day_period
+      end
+      @ranks = @users.page(params[:page]).per(25)
     end
 end
