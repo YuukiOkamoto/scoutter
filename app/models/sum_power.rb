@@ -10,24 +10,21 @@ class SumPower < ApplicationRecord
   validates :period, presence: true
 
   class << self
-    def personal_bulk_update(user)
-      daily = user.daily_power
-      weekly = user.weekly_power
-      total = user.total_power
+    def bulk_create_or_update
+      daily_record = day.first_or_initialize
+      weekly_record = week.first_or_initialize
+      total_record = total.first_or_initialize
 
-      user.sum_power.day.update(power: daily) if user.sum_power.day != daily
-      user.sum_power.week.update(power: weekly) if user.sum_power.week != weekly
-      user.sum_power.total.update(power: total) if user.sum_power.total != total
-    end
+      user = daily_record.user
 
-    def personal_bulk_create(user)
-      daily = user.daily_power
-      weekly = user.weekly_power
-      total = user.total_power
+      daily_power = user.daily_power
+      weekly_power = user.weekly_power
+      total_power = user.total_power
 
-      user.sum_power.day.create(power: daily)
-      user.sum_power.week.create(power: weekly)
-      user.sum_power.total.create(power: total)
+
+      daily_record.update_attributes(power: daily_power) if daily_record.power != daily_power
+      weekly_record.update_attributes(power: weekly_power) if weekly_record.power != weekly_power
+      total_record.update_attributes(power: total_power) if total_record.power != total_power
     end
   end
 end
