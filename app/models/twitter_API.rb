@@ -118,8 +118,8 @@ class TwitterAPI
       end
 
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更
-      @power_level = user.sum_power.find_by(period: 'total').power
-      user.update(character_id: Character.decide_character_id(@power_level))
+      chara_id = Character.decide_character_id(user.total_power)
+      user.update(character_id: chara_id) if user.character_id != chara_id
     end
 
     def update_user_info(user, uid)
