@@ -57,22 +57,20 @@ class TwitterAPI
     end
 
     def fav(uid, user)
+      # これまでの活動データ
+      activity = user.activities.find_by(action_id: Action.kinds[:fav]).first_or_initialize
+      # fav総数
       total_fav = TwitterAPI.get_total_favorites_count(uid)
-      activity = Activity.find_by(user_id: user.id, action_id: 1)
+      # 昨日終了時点のfav総数
+      # 初回ログイン時は昨日のfav総数が不明のため、現時点の総数をいれる
+      yesterday_fav = activity.new_record? ? total_fav : activity.yesterday_value
+      # 今日のfav数
+      fav_count = (total_fav - yesterday_fav) > @@fav_limit ? @@fav_limit : (total_fav - yesterday_fav)
+      # 最新のfav総数
+      activity.latest_value = total_fav
 
-      # 初回ログイン時にいいねのトータル回数の初期値を入れるため、yesterday_valueにtotal_favを代入している。よって初回ログイン時のいいねのポイントは無効化。
-      if activity == nil
-        Activity.create(user_id: user.id, action_id: 1, yesterday_value: total_fav, latest_value: total_fav)
-        @fav = @@fav_point * 0
-        # 初期値を入れた後は、戦闘力を測るたびにlatest_valueに最新のトータルいいね数が更新され続け、yesterday_valueとの差分で1日のいいね数を計測。latest_valueはcronにより毎日0時に更新され、yesterday_valueに格納される
-      else
-        yesterday_fav = Activity.find_by(user_id: user.id, action_id: 1).yesterday_value
-        fav_count = (total_fav - yesterday_fav) > @@fav_limit ? @@fav_limit : (total_fav - yesterday_fav)
-        @fav = @@fav_point * fav_count
-        activity.latest_value = total_fav
-        activity.save
-      end
-      @fav
+      activity.save
+      return fav_count * @@fav_point
     end
 
     def retweet(uid)
