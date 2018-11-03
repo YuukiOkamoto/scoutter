@@ -42,6 +42,20 @@ class TwitterAPI
   end
 
   class << self
+    def powering(uid, user)
+      # scoreとpowerを計算
+      score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
+      power = score_to_power(score, user)
+      # powerをDBに追加or更新
+      daily_power_record = user.power_levels.daily.first_or_initialize
+      daily_power_record.update_attributes(power: power)
+      # sum_powersの日次、週次、累計を保存or更新
+      user.sum_powers.bulk_create_or_update
+      # 戦闘力の合計値によって、ユーザーのキャラクターを変更
+      chara_id = Character.decide_character_id(user.total_power)
+      user.update(character_id: chara_id) if user.character_id != chara_id
+    end
+
     def fav(uid, user)
       total_fav = TwitterAPI.get_total_favorites_count(uid)
       activity = Activity.find_by(user_id: user.id, action_id: 1)
@@ -100,18 +114,8 @@ class TwitterAPI
       @tweet = xs_tweet + s_tweet + l_tweet + xl_tweet
     end
 
-    def powering(uid, user)
-      # scoreとpowerを計算
-      score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
-      power = score_to_power(score, user)
-      # powerをDBに追加or更新
-      daily_power_record = user.power_levels.daily.first_or_initialize
-      daily_power_record.update_attributes(power: power)
-      # sum_powerの日次、週次、累計を保存or更新
-      user.sum_power.bulk_create_or_update
-      # 戦闘力の合計値によって、ユーザーのキャラクターを変更
-      chara_id = Character.decide_character_id(user.total_power)
-      user.update(character_id: chara_id) if user.character_id != chara_id
+    def score_to_power(score, user)
+      (score * user.character.growth_rate).round
     end
 
     def update_user_info(user, uid)
@@ -148,8 +152,5 @@ class TwitterAPI
       instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
     end
 
-    def score_to_power(score, user)
-      (score * user.character.growth_rate).round
-    end
   end
 end

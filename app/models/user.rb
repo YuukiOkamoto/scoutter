@@ -2,7 +2,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   has_one_attached :icon
 
-  has_many :sum_power
+  has_many :sum_powers
 
   has_many :power_levels
   has_many :authentications, dependent: :destroy
@@ -16,8 +16,8 @@ class User < ApplicationRecord
   validates :twitter_id, presence: true
 
   scope :power_rank, -> do
-    joins(:sum_power)
-      .includes(:character, :sum_power)
+    joins(:sum_powers)
+      .includes(:character, :sum_powers)
       .order('sum_powers.power desc, users.id desc')
   end
   scope :total_period, -> { merge(SumPower.total) }

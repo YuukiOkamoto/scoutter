@@ -4,7 +4,7 @@ namespace :sum_power_ranking do
     users = User.all
     users.each do |user|
       begin
-        user.sum_power.bulk_create_or_update
+        user.sum_powers.bulk_create_or_update
       rescue => e
         logger.debug(e)
         next
