@@ -28,11 +28,11 @@ class TwitterAPI
   @@l_tweet_maximum = ActionQuality.l_tweet.maximum
   @@xl_tweet_maximum = ActionQuality.xl_tweet.maximum
 
-  @@fav_limit = Action.fav.limit
-  @@retweet_limit = Action.retweet.limit
-  @@quote_limit = Action.quote.limit
-  @@reply_limit = Action.reply.limit
-  @@tweet_limit = Action.tweet.limit
+  @@fav_limit = Action.fav.first.limit
+  @@retweet_limit = Action.retweet.first.limit
+  @@quote_limit = Action.quote.first.limit
+  @@reply_limit = Action.reply.first.limit
+  @@tweet_limit = Action.tweet.first.limit
 
   def initialize
     @client = Twitter::REST::Client.new do |config|
