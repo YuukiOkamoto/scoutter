@@ -13,11 +13,10 @@ class PowerLevel < ApplicationRecord
   end
 
   class << self
-    # 特定ユーザーのcount日前からの日々の戦闘力の合計値を配列で返す
-    def get_target_period_array(count, user_id)
-      user = User.find(user_id)
-      start_power = user.power_levels.until_ago(count).sum(:power)
-      count.step(1, -1).map { |i| start_power += user.power_levels.ago(i - 1).sum(:power) }
+    # period日前からの日次の戦闘力合計を配列で返す
+    def get_per_day_array(period)
+      start_power = all.until_ago(period).sum(:power)
+      period.step(1, -1).map { |i| start_power += all.ago(i - 1).sum(:power) }
     end
   end
 end

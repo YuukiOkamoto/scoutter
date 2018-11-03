@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_action :set_period, only: :show
 
   def show
-    @data_xxx_days = PowerLevel.get_target_period_array(@period, params[:id])
     @user = User.find(params[:id])
+    @data_xxx_days = @user.power_levels.get_per_day_array(@period)
   end
 
   def rank
