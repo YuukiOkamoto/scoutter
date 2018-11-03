@@ -101,22 +101,14 @@ class TwitterAPI
     end
 
     def powering(uid, user)
-      convert_score_into_power(uid, user)
-      # デイリー戦闘力をpower_levelsテーブルに保存
-      # 今日一度も戦闘力を図っていなければデイリー戦闘力のレコードを作成し、一度でも測っていればデイリー戦闘力を更新する
-      @daily_power_record = PowerLevel.find_by('created_at > ? && user_id = ?', Time.now.beginning_of_day, user.id)
-      if @daily_power_record
-        @daily_power_record.update(power: @daily_power)
-      else
-        PowerLevel.create(user_id: user.id, power: @daily_power)
-      end
-      # sum_powerテーブルに日時、週間、合計戦闘力を格納
-      if user.sum_power.empty?
-        SumPower.personal_bulk_create(user)
-      else
-        SumPower.personal_bulk_update(user)
-      end
-
+      # scoreとpowerを計算
+      score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
+      power = score_to_power(score, user)
+      # powerをDBに追加or更新
+      daily_power_record = user.power_levels.daily.first_or_initialize
+      daily_power_record.update_attributes(power: power)
+      # sum_powerの日次、週次、累計を保存or更新
+      user.sum_power.bulk_create_or_update
       # 戦闘力の合計値によって、ユーザーのキャラクターを変更
       chara_id = Character.decide_character_id(user.total_power)
       user.update(character_id: chara_id) if user.character_id != chara_id
@@ -156,10 +148,8 @@ class TwitterAPI
       instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
     end
 
-    def convert_score_into_power(uid, user)
-      @daily_score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
-      @daily_power = @daily_score * Character.find(user.character_id).growth_rate
-      @daily_power = @daily_power.to_i
+    def score_to_power(score, user)
+      (score * user.character.growth_rate).round
     end
   end
 end
