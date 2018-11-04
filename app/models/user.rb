@@ -24,6 +24,10 @@ class User < ApplicationRecord
   scope :week_period, -> { merge(SumPower.week) }
   scope :day_period, -> { merge(SumPower.day) }
 
+  def uid(provider: 'twitter')
+    authentications.set_uid(provider)
+  end
+
   def daily_power
     power_levels.daily.sum(:power)
   end
@@ -42,5 +46,9 @@ class User < ApplicationRecord
 
   def up_to_next_character
     character.maximum + 1 - power_levels.sum(:power)
+  end
+
+  def get_activities_for(kind_key)
+    activities.find_or_initialize_by(action_id: Action.kinds[kind_key])
   end
 end

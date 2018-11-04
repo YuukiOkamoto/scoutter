@@ -42,9 +42,9 @@ class TwitterAPI
   end
 
   class << self
-    def powering(uid, user)
+    def powering(user)
       # scoreとpowerを計算
-      score = fav(uid, user) + retweet(uid) + quote(uid) + reply(uid) + tweet(uid)
+      score = fav_count_to_score(user) + retweet(user) + quote(user) + reply(user) + tweet(user)
       power = score_to_power(score, user)
       # powerをDBに追加or更新
       daily_power_record = user.power_levels.daily.first_or_initialize
@@ -56,42 +56,31 @@ class TwitterAPI
       user.update(character_id: chara_id) if user.character_id != chara_id
     end
 
-    def fav(uid, user)
-      # これまでの活動データ
-      activity = user.activities.find_by(action_id: Action.kinds[:fav]).first_or_initialize
-      # fav総数
-      total_fav = TwitterAPI.get_total_favorites_count(uid)
-      # 昨日終了時点のfav総数
-      # 初回ログイン時は昨日のfav総数が不明のため、現時点の総数をいれる
-      yesterday_fav = activity.new_record? ? total_fav : activity.yesterday_value
-      # 今日のfav数
-      fav_count = (total_fav - yesterday_fav) > @@fav_limit ? @@fav_limit : (total_fav - yesterday_fav)
-      # 最新のfav総数
-      activity.latest_value = total_fav
-
-      activity.save
-      return fav_count * @@fav_point
+    def fav_count_to_score(user)
+      activity = user.activities.find_by(action_id: Action.kinds[:fav])
+      fav_count = (activity.latest_value - activity.yesterday_value).clamp(0, @@fav_limit)
+      fav_count * @@fav_point
     end
 
-    def retweet(uid)
-      retweet_count = TwitterAPI.get_retweets_from_today(uid)
+    def retweet(user)
+      retweet_count = get_count(user, :retweet)
       @retweet = @@retweet_point * retweet_count
     end
 
-    def quote(uid, quote = [])
-      TwitterAPI.get_tweets_from_today(uid).each { |tweet| quote << tweet if tweet.quote? }
+    def quote(user, quote = [])
+      get_count(user, :tweet).each { |tweet| quote << tweet if tweet.quote? }
       quote_count = quote.count > @@quote_limit ? @@quote_limit : quote.count
       @quote = @@quote_point * quote_count
     end
 
-    def reply(uid)
-      reply_count = TwitterAPI.get_replies_from_today(uid)
+    def reply(user)
+      reply_count = get_count(user, :reply)
       reply_count = @@reply_limit if reply_count > @@reply_limit
       @reply = @@reply_point * reply_count
     end
 
-    def tweet(uid, xs_tweet_count = 0, s_tweet_count = 0, l_tweet_count = 0, xl_tweet_count = 0)
-      TwitterAPI.get_tweets_from_today(uid).each do |tweet|
+    def tweet(user, xs_tweet_count = 0, s_tweet_count = 0, l_tweet_count = 0, xl_tweet_count = 0)
+      get_count(user, :tweet).each do |tweet|
         unless tweet.quote?
           if tweet.text.length.between?(@@xs_tweet_minimum, @@xs_tweet_maximum)
             xs_tweet_count += 1
@@ -116,10 +105,10 @@ class TwitterAPI
       (score * user.character.growth_rate).round
     end
 
-    def update_user_info(user, uid)
-      update_name(user, uid)
-      update_twitter_id(user, uid)
-      update_image(user, uid)
+    def update_user_info(user)
+      update_name(user, user.uid)
+      update_twitter_id(user, user.uid)
+      update_image(user, user.uid)
     end
 
     def update_name(user, uid)
@@ -134,21 +123,18 @@ class TwitterAPI
       user.update(image: TwitterAPI.instance.client.user(uid).profile_image_url_https) if user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
     end
 
-    def get_total_favorites_count(uid)
-      instance.client.user(uid).favorites_count
+    def get_count(user, type)
+      uid = user.uid
+      case type
+      when :fav
+        instance.client.user(uid).favorites_count
+      when :retweet
+        instance.client.retweeted_by_user(uid, options = { count: @@retweet_limit }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      when :reply
+        instance.client.user_timeline(uid, options = { count: 200 }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 200, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
+      when :tweet
+        instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
+      end
     end
-
-    def get_retweets_from_today(uid)
-      instance.client.retweeted_by_user(uid, options = { count: @@retweet_limit }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
-    end
-
-    def get_replies_from_today(uid)
-      instance.client.user_timeline(uid, options = { count: 200 }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count - TwitterAPI.instance.client.user_timeline(uid, options = { count: 200, exclude_replies: true }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }.count
-    end
-
-    def get_tweets_from_today(uid)
-      instance.client.user_timeline(uid, options = { count: @@tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Time.now.beginning_of_day }
-    end
-
   end
 end

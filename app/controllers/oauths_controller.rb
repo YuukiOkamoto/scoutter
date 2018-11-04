@@ -9,26 +9,29 @@ class OauthsController < ApplicationController
     provider = params[:provider]
     return redirect_to root_path unless params[:denied].nil?
     if @user = login_from(provider)
-      @uid = @user.authentications.set_uid(provider)
-      TwitterAPI.update_user_info(@user, @uid)
+      TwitterAPI.update_user_info(@user)
       # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
       @user.image.slice!('_normal')
-      TwitterAPI.powering(@uid, @user)
+
+      fav_activity = @user.get_activities_for(:fav)
+      fav_activity.create_or_update_for_twitter
+      TwitterAPI.powering(@user)
       redirect_to user_path(@user.id)
     else
       begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        @uid = @user.authentications.set_uid(provider)
         # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
         @user.image.slice!('_normal')
-        if TwitterAPI.instance.client.user(@uid).protected?
+        if TwitterAPI.instance.client.user(@user.uid).protected?
           @user.destroy
           redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
           return
         end
-        TwitterAPI.powering(@uid, @user)
+        fav_activity = @user.get_activities_for(:fav)
+        fav_activity.create_or_update_for_twitter
+        TwitterAPI.powering(@user)
         redirect_to user_path(@user.id)
       rescue => e
         logger.debug(e)
