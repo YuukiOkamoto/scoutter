@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_132614) do
+ActiveRecord::Schema.define(version: 2018_11_05_113057) do
 
   create_table "action_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "point"
-    t.bigint "action_qualities_id"
+    t.bigint "action_quality_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["action_qualities_id"], name: "index_action_points_on_action_qualities_id"
+    t.index ["action_quality_id"], name: "index_action_points_on_action_quality_id"
     t.index ["deleted_at"], name: "index_action_points_on_deleted_at"
   end
 
