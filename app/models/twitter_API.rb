@@ -51,7 +51,7 @@ class TwitterAPI
     end
 
     def profile_image(user)
-      instance.client.user(user.uid).profile_image_url_https.to_s.delete('_normal')
+      instance.client.user(user.uid).profile_image_url_https.to_s.sub('_normal', '')
     end
 
     def powering(user)

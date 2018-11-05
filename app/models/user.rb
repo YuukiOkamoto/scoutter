@@ -15,6 +15,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :twitter_id, presence: true
 
+  # TwitterProfileImageの画質向上
+  before_create -> { self.image = self.image.to_s.sub('_normal', '') }
+
   scope :power_rank, -> do
     joins(:sum_powers)
       .includes(:character, :sum_powers)
