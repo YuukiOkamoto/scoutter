@@ -76,9 +76,8 @@ class TwitterAPI
       retweet_count * @retweet_point
     end
 
-    def quote_count_to_score(quote = [])
-      get_count(:tweet).each { |tweet| quote << tweet if tweet.quote? }
-      quote_count = quote.count > @quote_limit ? @quote_limit : quote.count
+    def quote_count_to_score()
+      quote_count = get_count(:tweet).select { |tweet| tweet.quote? }.count.clamp(0, @quote_limit)
       quote_count * @quote_point
     end
 
