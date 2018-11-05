@@ -124,15 +124,15 @@ class TwitterAPI
     end
 
     def set_data_for_calculation
-      @fav_point = ActionPoint.fav.point
-      @retweet_point = ActionPoint.retweet.point
-      @quote_point = ActionPoint.quote.point
-      @reply_point = ActionPoint.reply.point
+      @fav_point = Action.fav.first.action_points.first.point
+      @retweet_point = Action.retweet.first.action_points.first.point
+      @quote_point = Action.quote.first.action_points.first.point
+      @reply_point = Action.reply.first.action_points.first.point
 
-      @xs_tweet_point = ActionPoint.xs_tweet.point
-      @s_tweet_point = ActionPoint.s_tweet.point
-      @l_tweet_point = ActionPoint.l_tweet.point
-      @xl_tweet_point = ActionPoint.xl_tweet.point
+      @xs_tweet_point = Action.get_quality(:tweet, :bad).action_point.point
+      @s_tweet_point = Action.get_quality(:tweet, :normal).action_point.point
+      @l_tweet_point = Action.get_quality(:tweet, :good).action_point.point
+      @xl_tweet_point = Action.get_quality(:tweet, :very_good).action_point.point
 
       @xs_tweet_minimum = Action.get_quality(:tweet, :bad).minimum
       @s_tweet_minimum = Action.get_quality(:tweet, :normal).minimum
