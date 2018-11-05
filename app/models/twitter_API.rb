@@ -57,9 +57,16 @@ class TwitterAPI
     when :retweet
       @client.retweeted_by_user(uid, options = { count: @retweet_limit }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
     when :reply
-      @client.user_timeline(uid, options = { count: 200 }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count - @client.user_timeline(uid, options = { count: 200, exclude_replies: true }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
-    when :tweet
-      @client.user_timeline(uid, options = { count: @tweet_limit, exclude_replies: true, include_rts: false }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }
+      all_tweet =
+        @client.user_timeline(uid, options = { count: 200 })
+          .select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
+      exclude_reply_tweet =
+        @client.user_timeline(uid, options = { count: 200, exclude_replies: true })
+          .select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
+      all_tweet - exclude_reply_tweet
+    when :quote
+      @client.user_timeline(uid, options = { count: 200, exclude_replies: true, include_rts: false })
+        .select { |tweet| tweet.created_at >= Date.today.beginning_of_day && tweet.quote? }.count
     end
   end
 
@@ -76,8 +83,8 @@ class TwitterAPI
       retweet_count * @retweet_point
     end
 
-    def quote_count_to_score()
-      quote_count = get_count(:tweet).select { |tweet| tweet.quote? }.count.clamp(0, @quote_limit)
+    def quote_count_to_score
+      quote_count = get_count(:quote).clamp(0, @quote_limit)
       quote_count * @quote_point
     end
 
@@ -86,26 +93,30 @@ class TwitterAPI
       reply_count * @reply_point
     end
 
-    def tweet_count_to_score(xs_tweet_count = 0, s_tweet_count = 0, l_tweet_count = 0, xl_tweet_count = 0)
-      get_count(:tweet).each do |tweet|
-        unless tweet.quote?
-          if tweet.text.length.between?(@xs_tweet_minimum, @xs_tweet_maximum)
-            xs_tweet_count += 1
-          elsif tweet.text.length.between?(@s_tweet_minimum, @s_tweet_maximum)
-            s_tweet_count += 1
-          elsif tweet.text.length.between?(@l_tweet_minimum, @l_tweet_maximum)
-            l_tweet_count += 1
-          elsif tweet.text.length.between?(@xl_tweet_minimum, @xl_tweet_maximum)
-            xl_tweet_count += 1
-          end
+    def tweet_count_to_score
+      xs_tweet_count, s_tweet_count, l_tweet_count, xl_tweet_count = 0, 0, 0, 0
+      get_tweet_data.each do |tweet|
+        case tweet.text.length
+        when between?(@xs_tweet_minimum, @xs_tweet_maximum)
+          xs_tweet_count += 1
+        when between?(@s_tweet_minimum, @s_tweet_maximum)
+          s_tweet_count += 1
+        when between?(@l_tweet_minimum, @l_tweet_maximum)
+          l_tweet_count += 1
+        when between?(@xl_tweet_minimum, @xl_tweet_maximum)
+          xl_tweet_count += 1
         end
       end
-      xs_tweet = @xs_tweet_point * xs_tweet_count
-      s_tweet = @s_tweet_point * s_tweet_count
-      l_tweet = @l_tweet_point * l_tweet_count
-      xl_tweet = @xl_tweet_point * xl_tweet_count
+      xs_tweet_score = xs_tweet_count * @xs_tweet_point
+      s_tweet_score = s_tweet_count * @s_tweet_point
+      l_tweet_score = l_tweet_count * @l_tweet_point
+      xl_tweet_score = xl_tweet_count * @xl_tweet_point
+      xs_tweet_score + s_tweet_score + l_tweet_score + xl_tweet_score
+    end
 
-      @tweet = xs_tweet + s_tweet + l_tweet + xl_tweet
+    def get_tweet_data
+      @client.user_timeline(@user.uid, options = { count: 200, exclude_replies: true, include_rts: false })
+        .select { |tweet| tweet.created_at >= Date.today.beginning_of_day && !tweet.quote? }
     end
 
     def score_to_power(score)
