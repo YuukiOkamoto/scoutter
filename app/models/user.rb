@@ -51,4 +51,11 @@ class User < ApplicationRecord
   def get_activities_for(kind_key)
     activities.find_or_initialize_by(action_id: Action.kinds[kind_key])
   end
+
+  def refresh_by_twitter
+    self.name = TwitterAPI.user_name(self)
+    self.twitter_id = TwitterAPI.twitter_id(self)
+    self.image = TwitterAPI.profile_image(self)
+    save if changed?
+  end
 end

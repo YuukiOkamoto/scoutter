@@ -42,6 +42,18 @@ class TwitterAPI
   end
 
   class << self
+    def user_name(user)
+      instance.client.user(user.uid).name
+    end
+
+    def twitter_id(user)
+      instance.client.user(user.uid).screen_name
+    end
+
+    def profile_image(user)
+      instance.client.user(user.uid).profile_image_url_https.to_s.delete('_normal')
+    end
+
     def powering(user)
       # scoreとpowerを計算
       score = fav_count_to_score(user) + retweet(user) + quote(user) + reply(user) + tweet(user)
@@ -103,24 +115,6 @@ class TwitterAPI
 
     def score_to_power(score, user)
       (score * user.character.growth_rate).round
-    end
-
-    def update_user_info(user)
-      update_name(user, user.uid)
-      update_twitter_id(user, user.uid)
-      update_image(user, user.uid)
-    end
-
-    def update_name(user, uid)
-      user.update(name: TwitterAPI.instance.client.user(uid).name) if user.name != TwitterAPI.instance.client.user(uid).name
-    end
-
-    def update_twitter_id(user, uid)
-      user.update(twitter_id: TwitterAPI.instance.client.user(uid).screen_name) if user.twitter_id != TwitterAPI.instance.client.user(uid).screen_name
-    end
-
-    def update_image(user, uid)
-      user.update(image: TwitterAPI.instance.client.user(uid).profile_image_url_https) if user.image != TwitterAPI.instance.client.user(uid).profile_image_url_https
     end
 
     def get_count(user, type)

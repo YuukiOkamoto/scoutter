@@ -9,7 +9,7 @@ class OauthsController < ApplicationController
     provider = params[:provider]
     return redirect_to root_path unless params[:denied].nil?
     if @user = login_from(provider)
-      TwitterAPI.update_user_info(@user)
+      @user.refresh_by_twitter
       # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
       @user.image.slice!('_normal')
 
