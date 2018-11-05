@@ -8,7 +8,7 @@ class OauthsController < ApplicationController
 
   def callback
     provider = params[:provider]
-    return redirect_to root_path unless params[:denied].nil?
+    return redirect_to root_path if authentication_reject?
     if @user = login_from(provider)
       @user.refresh_by_twitter
 
@@ -37,9 +37,13 @@ class OauthsController < ApplicationController
     end
   end
 
-  protected
+  private
 
-  def render_api_restriction
-    render 'errors/api_restriction'
-  end
+    def render_api_restriction
+      render 'errors/api_restriction'
+    end
+
+    def authentication_reject?
+      params[:denied].present?
+    end
 end
