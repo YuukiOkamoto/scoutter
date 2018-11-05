@@ -82,8 +82,7 @@ class TwitterAPI
     end
 
     def reply_count_to_score
-      reply_count = get_count(:reply)
-      reply_count = @reply_limit if reply_count > @reply_limit
+      reply_count = get_count(:reply).clamp(0, @reply_limit)
       reply_count * @reply_point
     end
 
