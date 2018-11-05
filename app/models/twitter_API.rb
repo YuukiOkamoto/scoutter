@@ -58,7 +58,7 @@ class TwitterAPI
       instance.client.user(user.uid).profile_image_url_https.to_s.sub('_normal', '')
     end
 
-    def powering(user)
+    def measure_power(user)
       # scoreとpowerを計算
       score = fav_count_to_score(user) + retweet(user) + quote(user) + reply(user) + tweet(user)
       power = score_to_power(score, user)

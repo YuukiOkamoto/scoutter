@@ -11,28 +11,21 @@ class OauthsController < ApplicationController
     return redirect_to root_path if authentication_reject?
     if @user = login_from(provider)
       @user.refresh_by_twitter
-
-      fav_activity = @user.get_activities_for(:fav)
-      fav_activity.create_or_update_for_twitter
-      TwitterAPI.powering(@user)
-      redirect_to user_path(@user.id)
     else
       begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        if TwitterAPI.private_account?(@user)
-          return redirect_to root_path, danger: t('.protected')
-        end
-        fav_activity = @user.get_activities_for(:fav)
-        fav_activity.create_or_update_for_twitter
-        TwitterAPI.powering(@user)
-        redirect_to user_path(@user.id)
       rescue => e
         logger.debug(e)
-        redirect_to root_path
       end
     end
+    if TwitterAPI.private_account?(@user)
+      return redirect_to root_path, danger: t('oauths.callback.protected')
+    end
+    create_or_update_activities
+    TwitterAPI.measure_power(@user)
+    redirect_to user_path(@user.id)
   end
 
   private
@@ -43,5 +36,10 @@ class OauthsController < ApplicationController
 
     def authentication_reject?
       params[:denied].present?
+    end
+
+    def create_or_update_activities
+      fav_activity = @user.get_activities_for(:fav)
+      fav_activity.create_or_update_for_twitter
     end
 end
