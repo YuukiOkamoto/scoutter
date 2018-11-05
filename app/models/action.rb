@@ -6,9 +6,11 @@ class Action < ApplicationRecord
   validates :name, presence: true
   validates :twitter_id, presence: true
 
-  scope :fav, -> { find(1) }
-  scope :retweet, -> { find(2) }
-  scope :quote, -> { find(3) }
-  scope :reply, -> { find(4) }
-  scope :tweet, -> { find(5) }
+  enum kind: { fav: 1, retweet: 2, quote: 3, reply: 4, tweet: 5 }
+
+  class << self
+    def get_quality(kind, quality)
+      find_by(kind: kinds[kind]).action_qualities.find_by(quality: ActionQuality.qualities[quality])
+    end
+  end
 end

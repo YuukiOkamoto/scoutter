@@ -1,6 +1,6 @@
 module PowerLevelHelper
   def get_sum_power(user, period)
-    user.sum_power.find_by(period: period).power
+    user.sum_powers.find_by(period: period).power
   end
 
   def rank_count(ranks, rank_counter)
