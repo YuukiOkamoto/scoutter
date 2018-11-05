@@ -1,7 +1,6 @@
 require 'twitter'
 
 class TwitterAPI
-
   attr_reader :client
   attr_accessor :user
 

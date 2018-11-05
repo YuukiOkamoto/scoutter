@@ -15,15 +15,10 @@ class UsersController < ApplicationController
 
   def my_rank
     set_ranks
-    # 自分のランキング位置に飛ぶクエリとフラグをつけてリダイレクト
-    # renderせずわざわざリダイレクトするのは、URL(/ranking?page○#△)がkaminariのページネーションのURLと似てほしいため。
-    # このままrenderすると、/ranking/selfとなってしまう。
     redirect_to ranking_path(view_context.my_rank_query)
   end
 
-  # FIXME：コントローラ内でURLの設定はしたくないので、concerns等の他の場所に退避する
-  #        その際に、link_toから戦闘力、キャラ名を受け取るのではなく、直接取得出来るようにすることが望ましい
-  def set_share_url
+  def share_twitter
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
         "&text=" +

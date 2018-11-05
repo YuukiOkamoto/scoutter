@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'oauth/callback' => 'oauths#callback'
   get 'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
   resources :users, only: %i[show]
-  get '/users/:id/share_twitter' => 'users#set_share_url', as: :share_twitter
+  get '/users/:id/share_twitter' => 'users#share_twitter', as: :share_twitter
   get '/term' => 'home#term'
   root to: 'home#index'
 end
