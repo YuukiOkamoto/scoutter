@@ -56,9 +56,13 @@ class User < ApplicationRecord
   end
 
   def refresh_by_twitter
-    self.name = TwitterAPI.user_name(self)
-    self.twitter_id = TwitterAPI.twitter_id(self)
-    self.image = TwitterAPI.profile_image(self)
+    self.name = twitter_api.user_name
+    self.twitter_id = twitter_api.twitter_id
+    self.image = twitter_api.profile_image
     save if changed?
+  end
+
+  def twitter_api
+    TwitterAPI.new(self)
   end
 end

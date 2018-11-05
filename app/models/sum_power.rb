@@ -15,16 +15,13 @@ class SumPower < ApplicationRecord
       weekly_record = week.first_or_initialize
       total_record = total.first_or_initialize
 
-      user = daily_record.user
+      daily_record.power = daily_record.user.daily_power
+      weekly_record.power = weekly_record.user.weekly_power
+      total_record.power = total_record.user.total_power
 
-      daily_power = user.daily_power
-      weekly_power = user.weekly_power
-      total_power = user.total_power
-
-
-      daily_record.update_attributes(power: daily_power) if daily_record.power != daily_power
-      weekly_record.update_attributes(power: weekly_power) if weekly_record.power != weekly_power
-      total_record.update_attributes(power: total_power) if total_record.power != total_power
+      daily_record.save if daily_record.changed?
+      weekly_record.save if daily_record.changed?
+      total_record.save if daily_record.changed?
     end
   end
 end

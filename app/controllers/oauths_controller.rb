@@ -20,11 +20,11 @@ class OauthsController < ApplicationController
         logger.debug(e)
       end
     end
-    if TwitterAPI.private_account?(@user)
+    if @user.twitter_api.private_account?
       return redirect_to root_path, danger: t('oauths.callback.protected')
     end
     create_or_update_activities
-    TwitterAPI.measure_power(@user)
+    @user.twitter_api.measure_power
     redirect_to user_path(@user.id)
   end
 
