@@ -95,7 +95,7 @@ class TwitterAPI
 
     def tweet_count_to_score
       xs_tweet_count, s_tweet_count, l_tweet_count, xl_tweet_count = 0, 0, 0, 0
-      get_tweet_data.each do |tweet|
+      get_tweet_data.take(@tweet_limit).each do |tweet|
         case tweet.text.length
         when between?(@xs_tweet_minimum, @xs_tweet_maximum)
           xs_tweet_count += 1
