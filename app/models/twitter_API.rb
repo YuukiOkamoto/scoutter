@@ -134,15 +134,15 @@ class TwitterAPI
       @l_tweet_point = ActionPoint.l_tweet.point
       @xl_tweet_point = ActionPoint.xl_tweet.point
 
-      @xs_tweet_minimum = ActionQuality.xs_tweet.minimum
-      @s_tweet_minimum = ActionQuality.s_tweet.minimum
-      @l_tweet_minimum = ActionQuality.l_tweet.minimum
-      @xl_tweet_minimum = ActionQuality.xl_tweet.minimum
+      @xs_tweet_minimum = Action.get_quality(:tweet, :bad).minimum
+      @s_tweet_minimum = Action.get_quality(:tweet, :normal).minimum
+      @l_tweet_minimum = Action.get_quality(:tweet, :good).minimum
+      @xl_tweet_minimum = Action.get_quality(:tweet, :very_good).minimum
 
-      @xs_tweet_maximum = ActionQuality.xs_tweet.maximum
-      @s_tweet_maximum = ActionQuality.s_tweet.maximum
-      @l_tweet_maximum = ActionQuality.l_tweet.maximum
-      @xl_tweet_maximum = ActionQuality.xl_tweet.maximum
+      @xs_tweet_maximum = Action.get_quality(:tweet, :bad).maximum
+      @s_tweet_maximum = Action.get_quality(:tweet, :normal).maximum
+      @l_tweet_maximum = Action.get_quality(:tweet, :good).maximum
+      @xl_tweet_maximum = Action.get_quality(:tweet, :very_good).maximum
 
       @fav_limit = Action.fav.first.limit
       @retweet_limit = Action.retweet.first.limit
