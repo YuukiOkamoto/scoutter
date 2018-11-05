@@ -42,6 +42,10 @@ class TwitterAPI
   end
 
   class << self
+    def private_account?(user)
+      instance.client.user(user.uid).protected?
+    end
+
     def user_name(user)
       instance.client.user(user.uid).name
     end

@@ -21,10 +21,8 @@ class OauthsController < ApplicationController
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        if TwitterAPI.instance.client.user(@user.uid).protected?
-          @user.destroy
-          redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
-          return
+        if TwitterAPI.private_account?(@user)
+          return redirect_to root_path, danger: t('.protected')
         end
         fav_activity = @user.get_activities_for(:fav)
         fav_activity.create_or_update_for_twitter
