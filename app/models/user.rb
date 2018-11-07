@@ -54,7 +54,7 @@ class User < ApplicationRecord
   end
 
   def get_sum_powers(period)
-    sum_powers.where_period(period)
+    sum_powers.find_by(period: SumPower.periods[period]).power
   end
 
   def refresh_by_twitter

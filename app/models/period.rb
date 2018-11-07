@@ -7,7 +7,8 @@ class Period < ActiveHash::Base
   ]
 
   class << self
-    def days(name = :month)
+    def days(name)
+      name ||= :month
       find_by(name: name).days
     end
   end
