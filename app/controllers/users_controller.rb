@@ -9,15 +9,6 @@ class UsersController < ApplicationController
     @data_xxx_days = @user.power_levels.get_per_day_array(@period)
   end
 
-  def rank
-    set_ranks
-  end
-
-  def my_rank
-    set_ranks
-    redirect_to ranking_path(view_context.my_rank_query)
-  end
-
   def share_twitter
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
@@ -39,11 +30,5 @@ class UsersController < ApplicationController
 
     def set_period
       @period = Period.days(params[:period])
-    end
-
-    def set_ranks
-      @period = params[:period] || 'total'
-      @users = User.power_rank.merge_power(@period)
-      @ranks = @users.page(params[:page]).per(25)
     end
 end
