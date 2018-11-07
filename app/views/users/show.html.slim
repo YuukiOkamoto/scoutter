@@ -2,7 +2,7 @@
   p
     | あなたの戦闘力は…
     #power-level
-      = get_sum_power(@user, 'total').to_j
+      = @user.get_sum_powers(:total).to_j
       span.growing.blink
         | ↑
         = @user.today_increase_power.to_j
@@ -16,7 +16,7 @@
     = image_tag @user.character.image_path
   .chara-text
     = @user.character_introduction
-  = link_to share_twitter_path(power: get_sum_power(@user, 'total'),
+  = link_to share_twitter_path(power: @user.get_sum_powers(:total),
                               character: @user.character_name,
                               introduce: @user.character_introduction),
                               class: 'btn btn-share twitter fuwafuwa',

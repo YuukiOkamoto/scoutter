@@ -53,6 +53,10 @@ class User < ApplicationRecord
     activities.find_or_initialize_by(action_id: Action.kinds[kind_key])
   end
 
+  def get_sum_powers(period)
+    sum_powers.where_period(period)
+  end
+
   def refresh_by_twitter
     self.name = twitter_api.user_name
     self.twitter_id = twitter_api.twitter_id
