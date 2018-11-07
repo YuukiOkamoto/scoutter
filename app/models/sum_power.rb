@@ -10,6 +10,9 @@ class SumPower < ApplicationRecord
   validates :period, presence: true
 
   class << self
+    def where_period(period)
+      where(period: periods[period])
+    end
     def bulk_create_or_update
       daily_record = day.first_or_initialize
       weekly_record = week.first_or_initialize

@@ -23,9 +23,7 @@ class User < ApplicationRecord
       .includes(:character, :sum_powers)
       .order('sum_powers.power desc, users.id desc')
   end
-  scope :total_period, -> { merge(SumPower.total) }
-  scope :week_period, -> { merge(SumPower.week) }
-  scope :day_period, -> { merge(SumPower.day) }
+  scope :merge_power, ->(period) { merge(SumPower.where_period(period)) }
 
   def uid(provider: 'twitter')
     authentications.set_uid(provider)

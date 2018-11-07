@@ -42,14 +42,8 @@ class UsersController < ApplicationController
     end
 
     def set_ranks
-      case @period = params[:period] || 'total'
-      when 'total'
-        @users = User.power_rank.total_period
-      when 'week'
-        @users = User.power_rank.week_period
-      when 'day'
-        @users = User.power_rank.day_period
-      end
+      @period = params[:period] || 'total'
+      @users = User.power_rank.merge_power(@period)
       @ranks = @users.page(params[:page]).per(25)
     end
 end
