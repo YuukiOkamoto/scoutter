@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 2018_11_05_113057) do
   end
 
   create_table "actions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.integer "kind"
     t.integer "limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "kind"
     t.index ["deleted_at"], name: "index_actions_on_deleted_at"
   end
 
