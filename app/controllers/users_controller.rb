@@ -9,15 +9,6 @@ class UsersController < ApplicationController
     @data_xxx_days = @user.power_levels.get_per_day_array(@period)
   end
 
-  def rank
-    set_ranks
-  end
-
-  def my_rank
-    set_ranks
-    redirect_to ranking_path(view_context.my_rank_query)
-  end
-
   def share_twitter
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
@@ -38,30 +29,6 @@ class UsersController < ApplicationController
     end
 
     def set_period
-      # デフォルトの期間は30日
-      @period = case params[:period]
-                when 'week' then
-                  7
-                when 'month' then
-                  30
-                when 'quarter' then
-                  90
-                when 'year' then
-                  365
-                else
-                  30
-                end
-    end
-
-    def set_ranks
-      case @period = params[:period] || 'total'
-      when 'total'
-        @users = User.power_rank.total_period
-      when 'week'
-        @users = User.power_rank.week_period
-      when 'day'
-        @users = User.power_rank.day_period
-      end
-      @ranks = @users.page(params[:page]).per(25)
+      @period = Period.days(params[:period])
     end
 end

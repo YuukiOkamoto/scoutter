@@ -23,9 +23,7 @@ class User < ApplicationRecord
       .includes(:character, :sum_powers)
       .order('sum_powers.power desc, users.id desc')
   end
-  scope :total_period, -> { merge(SumPower.total) }
-  scope :week_period, -> { merge(SumPower.week) }
-  scope :day_period, -> { merge(SumPower.day) }
+  scope :merge_power, ->(period) { merge(SumPower.where_period(period)) }
 
   def uid(provider: 'twitter')
     authentications.set_uid(provider)
@@ -53,6 +51,10 @@ class User < ApplicationRecord
 
   def get_activities_for(kind_key)
     activities.find_or_initialize_by(action_id: Action.kinds[kind_key])
+  end
+
+  def get_sum_powers(period)
+    sum_powers.find_by(period: SumPower.periods[period]).power
   end
 
   def refresh_by_twitter
