@@ -23,8 +23,8 @@ class SumPower < ApplicationRecord
       total_record.power = total_record.user.total_power
 
       daily_record.save if daily_record.changed?
-      weekly_record.save if daily_record.changed?
-      total_record.save if daily_record.changed?
+      weekly_record.save if weekly_record.changed?
+      total_record.save if total_record.changed?
     end
   end
 end
