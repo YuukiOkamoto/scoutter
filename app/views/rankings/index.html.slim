@@ -9,10 +9,10 @@
         - b.radio_button(class: 'mr-1 align-text-bottom') + b.label
   table.table.table-hover.col-lg-10
     tbody
-      = render partial: 'users/rank', collection: @ranks, locals: { period: @period, ranks: @ranks }
+      = render partial: 'rank', collection: @ranks, locals: { period: @period, ranks: @ranks }
   = paginate @ranks, theme: 'rank',
     pagination_class: 'pagination-sm'
   .text-center
-    = link_to ranking_self_path(period: @period), class: 'btn btn-rank fuwafuwa m-0 bit-10' do
+    = link_to rankings_path(period: @period, position: :mine), class: 'btn btn-rank fuwafuwa m-0 bit-10' do
       | 自分の順位を見る
     end

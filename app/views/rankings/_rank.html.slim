@@ -18,7 +18,7 @@ tr id=rank_counter+1
               = t(".#{period}_power")
             '
             .bit-12-bold.rank_power
-              = get_sum_power(rank, period).to_j
+              = rank.get_sum_powers(period).to_j
         .row
           .col-12.col-lg-3.pr-0.little-big
             = rank.character&.name
