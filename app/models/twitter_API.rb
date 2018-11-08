@@ -96,13 +96,13 @@ class TwitterAPI
       xs_tweet_count, s_tweet_count, l_tweet_count, xl_tweet_count = 0, 0, 0, 0
       get_tweet_data.take(@tweet_limit).each do |tweet|
         case tweet.text.length
-        when between?(@xs_tweet_minimum, @xs_tweet_maximum)
+        when @xs_tweet_minimum..@xs_tweet_maximum
           xs_tweet_count += 1
-        when between?(@s_tweet_minimum, @s_tweet_maximum)
+        when @s_tweet_minimum..@s_tweet_maximum
           s_tweet_count += 1
-        when between?(@l_tweet_minimum, @l_tweet_maximum)
+        when @l_tweet_minimum..@l_tweet_maximum
           l_tweet_count += 1
-        when between?(@xl_tweet_minimum, @xl_tweet_maximum)
+        when @xl_tweet_minimum..@xl_tweet_maximum
           xl_tweet_count += 1
         end
       end
