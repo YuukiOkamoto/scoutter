@@ -1,32 +1,33 @@
 require 'twitter'
 
-class TwitterAPI
-  attr_reader :client
-  attr_accessor :user
+module TwitterAPI
+  extend ActiveSupport::Concern
 
+  included do
+    attr_reader :client
+  end
 
-  def initialize(user)
-    @client = Twitter::REST::Client.new do |config|
+  def twitter_client
+    @client ||= Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['CONSUMER_KEY']
       config.consumer_secret = ENV['CONSUMER_SECRET']
     end
-    @user = user
   end
 
   def private_account?
-    @client.user(@user.uid).protected?
+    twitter_client.user(self.uid).protected?
   end
 
   def user_name
-    @client.user(@user.uid).name
+    twitter_client.user(self.uid).name
   end
 
   def twitter_id
-    @client.user(@user.uid).screen_name
+    twitter_client.user(self.uid).screen_name
   end
 
   def profile_image
-    @client.user(@user.uid).profile_image_url_https.to_s.sub('_normal', '')
+    twitter_client.user(self.uid).profile_image_url_https.to_s.sub('_normal', '')
   end
 
   def measure_power
@@ -39,32 +40,32 @@ class TwitterAPI
       tweet_count_to_score
     power = score_to_power(score)
     # powerをDBに追加or更新
-    daily_power_record = @user.power_levels.daily.first_or_initialize
+    daily_power_record = self.power_levels.daily.first_or_initialize
     daily_power_record.update_attributes(power: power)
     # sum_powersの日次、週次、累計を保存or更新
-    @user.sum_powers.bulk_create_or_update
+    self.sum_powers.bulk_create_or_update
     # 戦闘力の合計値によって、ユーザーのキャラクターを変更
-    @user.character_id = Character.decide_character_id(@user.total_power)
-    @user.save if @user.character_id_changed?
+    self.character_id = Character.decide_character_id(self.total_power)
+    self.save if self.character_id_changed?
   end
 
   def get_count(type)
-    uid = @user.uid
+    uid = self.uid
     case type
     when :fav
-      @client.user(uid).favorites_count
+      twitter_client.user(uid).favorites_count
     when :retweet
-      @client.retweeted_by_user(uid, options = { count: @retweet_limit }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
+      twitter_client.retweeted_by_user(uid, options = { count: @retweet_limit }).select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
     when :reply
       all_tweet =
-        @client.user_timeline(uid, options = { count: 200 })
+        twitter_client.user_timeline(uid, options = { count: 200 })
           .select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
       exclude_reply_tweet =
-        @client.user_timeline(uid, options = { count: 200, exclude_replies: true })
+        twitter_client.user_timeline(uid, options = { count: 200, exclude_replies: true })
           .select { |tweet| tweet.created_at > Date.today.beginning_of_day }.count
       all_tweet - exclude_reply_tweet
     when :quote
-      @client.user_timeline(uid, options = { count: 200, exclude_replies: true, include_rts: false })
+      twitter_client.user_timeline(uid, options = { count: 200, exclude_replies: true, include_rts: false })
         .select { |tweet| tweet.created_at >= Date.today.beginning_of_day && tweet.quote? }.count
     end
   end
@@ -72,7 +73,7 @@ class TwitterAPI
   private
 
     def fav_count_to_score
-      activity = @user.activities.find_by(action_id: Action.kinds[:fav])
+      activity = self.activities.find_by(action_id: Action.kinds[:fav])
       fav_count = (activity.latest_value - activity.yesterday_value).clamp(0, @fav_limit)
       fav_count * @fav_point
     end
@@ -114,12 +115,12 @@ class TwitterAPI
     end
 
     def get_tweet_data
-      @client.user_timeline(@user.uid, options = { count: 200, exclude_replies: true, include_rts: false })
+      twitter_client.user_timeline(self.uid, options = { count: 200, exclude_replies: true, include_rts: false })
         .select { |tweet| tweet.created_at >= Date.today.beginning_of_day && !tweet.quote? }
     end
 
     def score_to_power(score)
-      (score * @user.character.growth_rate).round
+      (score * self.character.growth_rate).round
     end
 
     def set_data_for_calculation
