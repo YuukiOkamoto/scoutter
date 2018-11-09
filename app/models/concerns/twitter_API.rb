@@ -94,23 +94,17 @@ module TwitterAPI
     end
 
     def tweet_count_to_score
-      xs_tweet_count, s_tweet_count, l_tweet_count, xl_tweet_count = 0, 0, 0, 0
-      get_tweet_data.take(@tweet_limit).each do |tweet|
-        case tweet.text.length
-        when @xs_tweet_minimum..@xs_tweet_maximum
-          xs_tweet_count += 1
-        when @s_tweet_minimum..@s_tweet_maximum
-          s_tweet_count += 1
-        when @l_tweet_minimum..@l_tweet_maximum
-          l_tweet_count += 1
-        when @xl_tweet_minimum..@xl_tweet_maximum
-          xl_tweet_count += 1
-        end
-      end
+      text_lengths = get_tweet_data.take(@tweet_limit).pluck(:text).map(&:length)
+      xs_tweet_count = text_lengths.count { |length| length.between?(@xs_tweet_minimum, @xs_tweet_maximum) }
+      s_tweet_count = text_lengths.count { |length| length.between?(@s_tweet_minimum, @s_tweet_maximum) }
+      l_tweet_count = text_lengths.count { |length| length.between?(@l_tweet_minimum, @l_tweet_maximum) }
+      xl_tweet_count = text_lengths.count { |length| length.between?(@xl_tweet_minimum, @xl_tweet_maximum) }
+
       xs_tweet_score = xs_tweet_count * @xs_tweet_point
       s_tweet_score = s_tweet_count * @s_tweet_point
       l_tweet_score = l_tweet_count * @l_tweet_point
       xl_tweet_score = xl_tweet_count * @xl_tweet_point
+
       xs_tweet_score + s_tweet_score + l_tweet_score + xl_tweet_score
     end
 
