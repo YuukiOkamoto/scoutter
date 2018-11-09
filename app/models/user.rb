@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include TwitterAPI
   authenticates_with_sorcery!
   has_one_attached :icon
 
@@ -58,13 +59,13 @@ class User < ApplicationRecord
   end
 
   def refresh_by_twitter
-    self.name = twitter_api.user_name
-    self.twitter_id = twitter_api.twitter_id
-    self.image = twitter_api.profile_image
+    self.name = self.user_name
+    self.twitter_id = self.twitter_id
+    self.image = self.profile_image
     save if changed?
   end
 
-  def twitter_api
-    TwitterAPI.new(self)
-  end
+  # def twitter_api
+  #   TwitterAPI.new(self)
+  # end
 end
