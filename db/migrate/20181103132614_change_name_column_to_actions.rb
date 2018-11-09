@@ -1,6 +1,6 @@
 class ChangeNameColumnToActions < ActiveRecord::Migration[5.2]
   def change
-    change_column :actions, :name, :Integer
-    rename_column :actions, :name, :kind
+    remove_column :actions, :name, :string
+    add_column :actions, :kind, :Integer
   end
 end
