@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
   before_action :not_self_page, only: :show
   before_action :set_period, only: :show
+  before_action :set_user
 
   def show
-    @user = User.find(params[:id])
     @data_xxx_days = @user.power_levels.get_per_day_array(@period)
   end
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     tweet_url = URI.encode(
       "http://twitter.com/intent/tweet?" +
         "&text=" +
-        "わたしのTwitter戦闘力は…【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは…【 #{params[:character]} 】!!!\n" +
+        "わたしのTwitter戦闘力は…【 #{@user.get_sum_powers(:total).to_j} 】!!!\nこの戦闘力から導き出されたキャラクターは…【 #{params[:character]} 】!!!\n" +
         "毎日測ってTwitter戦闘力を上げていこう!!!\n" +
         "#Scoutter\n#Twitter戦闘力\n" +
         "&url=" +
@@ -30,5 +30,9 @@ class UsersController < ApplicationController
 
     def set_period
       @period = Period.days(params[:period])
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 end
