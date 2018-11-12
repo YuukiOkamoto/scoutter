@@ -64,9 +64,4 @@ class User < ApplicationRecord
     self.image = self.profile_image
     save if changed?
   end
-
-  def set_access_token_secret(access_token)
-   twitter_client.access_token = access_token.token
-   twitter_client.access_token_secret = access_token.secret
-  end
 end

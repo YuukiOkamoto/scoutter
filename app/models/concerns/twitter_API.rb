@@ -16,6 +16,11 @@ module TwitterAPI
     end
   end
 
+  def set_access_token_secret(access_token)
+    twitter_client.access_token = access_token.token
+    twitter_client.access_token_secret = access_token.secret
+  end
+
   def user_name
     twitter_client.user(self.uid).name
   end
