@@ -20,9 +20,7 @@ class OauthsController < ApplicationController
         logger.debug(e)
       end
     end
-    if @user.private_account?
-      return redirect_to root_path, danger: t('oauths.callback.protected')
-    end
+    @user.set_access_token_secret(@access_token)
     create_or_update_activities
     @user.measure_power
     redirect_to user_path(@user.id)
