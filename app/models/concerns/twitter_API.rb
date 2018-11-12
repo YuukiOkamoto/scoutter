@@ -11,11 +11,14 @@ module TwitterAPI
     @client ||= Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['CONSUMER_KEY']
       config.consumer_secret = ENV['CONSUMER_SECRET']
+      config.access_token = ''
+      config.access_token_secret = ''
     end
   end
 
-  def private_account?
-    twitter_client.user(self.uid).protected?
+  def set_access_token_secret(access_token)
+    twitter_client.access_token = access_token.token
+    twitter_client.access_token_secret = access_token.secret
   end
 
   def user_name
