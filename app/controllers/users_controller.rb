@@ -9,19 +9,6 @@ class UsersController < ApplicationController
     @data_xxx_days = @user.power_levels.get_per_day_array(@period)
   end
 
-  def share_twitter
-    tweet_url = URI.encode(
-      "http://twitter.com/intent/tweet?" +
-        "&text=" +
-        "わたしのTwitter戦闘力は…【 #{params[:power]} 】!!!\nこの戦闘力から導き出されたキャラクターは…【 #{params[:character]} 】!!!\n" +
-        "毎日測ってTwitter戦闘力を上げていこう!!!\n" +
-        "#Scoutter\n#Twitter戦闘力\n" +
-        "&url=" +
-        "#{view_context.root_url}"
-    )
-    redirect_to tweet_url
-  end
-
   private
 
     def not_self_page
