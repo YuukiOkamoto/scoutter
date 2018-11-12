@@ -1,6 +1,0 @@
-- flash.each do |key, value|
-  - next if key == 'timedout'
-  = content_tag 'div', class: "alert alert-dismissible alert-#{key}" do
-    button.close[data-dismiss="alert"]
-      | ×
-    = value

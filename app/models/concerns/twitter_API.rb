@@ -16,10 +16,6 @@ module TwitterAPI
     end
   end
 
-  def private_account?
-    twitter_client.user(self.uid).protected?
-  end
-
   def user_name
     twitter_client.user(self.uid).name
   end
