@@ -25,7 +25,7 @@ module TwitterAPI
     twitter_client.user(self.uid).name
   end
 
-  def twitter_id
+  def twitter_screen_name
     twitter_client.user(self.uid).screen_name
   end
 
