@@ -60,7 +60,7 @@ class User < ApplicationRecord
 
   def refresh_by_twitter
     self.name = self.user_name
-    self.twitter_id = self.twitter_id
+    self.twitter_id = self.twitter_screen_name
     self.image = self.profile_image
     save if changed?
   end
