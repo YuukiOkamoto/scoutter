@@ -1,45 +1,43 @@
 class OauthsController < ApplicationController
   skip_before_action :require_login, raise: false
   rescue_from Twitter::Error::ServiceUnavailable, with: :render_api_restriction
+
   def oauth
     login_at(params[:provider])
   end
 
   def callback
     provider = params[:provider]
-    return redirect_to root_path unless params[:denied].nil?
+    return redirect_to root_path if authentication_reject?
     if @user = login_from(provider)
-      @uid = @user.authentications.set_uid(provider)
-      TwitterAPI.update_user_info(@user, @uid)
-      # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
-      @user.image.slice!('_normal')
-      TwitterAPI.powering(@uid, @user)
-      redirect_to user_path(@user.id)
+      @user.refresh_by_twitter
     else
       begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        @uid = @user.authentications.set_uid(provider)
-        # 以下、画質向上のため、APIで取得してきたユーザーのプロフィール画像のurlから"_normal"という記述を削除しています。
-        @user.image.slice!('_normal')
-        if TwitterAPI.instance.client.user(@uid).protected?
-          @user.destroy
-          redirect_to root_path, danger: '申し訳ありません。非公開アカウントではログインできません。'
-          return
-        end
-        TwitterAPI.powering(@uid, @user)
-        redirect_to user_path(@user.id)
       rescue => e
         logger.debug(e)
-        redirect_to root_path
       end
     end
+    @user.set_access_token_secret(@access_token)
+    create_or_update_activities
+    @user.measure_power
+    redirect_to user_path(@user.id)
   end
 
-  protected
+  private
 
-  def render_api_restriction
-    render 'errors/api_restriction'
-  end
+    def render_api_restriction
+      render 'errors/api_restriction'
+    end
+
+    def authentication_reject?
+      params[:denied].present?
+    end
+
+    def create_or_update_activities
+      fav_activity = @user.get_activities_for(:fav)
+      fav_activity.create_or_update_for_twitter
+    end
 end
